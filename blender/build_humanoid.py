@@ -589,6 +589,8 @@ def main():
         sword.matrix_parent_inverse = Matrix.Identity(4)
         sword.location = (0, .07 - arm.data.bones["hand_R"].length, 0)
         sword.rotation_euler = (math.radians(-130), 0, 0)
+        # Director: turn the blade 90 degrees around its grip (+Z before glTF export).
+        sword.rotation_euler = (sword.rotation_euler.to_matrix() @ Matrix.Rotation(math.pi / 2, 3, "Z")).to_euler()
 
     arm.animation_data.action = bpy.data.actions["Idle"]
     arm.show_in_front = True

@@ -157,6 +157,7 @@ func _load_unit() -> void:
 		attach.add_child(sword)
 		sword.position = HAND_OFFSET
 		sword.rotation_degrees = SWORD_ROTATION
+		sword.rotate_object_local(Vector3.UP, deg_to_rad(90.0)) # Director: turn the blade 90 degrees around its grip.
 
 
 func _apply_look() -> void:
