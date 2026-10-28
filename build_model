@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Crimson Red 3D - rebuild the test models with Blender (headless) into godot/models/.
+# Usage: ./build_model            (builds knight and mannequin)
+#        ./build_model knight     (just one)
+set -euo pipefail
+cd "$(dirname "$0")"
+BLENDER="${BLENDER:-$(command -v blender || echo /Applications/Blender.app/Contents/MacOS/Blender)}"
+for m in ${1:-knight mannequin}; do
+  "$BLENDER" --background --python blender/build_humanoid.py -- godot/models "$m"
+done

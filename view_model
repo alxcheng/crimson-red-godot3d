@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Crimson Red 3D - open the test viewer in Godot. Usage: ./view_model
+# Add --shots for stills or --sequence for animation review frames in godot/shots/.
+# All viewer flags pass through, e.g. --model=mannequin --look=pixel --sequence.
+set -euo pipefail
+cd "$(dirname "$0")/godot"
+GODOT="${GODOT:-$(command -v godot || echo /Applications/Godot.app/Contents/MacOS/Godot)}"
+exec "$GODOT" --path . -- "$@"

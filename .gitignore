@@ -1,0 +1,7 @@
+# Generated engine imports and review captures
+/godot/.godot/
+/godot/shots/
+# Blender backups and Python caches
+*.blend1
+*.blend2
+__pycache__/
