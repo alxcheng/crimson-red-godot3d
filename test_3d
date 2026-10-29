@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Crimson Red 3D - run every Godot-side check (headless). Exit 0 only if all pass.
+#   model validation | SmoothValue spring | exported data + unit conversions | steering lab (movement scenarios)
+#   | sandbox battle logic (orders, hit timing, containment, determinism) | sandbox scene driven like a player
+set -uo pipefail
+cd "$(dirname "$0")"
+GODOT="${GODOT:-$(command -v godot || echo /Applications/Godot.app/Contents/MacOS/Godot)}"
+"$GODOT" --headless --path godot --import >/dev/null 2>&1
+fail=0
+run() {
+  local label="$1" script="$2" marker="$3"
+  local out; out="$("$GODOT" --headless --path godot --script "$script" 2>&1)"; local code=$?
+  if [ $code -eq 0 ] && echo "$out" | grep -q "$marker"; then echo "PASS  $label"; else echo "FAIL  $label (exit $code)"; echo "$out" | grep -E "ERROR|FAIL" | head -8; fail=1; fi
+}
+run "model validation"   res://validate_models.gd        MODEL_VALIDATION_PASS
+run "SmoothValue spring" res://tests/smooth_value_test.gd SMOOTH_VALUE_PASS
+run "exported data"      res://tests/data_test.gd        DATA_PASS
+run "steering lab"       res://tests/steering_lab.gd     STEERING_LAB_PASS
+run "sandbox battle sim" res://tests/sandbox_test.gd     SANDBOX_PASS
+run "unit picking"       res://tests/picking_test.gd     PICKING_PASS
+run "sandbox scene"      res://tests/sandbox_view_test.gd SANDBOX_VIEW_PASS
+run "menu screens"       res://tests/menu_test.gd        MENU_PASS
+exit $fail

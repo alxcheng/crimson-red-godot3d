@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Crimson Red 3D - open the cobblestone dungeon stage under the dimetric camera. Usage: ./view_stage [--units] [--pitch=30]
+set -euo pipefail
+cd "$(dirname "$0")/godot"
+GODOT="${GODOT:-$(command -v godot || echo /Applications/Godot.app/Contents/MacOS/Godot)}"
+exec "$GODOT" --path . res://stage_view.tscn -- "$@"

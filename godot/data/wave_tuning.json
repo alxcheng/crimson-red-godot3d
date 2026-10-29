@@ -1,0 +1,26 @@
+{
+  "baseBudget": 4,
+  "burstDelay": [
+    0.1,
+    0.5
+  ],
+  "firstDelay": 3.5,
+  "maxOnField": 4,
+  "perTier": 1.5,
+  "ramp": [
+    0.4,
+    0.8,
+    1.3,
+    0.9,
+    1.7
+  ],
+  "trickleDelay": [
+    1.5,
+    3
+  ],
+  "waveDelay": [
+    2,
+    4
+  ],
+  "waves": 5
+}

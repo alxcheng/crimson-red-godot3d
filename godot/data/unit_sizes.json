@@ -1,0 +1,5 @@
+{
+  "_note": "Hand-authored (not exported). Collision radius in metres per unit, used by movement and melee slots. [tuned] seeded from the 2D body boxes (sprite_bounds x spriteScale) and judged by the steering lab. Keys are class / enemy ids.",
+  "heroes": { "knight": 0.45, "paladin": 0.45, "rogue": 0.40, "priest": 0.36, "wizard": 0.36, "witch": 0.36, "brigand": 0.42, "champion": 0.45, "duelist": 0.40 },
+  "enemies": { "skeleton": 0.45, "goblin": 0.35, "bat": 0.30, "mushroom": 0.55 }
+}

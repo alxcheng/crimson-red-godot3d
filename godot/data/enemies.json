@@ -1,0 +1,63 @@
+{
+  "ENEMIES": {
+    "bat": {
+      "anims": "bat",
+      "auto": "BatAutoShot",
+      "chaotic": true,
+      "danger": 4,
+      "minTier": 2,
+      "moveSpeed": 1,
+      "name": "Bat",
+      "ranged": true,
+      "spawn": "inside",
+      "spriteScale": 0.75,
+      "stats": {
+        "hp": 600,
+        "power": 95
+      }
+    },
+    "goblin": {
+      "anims": "goblin",
+      "auto": "GoblinAutoAttack",
+      "danger": 2,
+      "minTier": 1,
+      "moveSpeed": 1.83,
+      "name": "Goblin",
+      "spawn": "right",
+      "spriteScale": 0.75,
+      "stats": {
+        "hp": 375,
+        "power": 80
+      }
+    },
+    "mushroom": {
+      "anims": "mushroom",
+      "auto": "MushroomAutoAttack",
+      "danger": 8,
+      "minTier": 3,
+      "moveSpeed": 0.83,
+      "name": "Mushroom",
+      "spawn": "right",
+      "spriteScale": 1.25,
+      "stats": {
+        "hp": 2200,
+        "power": 165
+      }
+    },
+    "skeleton": {
+      "anims": "skeleton",
+      "auto": "SkeletonAutoAttack",
+      "danger": 2,
+      "minTier": 1,
+      "moveSpeed": 1.5,
+      "name": "Skeleton",
+      "spawn": "right",
+      "spriteScale": 0.75,
+      "stats": {
+        "hp": 500,
+        "power": 70
+      }
+    }
+  },
+  "SPEED_SCALE": 1.667
+}

@@ -1,0 +1,48 @@
+{
+  "actives": {
+    "knight": [
+      "KnightHamstring"
+    ],
+    "priest": [
+      "PriestPowerInfusion"
+    ],
+    "wizard": [
+      "WizardExplosion"
+    ]
+  },
+  "hintSignOff": [
+    "Have fun!",
+    "- Creator"
+  ],
+  "hintTitle": "BATTLE TUTORIAL",
+  "hints": [
+    "1. Press 1, 2, 3, and 4 to select and control party members",
+    "2. Click on the ground to command your characters to move there",
+    "3. Click on enemies to send your character to attack them",
+    "4. Support characters like Priest can target allies instead",
+    "5. Press Q, W, E, R to use the abilities of the selected member",
+    "6. Some abilities are instantly used as soon as possible, but some stop time for you to select a target on click",
+    "7. When taking damage, the yellow stagger bar fills up, upon which that character is stunned for a time",
+    "8. You win once you beat all enemies in an encounter",
+    "9. You lose when all your party members die"
+  ],
+  "loop": true,
+  "party": [
+    "priest",
+    "wizard",
+    "knight"
+  ],
+  "tutorial": true,
+  "waves": [
+    {
+      "enemies": [
+        "goblin",
+        "goblin",
+        "goblin"
+      ],
+      "initialDelay": 2,
+      "maxEnemies": 3,
+      "spawnDelay": 1
+    }
+  ]
+}

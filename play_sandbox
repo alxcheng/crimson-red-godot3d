@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Crimson Red 3D - the sandbox battle: 4 heroes vs three waves on the dungeon stage.
+# Keys 1-4 select a hero, ONE click orders it (attack an enemy under the cursor, otherwise move), SPACE pauses.
+# R restart, K/J spawn skeleton/goblin at the cursor, F debug overlay, [ ] slow/fast.  Usage: ./play_sandbox [--debug]
+set -euo pipefail
+cd "$(dirname "$0")/godot"
+GODOT="${GODOT:-$(command -v godot || echo /Applications/Godot.app/Contents/MacOS/Godot)}"
+exec "$GODOT" --path . res://view/sandbox_battle.tscn -- "$@"

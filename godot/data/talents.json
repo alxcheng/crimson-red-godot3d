@@ -1,0 +1,1724 @@
+{
+  "CHOICE_EVERY": 3,
+  "LADDER": {
+    "champion": {
+      "autoBump": {
+        "ATK": 1,
+        "DEF": 1,
+        "maxHP": 50
+      },
+      "choices": [
+        {
+          "level": 3,
+          "options": [
+            {
+              "desc": "+4 ATK",
+              "id": "atk",
+              "mods": {
+                "ATK": 4
+              },
+              "name": "Keen Edge"
+            },
+            {
+              "desc": "+3 DEF, +150 HP",
+              "id": "def",
+              "mods": {
+                "DEF": 3,
+                "maxHP": 150
+              },
+              "name": "Steady Guard"
+            }
+          ]
+        },
+        {
+          "level": 6,
+          "options": [
+            {
+              "desc": "+400 max HP",
+              "id": "hp",
+              "mods": {
+                "maxHP": 400
+              },
+              "name": "Hardened"
+            },
+            {
+              "desc": "+8% CRIT chance",
+              "id": "crit",
+              "mods": {
+                "CRIT": 0.08
+              },
+              "name": "Precise"
+            }
+          ]
+        },
+        {
+          "level": 9,
+          "options": [
+            {
+              "desc": "+7 ATK",
+              "id": "atk2",
+              "mods": {
+                "ATK": 7
+              },
+              "name": "Might"
+            },
+            {
+              "desc": "+6 DEF",
+              "id": "def2",
+              "mods": {
+                "DEF": 6
+              },
+              "name": "Bulwark"
+            }
+          ]
+        },
+        {
+          "level": 12,
+          "options": [
+            {
+              "desc": "+5 ATK, +5 DEF, +300 HP",
+              "id": "all1",
+              "mods": {
+                "ATK": 5,
+                "DEF": 5,
+                "maxHP": 300
+              },
+              "name": "Veteran"
+            },
+            {
+              "desc": "+15% CRIT chance",
+              "id": "crit2",
+              "mods": {
+                "CRIT": 0.15
+              },
+              "name": "Deadly"
+            }
+          ]
+        },
+        {
+          "level": 15,
+          "options": [
+            {
+              "desc": "+12 ATK",
+              "id": "atk3",
+              "mods": {
+                "ATK": 12
+              },
+              "name": "Overwhelming"
+            },
+            {
+              "desc": "+800 max HP",
+              "id": "hp2",
+              "mods": {
+                "maxHP": 800
+              },
+              "name": "Titanic"
+            }
+          ]
+        },
+        {
+          "level": 18,
+          "options": [
+            {
+              "desc": "+12 DEF",
+              "id": "def3",
+              "mods": {
+                "DEF": 12
+              },
+              "name": "Impregnable"
+            },
+            {
+              "desc": "+20% CRIT chance",
+              "id": "crit3",
+              "mods": {
+                "CRIT": 0.2
+              },
+              "name": "Executioner"
+            }
+          ]
+        },
+        {
+          "level": 21,
+          "options": [
+            {
+              "desc": "+10 ATK, +10 DEF, +600 HP",
+              "id": "all2",
+              "mods": {
+                "ATK": 10,
+                "DEF": 10,
+                "maxHP": 600
+              },
+              "name": "Legendary"
+            },
+            {
+              "desc": "+25% CRIT chance",
+              "id": "crit4",
+              "mods": {
+                "CRIT": 0.25
+              },
+              "name": "Mythic"
+            }
+          ]
+        }
+      ],
+      "title": "War Training"
+    },
+    "duelist": {
+      "autoBump": {
+        "ATK": 1,
+        "CRIT": 0.01
+      },
+      "choices": [
+        {
+          "level": 3,
+          "options": [
+            {
+              "desc": "+8% CRIT",
+              "id": "fast",
+              "mods": {
+                "CRIT": 0.08
+              },
+              "name": "Quick Draw"
+            },
+            {
+              "desc": "+6 ATK",
+              "id": "edge",
+              "mods": {
+                "ATK": 6
+              },
+              "name": "Razor Edge"
+            }
+          ]
+        },
+        {
+          "level": 6,
+          "options": [
+            {
+              "desc": "+12% CRIT",
+              "id": "duel",
+              "mods": {
+                "CRIT": 0.12
+              },
+              "name": "Duelist's Nerve"
+            },
+            {
+              "desc": "+9 ATK",
+              "id": "slash",
+              "mods": {
+                "ATK": 9
+              },
+              "name": "Deep Slash"
+            }
+          ]
+        },
+        {
+          "level": 9,
+          "options": [
+            {
+              "desc": "+18% CRIT",
+              "id": "focus",
+              "mods": {
+                "CRIT": 0.18
+              },
+              "name": "Cold Focus"
+            },
+            {
+              "desc": "+14 ATK",
+              "id": "power",
+              "mods": {
+                "ATK": 14
+              },
+              "name": "Power Stroke"
+            }
+          ]
+        },
+        {
+          "level": 12,
+          "options": [
+            {
+              "desc": "+12 ATK, +10% CRIT",
+              "id": "lunge",
+              "mods": {
+                "ATK": 12,
+                "CRIT": 0.1
+              },
+              "name": "Lethal Lunge"
+            },
+            {
+              "desc": "+300 HP, +8% CRIT",
+              "id": "evasive",
+              "mods": {
+                "CRIT": 0.08,
+                "maxHP": 300
+              },
+              "name": "Evasive"
+            }
+          ]
+        },
+        {
+          "level": 15,
+          "options": [
+            {
+              "desc": "+25% CRIT",
+              "id": "deadly",
+              "mods": {
+                "CRIT": 0.25
+              },
+              "name": "Deadly Grace"
+            },
+            {
+              "desc": "+20 ATK",
+              "id": "sharp",
+              "mods": {
+                "ATK": 20
+              },
+              "name": "Keener Steel"
+            }
+          ]
+        },
+        {
+          "level": 18,
+          "options": [
+            {
+              "desc": "+18 ATK, +15% CRIT",
+              "id": "master",
+              "mods": {
+                "ATK": 18,
+                "CRIT": 0.15
+              },
+              "name": "Master Blademaster"
+            },
+            {
+              "desc": "+35% CRIT",
+              "id": "swift",
+              "mods": {
+                "CRIT": 0.35
+              },
+              "name": "Swift as Wind"
+            }
+          ]
+        },
+        {
+          "level": 21,
+          "options": [
+            {
+              "desc": "+24 ATK, +20% CRIT",
+              "id": "legend",
+              "mods": {
+                "ATK": 24,
+                "CRIT": 0.2
+              },
+              "name": "Legendary Duelist"
+            },
+            {
+              "desc": "+40% CRIT",
+              "id": "assass",
+              "mods": {
+                "CRIT": 0.4
+              },
+              "name": "Assassin"
+            }
+          ]
+        }
+      ],
+      "title": "Blade Precision"
+    },
+    "hunter": {
+      "autoBump": {
+        "ATK": 1,
+        "CRIT": 0.01
+      },
+      "choices": [
+        {
+          "level": 3,
+          "options": [
+            {
+              "desc": "+7% CRIT",
+              "id": "track",
+              "mods": {
+                "CRIT": 0.07
+              },
+              "name": "Tracker"
+            },
+            {
+              "desc": "+5 ATK",
+              "id": "aim",
+              "mods": {
+                "ATK": 5
+              },
+              "name": "Sure Aim"
+            }
+          ]
+        },
+        {
+          "level": 6,
+          "options": [
+            {
+              "desc": "+11% CRIT",
+              "id": "scope",
+              "mods": {
+                "CRIT": 0.11
+              },
+              "name": "Scoped Shot"
+            },
+            {
+              "desc": "+8 ATK",
+              "id": "pierce",
+              "mods": {
+                "ATK": 8
+              },
+              "name": "Piercing"
+            }
+          ]
+        },
+        {
+          "level": 9,
+          "options": [
+            {
+              "desc": "+400 HP, +6% CRIT",
+              "id": "snel",
+              "mods": {
+                "CRIT": 0.06,
+                "maxHP": 400
+              },
+              "name": "Silent Steps"
+            },
+            {
+              "desc": "+12 ATK",
+              "id": "hail",
+              "mods": {
+                "ATK": 12
+              },
+              "name": "Arrowsmith"
+            }
+          ]
+        },
+        {
+          "level": 12,
+          "options": [
+            {
+              "desc": "+10 ATK, +12% CRIT",
+              "id": "hunt",
+              "mods": {
+                "ATK": 10,
+                "CRIT": 0.12
+              },
+              "name": "Beast Hunter"
+            },
+            {
+              "desc": "+700 HP, +8% CRIT",
+              "id": "surviv",
+              "mods": {
+                "CRIT": 0.08,
+                "maxHP": 700
+              },
+              "name": "Survivor"
+            }
+          ]
+        },
+        {
+          "level": 15,
+          "options": [
+            {
+              "desc": "+22% CRIT",
+              "id": "marksm",
+              "mods": {
+                "CRIT": 0.22
+              },
+              "name": "Marksman"
+            },
+            {
+              "desc": "+18 ATK",
+              "id": "quiver",
+              "mods": {
+                "ATK": 18
+              },
+              "name": "Storm Quiver"
+            }
+          ]
+        },
+        {
+          "level": 18,
+          "options": [
+            {
+              "desc": "+14 ATK, +16% CRIT",
+              "id": "trk2",
+              "mods": {
+                "ATK": 14,
+                "CRIT": 0.16
+              },
+              "name": "Relentless Tracker"
+            },
+            {
+              "desc": "+30% CRIT",
+              "id": "ghst",
+              "mods": {
+                "CRIT": 0.3
+              },
+              "name": "Ghost Arrow"
+            }
+          ]
+        },
+        {
+          "level": 21,
+          "options": [
+            {
+              "desc": "+20 ATK, +20% CRIT",
+              "id": "mstr",
+              "mods": {
+                "ATK": 20,
+                "CRIT": 0.2
+              },
+              "name": "Master Huntsman"
+            },
+            {
+              "desc": "+35% CRIT",
+              "id": "phntm",
+              "mods": {
+                "CRIT": 0.35
+              },
+              "name": "Phantom Sights"
+            }
+          ]
+        }
+      ],
+      "title": "Hunter's Instinct"
+    },
+    "jester": {
+      "autoBump": {
+        "ATK": 1,
+        "DEF": 1,
+        "maxHP": 50
+      },
+      "choices": [
+        {
+          "level": 3,
+          "options": [
+            {
+              "desc": "+4 ATK",
+              "id": "atk",
+              "mods": {
+                "ATK": 4
+              },
+              "name": "Keen Edge"
+            },
+            {
+              "desc": "+3 DEF, +150 HP",
+              "id": "def",
+              "mods": {
+                "DEF": 3,
+                "maxHP": 150
+              },
+              "name": "Steady Guard"
+            }
+          ]
+        },
+        {
+          "level": 6,
+          "options": [
+            {
+              "desc": "+400 max HP",
+              "id": "hp",
+              "mods": {
+                "maxHP": 400
+              },
+              "name": "Hardened"
+            },
+            {
+              "desc": "+8% CRIT chance",
+              "id": "crit",
+              "mods": {
+                "CRIT": 0.08
+              },
+              "name": "Precise"
+            }
+          ]
+        },
+        {
+          "level": 9,
+          "options": [
+            {
+              "desc": "+7 ATK",
+              "id": "atk2",
+              "mods": {
+                "ATK": 7
+              },
+              "name": "Might"
+            },
+            {
+              "desc": "+6 DEF",
+              "id": "def2",
+              "mods": {
+                "DEF": 6
+              },
+              "name": "Bulwark"
+            }
+          ]
+        },
+        {
+          "level": 12,
+          "options": [
+            {
+              "desc": "+5 ATK, +5 DEF, +300 HP",
+              "id": "all1",
+              "mods": {
+                "ATK": 5,
+                "DEF": 5,
+                "maxHP": 300
+              },
+              "name": "Veteran"
+            },
+            {
+              "desc": "+15% CRIT chance",
+              "id": "crit2",
+              "mods": {
+                "CRIT": 0.15
+              },
+              "name": "Deadly"
+            }
+          ]
+        },
+        {
+          "level": 15,
+          "options": [
+            {
+              "desc": "+12 ATK",
+              "id": "atk3",
+              "mods": {
+                "ATK": 12
+              },
+              "name": "Overwhelming"
+            },
+            {
+              "desc": "+800 max HP",
+              "id": "hp2",
+              "mods": {
+                "maxHP": 800
+              },
+              "name": "Titanic"
+            }
+          ]
+        },
+        {
+          "level": 18,
+          "options": [
+            {
+              "desc": "+12 DEF",
+              "id": "def3",
+              "mods": {
+                "DEF": 12
+              },
+              "name": "Impregnable"
+            },
+            {
+              "desc": "+20% CRIT chance",
+              "id": "crit3",
+              "mods": {
+                "CRIT": 0.2
+              },
+              "name": "Executioner"
+            }
+          ]
+        },
+        {
+          "level": 21,
+          "options": [
+            {
+              "desc": "+10 ATK, +10 DEF, +600 HP",
+              "id": "all2",
+              "mods": {
+                "ATK": 10,
+                "DEF": 10,
+                "maxHP": 600
+              },
+              "name": "Legendary"
+            },
+            {
+              "desc": "+25% CRIT chance",
+              "id": "crit4",
+              "mods": {
+                "CRIT": 0.25
+              },
+              "name": "Mythic"
+            }
+          ]
+        }
+      ],
+      "title": "War Training"
+    },
+    "knight": {
+      "autoBump": {
+        "DEF": 1,
+        "maxHP": 15
+      },
+      "choices": [
+        {
+          "level": 1,
+          "options": [
+            {
+              "ability": "KnightHamstring",
+              "id": "hamstring",
+              "name": "Hamstring"
+            },
+            {
+              "ability": "KnightDefend",
+              "id": "defend",
+              "name": "Defend"
+            }
+          ]
+        },
+        {
+          "level": 5,
+          "options": [
+            {
+              "desc": "25% less stagger taken, knocked down 1 s less",
+              "id": "ignorepain",
+              "name": "Ignore Pain",
+              "traits": {
+                "staggerDurAdd": -1,
+                "staggerTaken": 0.75
+              }
+            },
+            {
+              "desc": "+20% defence",
+              "id": "bulwark",
+              "mods": {
+                "DEF_PCT": 0.2
+              },
+              "name": "Bulwark"
+            }
+          ]
+        },
+        {
+          "level": 10,
+          "options": [
+            {
+              "ability": "KnightSunderArmor",
+              "id": "sunder",
+              "name": "Sunder Armor"
+            },
+            {
+              "ability": "KnightCharge",
+              "id": "charge",
+              "name": "Charge"
+            }
+          ]
+        },
+        {
+          "level": 15,
+          "options": [
+            {
+              "desc": "His hits halve the healing an enemy receives for 5 s",
+              "id": "mortal",
+              "name": "Mortal Wounds",
+              "traits": {
+                "onHitStatus": {
+                  "duration": 5,
+                  "index": "HEAL_CUT",
+                  "magnitude": 0.5
+                }
+              }
+            },
+            {
+              "desc": "Every hit adds stagger worth 15% of his defence",
+              "id": "force",
+              "name": "Force of Nature",
+              "traits": {
+                "staggerFromDef": 0.15
+              }
+            }
+          ]
+        },
+        {
+          "level": 20,
+          "options": [
+            {
+              "ability": "KnightChallengingShout",
+              "id": "challenge",
+              "name": "Challenging Shout"
+            },
+            {
+              "ability": "KnightBattleShout",
+              "id": "battle",
+              "name": "Battle Shout"
+            }
+          ]
+        }
+      ],
+      "title": "Knight"
+    },
+    "paladin": {
+      "autoBump": {
+        "DEF": 1,
+        "maxHP": 70
+      },
+      "choices": [
+        {
+          "level": 3,
+          "options": [
+            {
+              "desc": "+7 DEF",
+              "id": "oath",
+              "mods": {
+                "DEF": 7
+              },
+              "name": "Oath of Steel"
+            },
+            {
+              "desc": "+500 max HP",
+              "id": "creed",
+              "mods": {
+                "maxHP": 500
+              },
+              "name": "Creed of Life"
+            }
+          ]
+        },
+        {
+          "level": 6,
+          "options": [
+            {
+              "desc": "+9 DEF, +250 HP",
+              "id": "holy",
+              "mods": {
+                "DEF": 9,
+                "maxHP": 250
+              },
+              "name": "Holy Bulwark"
+            },
+            {
+              "desc": "+6 ATK",
+              "id": "wrath",
+              "mods": {
+                "ATK": 6
+              },
+              "name": "Righteous Wrath"
+            }
+          ]
+        },
+        {
+          "level": 9,
+          "options": [
+            {
+              "desc": "+1000 max HP",
+              "id": "guard",
+              "mods": {
+                "maxHP": 1000
+              },
+              "name": "Guardian Oath"
+            },
+            {
+              "desc": "+11 ATK",
+              "id": "hammer",
+              "mods": {
+                "ATK": 11
+              },
+              "name": "Hammer of Justice"
+            }
+          ]
+        },
+        {
+          "level": 12,
+          "options": [
+            {
+              "desc": "+9 ATK, +9 DEF",
+              "id": "sentinel",
+              "mods": {
+                "ATK": 9,
+                "DEF": 9
+              },
+              "name": "Sentinel"
+            },
+            {
+              "desc": "+1300 max HP",
+              "id": "bulwark2",
+              "mods": {
+                "maxHP": 1300
+              },
+              "name": "Bulwark"
+            }
+          ]
+        },
+        {
+          "level": 15,
+          "options": [
+            {
+              "desc": "+15 DEF, +700 HP",
+              "id": "champion2",
+              "mods": {
+                "DEF": 15,
+                "maxHP": 700
+              },
+              "name": "Holy Champion"
+            },
+            {
+              "desc": "+15 ATK",
+              "id": "cruiser",
+              "mods": {
+                "ATK": 15
+              },
+              "name": "Crusader"
+            }
+          ]
+        },
+        {
+          "level": 18,
+          "options": [
+            {
+              "desc": "+2100 max HP",
+              "id": "justicar",
+              "mods": {
+                "maxHP": 2100
+              },
+              "name": "Justicar"
+            },
+            {
+              "desc": "+18 ATK, +11 DEF",
+              "id": "palbld",
+              "mods": {
+                "ATK": 18,
+                "DEF": 11
+              },
+              "name": "Paladin Blade"
+            }
+          ]
+        },
+        {
+          "level": 21,
+          "options": [
+            {
+              "desc": "+22 DEF, +1100 HP",
+              "id": "templar",
+              "mods": {
+                "DEF": 22,
+                "maxHP": 1100
+              },
+              "name": "Templar"
+            },
+            {
+              "desc": "+24 ATK",
+              "id": "liberat",
+              "mods": {
+                "ATK": 24
+              },
+              "name": "Liberator"
+            }
+          ]
+        }
+      ],
+      "title": "Oathkeeper"
+    },
+    "piper": {
+      "autoBump": {
+        "ATK": 1,
+        "DEF": 1,
+        "maxHP": 50
+      },
+      "choices": [
+        {
+          "level": 3,
+          "options": [
+            {
+              "desc": "+4 ATK",
+              "id": "atk",
+              "mods": {
+                "ATK": 4
+              },
+              "name": "Keen Edge"
+            },
+            {
+              "desc": "+3 DEF, +150 HP",
+              "id": "def",
+              "mods": {
+                "DEF": 3,
+                "maxHP": 150
+              },
+              "name": "Steady Guard"
+            }
+          ]
+        },
+        {
+          "level": 6,
+          "options": [
+            {
+              "desc": "+400 max HP",
+              "id": "hp",
+              "mods": {
+                "maxHP": 400
+              },
+              "name": "Hardened"
+            },
+            {
+              "desc": "+8% CRIT chance",
+              "id": "crit",
+              "mods": {
+                "CRIT": 0.08
+              },
+              "name": "Precise"
+            }
+          ]
+        },
+        {
+          "level": 9,
+          "options": [
+            {
+              "desc": "+7 ATK",
+              "id": "atk2",
+              "mods": {
+                "ATK": 7
+              },
+              "name": "Might"
+            },
+            {
+              "desc": "+6 DEF",
+              "id": "def2",
+              "mods": {
+                "DEF": 6
+              },
+              "name": "Bulwark"
+            }
+          ]
+        },
+        {
+          "level": 12,
+          "options": [
+            {
+              "desc": "+5 ATK, +5 DEF, +300 HP",
+              "id": "all1",
+              "mods": {
+                "ATK": 5,
+                "DEF": 5,
+                "maxHP": 300
+              },
+              "name": "Veteran"
+            },
+            {
+              "desc": "+15% CRIT chance",
+              "id": "crit2",
+              "mods": {
+                "CRIT": 0.15
+              },
+              "name": "Deadly"
+            }
+          ]
+        },
+        {
+          "level": 15,
+          "options": [
+            {
+              "desc": "+12 ATK",
+              "id": "atk3",
+              "mods": {
+                "ATK": 12
+              },
+              "name": "Overwhelming"
+            },
+            {
+              "desc": "+800 max HP",
+              "id": "hp2",
+              "mods": {
+                "maxHP": 800
+              },
+              "name": "Titanic"
+            }
+          ]
+        },
+        {
+          "level": 18,
+          "options": [
+            {
+              "desc": "+12 DEF",
+              "id": "def3",
+              "mods": {
+                "DEF": 12
+              },
+              "name": "Impregnable"
+            },
+            {
+              "desc": "+20% CRIT chance",
+              "id": "crit3",
+              "mods": {
+                "CRIT": 0.2
+              },
+              "name": "Executioner"
+            }
+          ]
+        },
+        {
+          "level": 21,
+          "options": [
+            {
+              "desc": "+10 ATK, +10 DEF, +600 HP",
+              "id": "all2",
+              "mods": {
+                "ATK": 10,
+                "DEF": 10,
+                "maxHP": 600
+              },
+              "name": "Legendary"
+            },
+            {
+              "desc": "+25% CRIT chance",
+              "id": "crit4",
+              "mods": {
+                "CRIT": 0.25
+              },
+              "name": "Mythic"
+            }
+          ]
+        }
+      ],
+      "title": "War Training"
+    },
+    "priest": {
+      "autoBump": {
+        "ATK": 1,
+        "maxHP": 60
+      },
+      "choices": [
+        {
+          "level": 3,
+          "options": [
+            {
+              "desc": "+400 max HP",
+              "id": "bless",
+              "mods": {
+                "maxHP": 400
+              },
+              "name": "Blessed Aegis"
+            },
+            {
+              "desc": "+5 ATK (holy power)",
+              "id": "hymn",
+              "mods": {
+                "ATK": 5
+              },
+              "name": "Hymn of Faith"
+            }
+          ]
+        },
+        {
+          "level": 6,
+          "options": [
+            {
+              "desc": "+6 DEF, +300 HP",
+              "id": "shield",
+              "mods": {
+                "DEF": 6,
+                "maxHP": 300
+              },
+              "name": "Sanctified Shield"
+            },
+            {
+              "desc": "+700 max HP",
+              "id": "light",
+              "mods": {
+                "maxHP": 700
+              },
+              "name": "Radiant Light"
+            }
+          ]
+        },
+        {
+          "level": 9,
+          "options": [
+            {
+              "desc": "+1100 max HP",
+              "id": "prayer",
+              "mods": {
+                "maxHP": 1100
+              },
+              "name": "Prayer of Mending"
+            },
+            {
+              "desc": "+9 ATK",
+              "id": "zeal",
+              "mods": {
+                "ATK": 9
+              },
+              "name": "Zealotry"
+            }
+          ]
+        },
+        {
+          "level": 12,
+          "options": [
+            {
+              "desc": "+8 DEF, +800 HP",
+              "id": "halo",
+              "mods": {
+                "DEF": 8,
+                "maxHP": 800
+              },
+              "name": "Halo of Protection"
+            },
+            {
+              "desc": "+1300 max HP",
+              "id": "miracle",
+              "mods": {
+                "maxHP": 1300
+              },
+              "name": "Miracle Worker"
+            }
+          ]
+        },
+        {
+          "level": 15,
+          "options": [
+            {
+              "desc": "+1000 max HP, +6% CRIT",
+              "id": "angel",
+              "mods": {
+                "CRIT": 0.06,
+                "maxHP": 1000
+              },
+              "name": "Angelic Favor"
+            },
+            {
+              "desc": "+14 ATK",
+              "id": "avenger",
+              "mods": {
+                "ATK": 14
+              },
+              "name": "Avenging Host"
+            }
+          ]
+        },
+        {
+          "level": 18,
+          "options": [
+            {
+              "desc": "+1400 max HP, +10% CRIT",
+              "id": "prophet",
+              "mods": {
+                "CRIT": 0.1,
+                "maxHP": 1400
+              },
+              "name": "Prophet"
+            },
+            {
+              "desc": "+18 ATK, +10 DEF",
+              "id": "judge",
+              "mods": {
+                "ATK": 18,
+                "DEF": 10
+              },
+              "name": "Divine Judge"
+            }
+          ]
+        },
+        {
+          "level": 21,
+          "options": [
+            {
+              "desc": "+2000 max HP, +12% CRIT",
+              "id": "saint",
+              "mods": {
+                "CRIT": 0.12,
+                "maxHP": 2000
+              },
+              "name": "Saint"
+            },
+            {
+              "desc": "+22 ATK, +16 DEF",
+              "id": "archang",
+              "mods": {
+                "ATK": 22,
+                "DEF": 16
+              },
+              "name": "Archangel"
+            }
+          ]
+        }
+      ],
+      "title": "Divine Intercession"
+    },
+    "rogue": {
+      "autoBump": {
+        "ATK": 1,
+        "CRIT": 0.01
+      },
+      "choices": [
+        {
+          "level": 3,
+          "options": [
+            {
+              "desc": "+7% CRIT",
+              "id": "poison",
+              "mods": {
+                "CRIT": 0.07
+              },
+              "name": "Poisoned Fang"
+            },
+            {
+              "desc": "+6 ATK",
+              "id": "stab",
+              "mods": {
+                "ATK": 6
+              },
+              "name": "Quick Stab"
+            }
+          ]
+        },
+        {
+          "level": 6,
+          "options": [
+            {
+              "desc": "+11% CRIT",
+              "id": "vanish",
+              "mods": {
+                "CRIT": 0.11
+              },
+              "name": "Vanish"
+            },
+            {
+              "desc": "+9 ATK",
+              "id": "backstab",
+              "mods": {
+                "ATK": 9
+              },
+              "name": "Backstab"
+            }
+          ]
+        },
+        {
+          "level": 9,
+          "options": [
+            {
+              "desc": "+350 HP, +10% CRIT",
+              "id": "venom",
+              "mods": {
+                "CRIT": 0.1,
+                "maxHP": 350
+              },
+              "name": "Venomous Blades"
+            },
+            {
+              "desc": "+13 ATK",
+              "id": "shadow",
+              "mods": {
+                "ATK": 13
+              },
+              "name": "Shadow Dance"
+            }
+          ]
+        },
+        {
+          "level": 12,
+          "options": [
+            {
+              "desc": "+11 ATK, +12% CRIT",
+              "id": "assas",
+              "mods": {
+                "ATK": 11,
+                "CRIT": 0.12
+              },
+              "name": "Assassin"
+            },
+            {
+              "desc": "+600 HP, +9% CRIT",
+              "id": "skulk",
+              "mods": {
+                "CRIT": 0.09,
+                "maxHP": 600
+              },
+              "name": "Skulker"
+            }
+          ]
+        },
+        {
+          "level": 15,
+          "options": [
+            {
+              "desc": "+24% CRIT",
+              "id": "night",
+              "mods": {
+                "CRIT": 0.24
+              },
+              "name": "Nightblade"
+            },
+            {
+              "desc": "+19 ATK",
+              "id": "daggers",
+              "mods": {
+                "ATK": 19
+              },
+              "name": "Twin Daggers"
+            }
+          ]
+        },
+        {
+          "level": 18,
+          "options": [
+            {
+              "desc": "+15 ATK, +16% CRIT",
+              "id": "ninj",
+              "mods": {
+                "ATK": 15,
+                "CRIT": 0.16
+              },
+              "name": "Shadow Ninja"
+            },
+            {
+              "desc": "+32% CRIT",
+              "id": "phantom",
+              "mods": {
+                "CRIT": 0.32
+              },
+              "name": "Phantom"
+            }
+          ]
+        },
+        {
+          "level": 21,
+          "options": [
+            {
+              "desc": "+22 ATK, +20% CRIT",
+              "id": "masterassas",
+              "mods": {
+                "ATK": 22,
+                "CRIT": 0.2
+              },
+              "name": "Master Assassin"
+            },
+            {
+              "desc": "+38% CRIT",
+              "id": "death",
+              "mods": {
+                "CRIT": 0.38
+              },
+              "name": "Death itself"
+            }
+          ]
+        }
+      ],
+      "title": "Shadow Craft"
+    },
+    "witch": {
+      "autoBump": {
+        "ATK": 1,
+        "DEF": 1,
+        "maxHP": 40
+      },
+      "choices": [
+        {
+          "level": 3,
+          "options": [
+            {
+              "desc": "+450 max HP",
+              "id": "mend",
+              "mods": {
+                "maxHP": 450
+              },
+              "name": "Field Medicine"
+            },
+            {
+              "desc": "+5 ATK",
+              "id": "ember",
+              "mods": {
+                "ATK": 5
+              },
+              "name": "Ember Blade"
+            }
+          ]
+        },
+        {
+          "level": 6,
+          "options": [
+            {
+              "desc": "+6 DEF, +250 HP",
+              "id": "path",
+              "mods": {
+                "DEF": 6,
+                "maxHP": 250
+              },
+              "name": "Pathfinder"
+            },
+            {
+              "desc": "+700 max HP",
+              "id": "heal",
+              "mods": {
+                "maxHP": 700
+              },
+              "name": "Mending Hands"
+            }
+          ]
+        },
+        {
+          "level": 9,
+          "options": [
+            {
+              "desc": "+8 DEF",
+              "id": "ward",
+              "mods": {
+                "DEF": 8
+              },
+              "name": "Battle Ward"
+            },
+            {
+              "desc": "+1000 max HP",
+              "id": "tenac",
+              "mods": {
+                "maxHP": 1000
+              },
+              "name": "Tenacity"
+            }
+          ]
+        },
+        {
+          "level": 12,
+          "options": [
+            {
+              "desc": "+1200 max HP, +5 ATK",
+              "id": "shaman",
+              "mods": {
+                "ATK": 5,
+                "maxHP": 1200
+              },
+              "name": "Shamanic Rites"
+            },
+            {
+              "desc": "+10 DEF, +400 HP",
+              "id": "clash",
+              "mods": {
+                "DEF": 10,
+                "maxHP": 400
+              },
+              "name": "Clash Proof"
+            }
+          ]
+        },
+        {
+          "level": 15,
+          "options": [
+            {
+              "desc": "+1600 max HP",
+              "id": "druid",
+              "mods": {
+                "maxHP": 1600
+              },
+              "name": "Druidic Bloom"
+            },
+            {
+              "desc": "+14 ATK, +8 DEF",
+              "id": "warlock",
+              "mods": {
+                "ATK": 14,
+                "DEF": 8
+              },
+              "name": "Warlock Pact"
+            }
+          ]
+        },
+        {
+          "level": 18,
+          "options": [
+            {
+              "desc": "+1200 max HP, +10% CRIT",
+              "id": "oracle",
+              "mods": {
+                "CRIT": 0.1,
+                "maxHP": 1200
+              },
+              "name": "Oracle"
+            },
+            {
+              "desc": "+18 ATK, +12 DEF",
+              "id": "veteran",
+              "mods": {
+                "ATK": 18,
+                "DEF": 12
+              },
+              "name": "Seasoned Vet"
+            }
+          ]
+        },
+        {
+          "level": 21,
+          "options": [
+            {
+              "desc": "+2000 max HP, +15% CRIT",
+              "id": "sage",
+              "mods": {
+                "CRIT": 0.15,
+                "maxHP": 2000
+              },
+              "name": "Battle Sage"
+            },
+            {
+              "desc": "+22 ATK, +16 DEF",
+              "id": "conq",
+              "mods": {
+                "ATK": 22,
+                "DEF": 16
+              },
+              "name": "Conqueror"
+            }
+          ]
+        }
+      ],
+      "title": "Pathfinder's Resolve"
+    },
+    "wizard": {
+      "autoBump": {
+        "ATK": 1,
+        "CRIT": 0.01
+      },
+      "choices": [
+        {
+          "level": 3,
+          "options": [
+            {
+              "desc": "+8 ATK (spell power)",
+              "id": "focus2",
+              "mods": {
+                "ATK": 8
+              },
+              "name": "Arcane Focus"
+            },
+            {
+              "desc": "+8% CRIT (critical cast)",
+              "id": "intel",
+              "mods": {
+                "CRIT": 0.08
+              },
+              "name": "Intellect"
+            }
+          ]
+        },
+        {
+          "level": 6,
+          "options": [
+            {
+              "desc": "+12% CRIT",
+              "id": "arcana",
+              "mods": {
+                "CRIT": 0.12
+              },
+              "name": "High Arcana"
+            },
+            {
+              "desc": "+10 ATK",
+              "id": "spell2",
+              "mods": {
+                "ATK": 10
+              },
+              "name": "Greater Spells"
+            }
+          ]
+        },
+        {
+          "level": 9,
+          "options": [
+            {
+              "desc": "+18% CRIT",
+              "id": "element",
+              "mods": {
+                "CRIT": 0.18
+              },
+              "name": "Elementalist"
+            },
+            {
+              "desc": "+14 ATK",
+              "id": "conjure",
+              "mods": {
+                "ATK": 14
+              },
+              "name": "Conjurer"
+            }
+          ]
+        },
+        {
+          "level": 12,
+          "options": [
+            {
+              "desc": "+500 HP, +10% CRIT",
+              "id": "abjuration",
+              "mods": {
+                "CRIT": 0.1,
+                "maxHP": 500
+              },
+              "name": "Abjurer"
+            },
+            {
+              "desc": "+16 ATK, +8% CRIT",
+              "id": "evocation",
+              "mods": {
+                "ATK": 16,
+                "CRIT": 0.08
+              },
+              "name": "Evoker"
+            }
+          ]
+        },
+        {
+          "level": 15,
+          "options": [
+            {
+              "desc": "+26% CRIT",
+              "id": "mage2",
+              "mods": {
+                "CRIT": 0.26
+              },
+              "name": "Archmage"
+            },
+            {
+              "desc": "+20 ATK",
+              "id": "pyrom",
+              "mods": {
+                "ATK": 20
+              },
+              "name": "Pyromancer"
+            }
+          ]
+        },
+        {
+          "level": 18,
+          "options": [
+            {
+              "desc": "+600 HP, +16% CRIT",
+              "id": "astral",
+              "mods": {
+                "CRIT": 0.16,
+                "maxHP": 600
+              },
+              "name": "Astral Projection"
+            },
+            {
+              "desc": "+22 ATK, +12% CRIT",
+              "id": "wild",
+              "mods": {
+                "ATK": 22,
+                "CRIT": 0.12
+              },
+              "name": "Wild Magic"
+            }
+          ]
+        },
+        {
+          "level": 21,
+          "options": [
+            {
+              "desc": "+24 ATK, +22% CRIT",
+              "id": "archwit",
+              "mods": {
+                "ATK": 24,
+                "CRIT": 0.22
+              },
+              "name": "Arch-Witch"
+            },
+            {
+              "desc": "+34% CRIT",
+              "id": "spell20",
+              "mods": {
+                "CRIT": 0.34
+              },
+              "name": "Spellstorm"
+            }
+          ]
+        }
+      ],
+      "title": "Arcane Studies"
+    }
+  }
+}

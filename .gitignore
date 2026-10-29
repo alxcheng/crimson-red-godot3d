@@ -5,3 +5,6 @@
 *.blend1
 *.blend2
 __pycache__/
+# OS clutter
+.DS_Store
+._*

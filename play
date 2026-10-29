@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Crimson Red 3D - the game: main menu -> stage select -> party / equip / talents / shop -> battle.
+# Flags after the script name pass through: --screen=title|stage_select|party|equip|shop|talents  --shot=name (save a screenshot and quit)
+set -euo pipefail
+cd "$(dirname "$0")/godot"
+GODOT="${GODOT:-$(command -v godot || echo /Applications/Godot.app/Contents/MacOS/Godot)}"
+exec "$GODOT" --path . res://menus/menu_app.tscn -- "$@"

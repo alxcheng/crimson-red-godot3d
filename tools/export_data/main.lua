@@ -1,0 +1,135 @@
+-- export_data: dumps the 2D game's data tables (main-game/data/*.lua and a few engine tables) to JSON
+-- for the Godot port. READ-ONLY on main-game: it requires the modules and writes only to CR_OUT_DIR.
+--
+--   CR_MAIN_DIR  absolute path of main-game/ (the LÖVE game)
+--   CR_OUT_DIR   absolute path of the output folder (crimson-red-3d/godot/data)
+--   CR_NO_OVERRIDES=1  export the plain data files without the in-game DEV TOOLS edits
+--
+-- By default the Director's saved DEV TOOLS edits (data/dev_overrides.lua) are applied first, so the
+-- export matches what is played. Output is deterministic: keys sorted, no timestamps, so a re-run
+-- only changes the files whose data changed (git diff shows exactly what).
+-- Functions in the data (none are expected in the data tables) are skipped and listed in _meta.json.
+
+local MAIN = os.getenv("CR_MAIN_DIR")
+local OUT  = os.getenv("CR_OUT_DIR")
+assert(MAIN and OUT, "set CR_MAIN_DIR and CR_OUT_DIR")
+package.path = MAIN .. "/?.lua;" .. package.path
+
+local skipped = {}
+
+local function isArray(t)
+    local n = 0
+    for k in pairs(t) do
+        if type(k) ~= "number" or k < 1 or k ~= math.floor(k) then return false end
+        n = n + 1
+    end
+    for i = 1, n do if t[i] == nil then return false end end
+    return true, n
+end
+
+local function num(v)
+    if v ~= v or v == math.huge or v == -math.huge then return "null" end
+    if v == math.floor(v) and math.abs(v) < 1e15 then return string.format("%d", v) end
+    return string.format("%.14g", v)
+end
+
+local function esc(s)
+    return '"' .. s:gsub('[%c"\\]', function(c)
+        local map = { ['"'] = '\\"', ["\\"] = "\\\\", ["\n"] = "\\n", ["\r"] = "\\r", ["\t"] = "\\t" }
+        return map[c] or string.format("\\u%04x", c:byte())
+    end) .. '"'
+end
+
+local function encode(v, path, depth, seen)
+    local t = type(v)
+    if t == "nil" then return "null" end
+    if t == "boolean" then return tostring(v) end
+    if t == "number" then return num(v) end
+    if t == "string" then return esc(v) end
+    if t == "function" or t == "userdata" or t == "thread" then
+        skipped[#skipped + 1] = path .. " (" .. t .. ")"
+        return nil
+    end
+    assert(not seen[v], "cycle at " .. path)
+    seen[v] = true
+    local pad, pad2 = string.rep("  ", depth), string.rep("  ", depth + 1)
+    local out
+    local arr, n = isArray(v)
+    if arr and n > 0 then
+        local parts = {}
+        for i = 1, n do
+            local e = encode(v[i], path .. "[" .. i .. "]", depth + 1, seen)
+            parts[#parts + 1] = pad2 .. (e or "null")
+        end
+        out = "[\n" .. table.concat(parts, ",\n") .. "\n" .. pad .. "]"
+    else
+        local keys = {}
+        for k in pairs(v) do keys[#keys + 1] = k end
+        table.sort(keys, function(a, b)
+            if type(a) == type(b) then return a < b end
+            return type(a) == "number"
+        end)
+        local parts = {}
+        for _, k in ipairs(keys) do
+            local e = encode(v[k], path .. "." .. tostring(k), depth + 1, seen)
+            if e then parts[#parts + 1] = pad2 .. esc(tostring(k)) .. ": " .. e end
+        end
+        out = #parts == 0 and "{}" or ("{\n" .. table.concat(parts, ",\n") .. "\n" .. pad .. "}")
+    end
+    seen[v] = nil
+    return out
+end
+
+local function write(name, value)
+    local text = encode(value, name, 0, {}) .. "\n"
+    local f = assert(io.open(OUT .. "/" .. name .. ".json", "wb"))
+    f:write(text)
+    f:close()
+    return #text
+end
+
+local function load(module)
+    local ok, m = pcall(require, module)
+    assert(ok, "cannot load " .. module .. ": " .. tostring(m))
+    return m
+end
+
+function love.load()
+    local overridesApplied = false
+    if os.getenv("CR_NO_OVERRIDES") ~= "1" then
+        -- the in-game DEV TOOLS edits sit on top of the data files; apply them like main.lua does at start-up
+        local ok, devData = pcall(require, "dev_data")
+        if ok and devData and devData.load then
+            devData.load()
+            overridesApplied = true
+        end
+    end
+    local sizes, counts = {}, {}
+    local function export(name, module, pick)
+        local m = load(module)
+        local value = pick and pick(m) or m
+        sizes[name] = write(name, value)
+        local n = 0
+        for _ in pairs(value) do n = n + 1 end
+        counts[name] = n
+    end
+    export("classes",      "data/classes")
+    export("enemies",      "data/enemies")
+    export("abilities",    "data/abilities")
+    export("talents",      "data/talents")
+    export("tutorial",     "data/tutorial")
+    export("sprite_bounds", "data/sprite_bounds")
+    export("bh_items",     "data/bh_items")
+    export("bh_rewards",   "data/bh_rewards")
+    export("wave_tuning",  "encounter/wave_gen", function(m) return m.TUNING end)
+    write("_meta", {
+        source = "main-game",
+        overridesApplied = overridesApplied,
+        files = counts,
+        skippedNonData = skipped,
+        note = "GENERATED by crimson-red-3d/tools/export_data. Do not edit by hand.",
+    })
+    print("EXPORT_OK overrides=" .. tostring(overridesApplied) .. " skipped=" .. #skipped)
+    for name, c in pairs(counts) do print(string.format("  %-14s %4d top-level entries, %6d bytes", name, c, sizes[name])) end
+    love.event.quit(0)
+end

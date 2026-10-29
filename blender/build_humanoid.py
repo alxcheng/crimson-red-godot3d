@@ -2,8 +2,8 @@
 
 OSRS-style low poly: flat-shaded, faceted, tapered limbs (no boxes), diamond eyes.
 Colours and stance copy the 2D Knight sprite (navy tabard, black sleeves/legs, grey armour).
-One mesh, one ~30 bone skeleton, five animations named after the 2D game's animation set
-(Idle, Move, Attack1, TakeHit, Death) and a separate sword prop, exported as .glb for Godot.
+One mesh, one connected 24-bone shared skeleton, seven animations
+(Idle, Move, Attack1, Attack2, Attack3, TakeHit, Death) and a separate sword prop, exported as .glb for Godot.
 
 Run (headless):
     blender --background --python build_humanoid.py -- <output_dir> [knight|mannequin]
@@ -12,11 +12,12 @@ Conventions (every future model must follow these so animations and gear are int
   * Blender is Z-up. The character faces -Y (glTF export turns that into Godot's +Z, "forward").
     The character's left side is +X.
   * Bone names use underscores (upper_arm_L), not dots: Godot node names dislike dots.
-  * Every bone points straight up or down at rest. The helpers `rot()` and `pos()` turn
-    "pitch forward / twist left / lean left" and "left / up / forward" into the right Euler
-    and location values for either kind of bone, so animation code never thinks about axes.
+  * Every child starts at its parent's tail. Pelvis branches and clavicles bridge the
+    torso to the limbs; feet/toes follow the sole. Main limb segments stay vertical at rest.
+    `rot()` and `pos()` express poses in degrees/metres; foot targets are solved in world space.
   * Props (weapons) have their origin at the grip and the blade along +Z.
 """
+import json
 import math
 import os
 import sys
@@ -25,34 +26,31 @@ import bmesh
 import bpy
 from mathutils import Matrix, Vector, Quaternion, Euler
 
-FPS = 60  # [tuned] bake foot contacts at 60Hz; pose timing below is authored at 30Hz.
+FPS = 240  # [tuned] clips are authored in seconds; dense 240Hz keys keep fast strikes from sliding the planted feet.
 SQ2 = math.sqrt(2.0)
 
 # ---- skeleton ----------------------------------------------------------------
 # name: (parent, head (x, y, z), tail (x, y, z))
 BONES = {
-    "root":    (None,     (0, 0, 0),      (0, 0, 0.20)),
+    "root":    (None,     (0, 0, 0),      (0, 0, 0.90)),
     "hips":    ("root",   (0, 0, 0.90),   (0, 0, 1.04)),
     "spine1":  ("hips",   (0, 0, 1.04),   (0, 0, 1.26)),
     "spine2":  ("spine1", (0, 0, 1.26),   (0, 0, 1.48)),
     "neck":    ("spine2", (0, 0, 1.48),   (0, 0, 1.62)),
     "head":    ("neck",   (0, 0, 1.62),   (0, 0, 1.88)),
-    "hair_back": ("head", (0, 0.085, 1.80), (0, 0.095, 1.62)),
 }
 for _s, _x in (("L", 1), ("R", -1)):
     BONES.update({
-        f"clavicle_{_s}":  ("spine2", (_x * 0.06, 0, 1.44), (_x * 0.06, 0, 1.50)),
+        f"clavicle_{_s}":  ("spine2", (0, 0, 1.48), (_x * 0.27, 0, 1.45)),
         f"upper_arm_{_s}": (f"clavicle_{_s}", (_x * 0.27, 0, 1.45), (_x * 0.27, 0, 1.15)),
         f"forearm_{_s}":   (f"upper_arm_{_s}", (_x * 0.27, 0, 1.15), (_x * 0.27, 0, 0.88)),
         f"hand_{_s}":      (f"forearm_{_s}", (_x * 0.27, 0, 0.88), (_x * 0.27, 0, 0.72)),
-        f"thigh_{_s}":     ("hips", (_x * 0.10, 0, 0.90), (_x * 0.10, 0, 0.50)),
+        f"pelvis_{_s}":    ("hips", (0, 0, 1.04), (_x * 0.10, 0, 0.90)),
+        f"thigh_{_s}":     (f"pelvis_{_s}", (_x * 0.10, 0, 0.90), (_x * 0.10, 0, 0.50)),
         f"shin_{_s}":      (f"thigh_{_s}", (_x * 0.10, 0, 0.50), (_x * 0.10, 0, 0.085)),
-        f"foot_{_s}":      (f"shin_{_s}", (_x * 0.10, 0, 0.085), (_x * 0.10, 0, 0.03)),
-        f"toe_{_s}":       (f"foot_{_s}", (_x * 0.10, -0.10, 0.05), (_x * 0.10, -0.10, 0.0)),
+        f"foot_{_s}":      (f"shin_{_s}", (_x * 0.10, 0, 0.085), (_x * 0.10, -0.10, 0.05)),
+        f"toe_{_s}":       (f"foot_{_s}", (_x * 0.10, -0.10, 0.05), (_x * 0.10, -0.18, 0.025)),
     })
-for _i, (_z0, _z1) in enumerate(((1.02, 0.88), (0.88, 0.74), (0.74, 0.58)), start=1):
-    BONES[f"tab_f{_i}"] = ("hips" if _i == 1 else f"tab_f{_i - 1}", (0, -0.12, _z0), (0, -0.12, _z1))
-    BONES[f"tab_b{_i}"] = ("hips" if _i == 1 else f"tab_b{_i - 1}", (0, 0.12, _z0), (0, 0.12, _z1))
 
 
 def is_up(bone):
@@ -123,7 +121,7 @@ class Builder:
 
     def broaden_head(self):
         # [tuned] 18% broader skull/jaw/hair, same height, depth and polygon count.
-        for bone in ("head", "hair_back"):
+        for bone in ("head",):
             for v in self.groups.get(bone, []):
                 v.co.x *= 1.18
 
@@ -154,8 +152,8 @@ def build_body(b):
     b.loft("spine2", "navy", [(0, 0, 1.26, .205, .125), (0, 0, 1.36, .245, .14), (0, 0, 1.45, .26, .125), (0, 0, 1.50, .15, .09)])
     b.loft("spine2", "grey", [(0, 0, 1.47, .16, .115), (0, 0, 1.54, .11, .085)], 8)
     for i, (z0, z1) in enumerate(((1.02, .88), (.88, .74), (.74, .58)), start=1):
-        b.loft(f"tab_f{i}", "navy", [(0, -.12, z0, .16 - .012 * i, .012), (0, -.12, z1, .16 - .012 * (i + 1), .012)], box=True)
-        b.loft(f"tab_b{i}", "navy2", [(0, .12, z0, .16 - .012 * i, .012), (0, .12, z1, .16 - .012 * (i + 1), .012)], box=True)
+        b.loft("hips", "navy", [(0, -.12, z0, .16 - .012 * i, .012), (0, -.12, z1, .16 - .012 * (i + 1), .012)], box=True)
+        b.loft("hips", "navy2", [(0, .12, z0, .16 - .012 * i, .012), (0, .12, z1, .16 - .012 * (i + 1), .012)], box=True)
     # neck, small head, face, hair
     b.loft("neck", "skin", [(0, 0, 1.50, .06, .06), (0, 0, 1.64, .05, .052)], 6)
     b.loft("head", "skin", [(0, 0, 1.60, .05, .055), (0, -.005, 1.66, .075, .085), (0, -.005, 1.75, .085, .095),
@@ -164,7 +162,7 @@ def build_body(b):
     for x in (.036, -.036):
         b.loft("head", "eye", [(x, -.097, 1.745, .02, .01), (x, -.101, 1.745, .02, .01)], 4, axis="Y")        # diamond eyes
     b.loft("head", "hair", [(0, .02, 1.72, .092, .102), (0, .02, 1.80, .098, .108), (0, .015, 1.87, .072, .082), (0, .01, 1.915, .03, .04)], 8)
-    b.loft("hair_back", "hair", [(0, .085, 1.82, .065, .036), (0, .095, 1.72, .052, .032), (0, .10, 1.62, .03, .022)], 6)
+    b.loft("head", "hair", [(0, .085, 1.82, .065, .036), (0, .095, 1.72, .052, .032), (0, .10, 1.62, .03, .022)], 6)
     # arms: broad shoulder armour, muscular black sleeves, grey bracers and gauntlets
     for s, x in (("L", 1), ("R", -1)):
         b.loft(f"clavicle_{s}", "grey", [(x * .27, 0, 1.52, .055, .055), (x * .27, 0, 1.48, .12, .11), (x * .27, 0, 1.38, .11, .10)], 7)
@@ -220,6 +218,8 @@ def build_armature():
         eb.head, eb.tail, eb.roll = head, tail, 0.0
         if parent:
             eb.parent = made[parent]
+            assert (eb.head - eb.parent.tail).length < 1e-6, (name, parent)
+            eb.use_connect = True
         made[name] = eb
     bpy.ops.object.mode_set(mode="OBJECT")
     return arm
@@ -253,7 +253,7 @@ def rot(bone, pitch=0.0, twist=0.0, side=0.0):
 
 def pos(bone, left=0.0, up=0.0, fwd=0.0):
     """Only for upward-pointing bones (root, hips, spine...)."""
-    return {bone: [0, 0, 0, left, up, fwd]}
+    return {"root" if bone == "hips" else bone: [0, 0, 0, left, up, fwd]}
 
 
 def add(*poses):
@@ -269,6 +269,8 @@ def add(*poses):
 # All poses/timings below are CR-original animation art direction [tuned].
 # Feet are solved against world-space contact targets, then baked onto the existing
 # deform bones. No runtime IK or extra Godot rig dependency is required.
+# `hips` is connected to `root`, so it cannot translate: body offsets given to
+# pos("hips") are applied to `root` (pelvis bobbing is root motion in this rig).
 STANCE_MANNEQUIN = add(
     pos("hips", up=-.055, left=.018), rot("hips", twist=-4, side=-2),
     rot("spine1", pitch=2, side=2), rot("spine2", pitch=1, twist=4),
@@ -285,181 +287,264 @@ STANCE = add(
     rot("hand_R", pitch=2),
     rot("upper_arm_L", pitch=8, side=17), rot("forearm_L", pitch=25),
     rot("hand_L", pitch=-6),
-    rot("tab_f1", pitch=6), rot("tab_b1", pitch=-6),
 )
 STANCES = {"knight": STANCE, "mannequin": STANCE_MANNEQUIN}
 
+CLIP_ORDER = ["Idle", "Move", "Walk", "Cast", "Attack1", "Attack2", "Attack3", "TakeHit", "Death",
+              "TwoHandIdle", "TwoHandAttack", "StaffRaise", "StaffCast", "OffhandAttack"]     # the last four: the humanoid bodies only
+LOOPING = ("Idle", "Move", "Walk", "TwoHandIdle")
 
-def cloth(phi, amp, lead=0.0, base_f=0.0, base_b=0.0):
-    """Small overlapping movement, with a delay along the cloth and hair chain."""
+# Per-model locomotion/foot style. feet = (x, front_y, back_y) of the planted soles;
+# run = Move gait (lean degrees, arm swing degrees, root drop, bounce, stride half-length,
+# foot lift, cycle seconds).
+STYLE = {
+    "knight":    dict(feet=(.215, -.08, .07), lean=20, arm=48, drop=.02, bounce=.065, twist=12,
+                      stride=.56, lift=.36, cycle=.6, duty=.38, idle_bounce=1.0),
+    "mannequin": dict(feet=(.215, -.08, .07), lean=16, arm=44, drop=.04, bounce=.06, twist=10,
+                      stride=.60, lift=.34, cycle=.62, duty=.38, idle_bounce=.8),
+    "goblin":    dict(feet=(.25, -.10, .10), lean=30, arm=55, drop=.09, bounce=.075, twist=16,
+                      stride=.54, lift=.32, cycle=.5, duty=.36, idle_bounce=1.3),
+    "witch":     dict(feet=(.20, -.08, .08), lean=34, arm=30, drop=.05, bounce=.04, twist=12,
+                      stride=.32, lift=.24, cycle=.66, duty=.45, idle_bounce=.4),
+    "skeleton":  dict(feet=(.17, -.08, .08), lean=12, arm=34, drop=.04, bounce=.06, twist=10,
+                      stride=.56, lift=.30, cycle=.54, duty=.40, idle_bounce=.6),
+}
+
+
+def override(base, *parts):
+    """Copy a full pose and REPLACE (not add to) the bones the parts mention."""
+    out = {bone: list(v) for bone, v in base.items()}
+    out.update(add(*parts))
+    return out
+
+
+def amplify(pose, base, k):
+    """Exaggerate `pose` away from `base` by factor k (anticipation / punch)."""
     out = {}
-    for i in (1, 2, 3):
-        out = add(out,
-                  rot(f"tab_f{i}", pitch=base_f + amp * math.sin(phi - .55 * i - lead)),
-                  rot(f"tab_b{i}", pitch=base_b + amp * math.sin(phi - .55 * i - lead - .4)))
-    return add(out, rot("hair_back", pitch=amp * .65 * math.sin(phi - 1.1 - lead)))
+    for bone in pose.keys() | base.keys():
+        a, b = pose.get(bone, [0.] * 6), base.get(bone, [0.] * 6)
+        out[bone] = [y + (x - y) * k for x, y in zip(a, b)]
+    return out
 
 
-def idle_pose(phi, stance):
-    # Four-second breath with a slower, asymmetric transfer of weight. Counter-rotate
-    # the chest/head so the character stays attentive rather than swaying as one rod.
-    s = math.sin
-    return add(stance,
-        pos("hips", up=.004 * s(2 * phi), left=.013 * s(phi)),
-        rot("hips", side=1.1 * s(phi), twist=1.3 * s(phi)),
-        rot("spine1", side=-1.0 * s(phi), pitch=.6 * s(2 * phi)),
-        rot("spine2", pitch=.9 * s(2 * phi - .4), twist=-1.3 * s(phi)),
-        rot("clavicle_L", pitch=.7 * s(2 * phi - .4)),
-        rot("clavicle_R", pitch=.7 * s(2 * phi - .6)),
-        rot("head", pitch=-.8 * s(2 * phi - .6), twist=2 * s(phi - .5)),
-        rot("upper_arm_L", pitch=1.8 * s(2 * phi - .8), side=.7 * s(phi)),
-        rot("upper_arm_R", pitch=1.2 * s(2 * phi - 1.0)),
-        rot("forearm_L", pitch=1.3 * s(2 * phi - 1.1)),
-        rot("forearm_R", pitch=1.0 * s(2 * phi - 1.2)),
-        cloth(phi, .7),
-    )
+# Easing for the segment that ENDS at a key. "back" overshoots ~10%: the punch.
+EASE = {
+    "linear": lambda u: u,
+    "smooth": lambda u: u * u * (3 - 2 * u),
+    "in": lambda u: u * u * u,
+    "out": lambda u: 1 - (1 - u) ** 3,
+    "snap": lambda u: 1 - (1 - u) ** 4,
+    "back": lambda u: 1 + 2.7 * (u - 1) ** 3 + 1.7 * (u - 1) ** 2,
+}
 
 
-def move_pose(phi, model):
+def sample_clip(clip, t):
+    if "fn" in clip:
+        return clip["fn"](t)
+    keys = clip["keys"]
+    times = sorted(keys)
+    if t <= times[0]:
+        return keys[times[0]]
+    if t >= times[-1]:
+        return keys[times[-1]]
+    for a, b in zip(times, times[1:]):
+        if a <= t <= b:
+            u = EASE[clip.get("ease", {}).get(b, "smooth")]((t - a) / (b - a))
+            pa, pb = keys[a], keys[b]
+            return {bone: [x * (1 - u) + y * u for x, y in
+                           zip(pa.get(bone, [0.] * 6), pb.get(bone, [0.] * 6))]
+                    for bone in pa.keys() | pb.keys()}
+
+
+# Walk gait per model (the run is STYLE): a relaxed walk, one foot always down (duty > .5), small bounce.
+WALK = {
+    "knight":    dict(stride=.64, cycle=1.0, duty=.62, lift=.16, lean=5, arm=20, drop=.012, bounce=.02, twist=9),
+    "mannequin": dict(stride=.64, cycle=1.0, duty=.62, lift=.16, lean=5, arm=20, drop=.012, bounce=.02, twist=9),
+    "goblin":    dict(stride=.50, cycle=.9, duty=.62, lift=.14, lean=12, arm=26, drop=.05, bounce=.025, twist=11),
+    "witch":     dict(stride=.40, cycle=1.1, duty=.65, lift=.11, lean=30, arm=14, drop=.06, bounce=.018, twist=7),
+    "skeleton":  dict(stride=.50, cycle=1.0, duty=.62, lift=.14, lean=4, arm=18, drop=.02, bounce=.02, twist=8),
+}
+
+
+def locomotion(model, walk=False):
+    """Move clip: a real run. Each foot is planted for `duty` of the cycle, so both feet
+    leave the ground between strides (flight phase) and the body rises and falls.
+    walk=True builds the Walk clip instead (same rig, WALK numbers, relaxed arms, no flight phase)."""
+    st = dict(STYLE[model])
+    if walk:
+        st.update(WALK[model])
+    cycle, duty = st["cycle"], st["duty"]
     s, c = math.sin, math.cos
-    # Independent absolute locomotion pose; never add the bent combat stance again.
-    p = add(pos("hips", up=-.058 - .012 * c(2 * phi), left=.016 * s(phi)),
-        rot("hips", twist=5 * c(phi), side=1.6 * s(phi)),
-        rot("spine1", pitch=5, side=-1.5 * s(phi)),
-        rot("spine2", pitch=3, twist=-8 * c(phi)),
-        rot("head", pitch=-7, twist=3 * c(phi)),
-        cloth(phi, 2.5, base_f=4, base_b=-5))
-    for side, sign in (("L", 1), ("R", -1)):
-        swing = sign * c(phi)
-        if model == "knight" and side == "R":
-            p = add(p, rot("upper_arm_R", pitch=29 - 8 * swing, side=-15),
-                    rot("forearm_R", pitch=48 + 4 * swing), rot("hand_R", pitch=2))
-        else:
-            p = add(p, rot(f"upper_arm_{side}", pitch=5 - 24 * swing, side=sign * 10),
-                    rot(f"forearm_{side}", pitch=26 - 9 * swing),
-                    rot(f"hand_{side}", pitch=-5))
-    return p
+    mid_stance = duty / 2
+
+    def fn(t):
+        u = t / cycle
+        phi = 2 * math.pi * u
+        # lowest at mid-stance, highest in mid-flight, twice per cycle
+        spring = c(4 * math.pi * (u - mid_stance))
+        p = add(pos("hips", up=-st["drop"] - st["bounce"] * spring, left=.025 * s(phi)),
+                rot("hips", twist=st["twist"] * c(phi), side=3 * s(phi)),
+                rot("spine1", pitch=st["lean"] * .55 + 2.5 * spring, side=-3 * s(phi)),
+                rot("spine2", pitch=st["lean"] * .45 + 2.5 * spring, twist=-st["twist"] * 1.3 * c(phi)),
+                rot("neck", pitch=-st["lean"] * .3),
+                rot("head", pitch=-st["lean"] * .5 - 3 * spring, twist=3 * c(phi)))
+        for side, sign in (("L", 1), ("R", -1)):
+            swing = sign * c(phi)
+            pump = sign * s(phi)
+            if model == "witch" and side == "R":
+                # the staff arm stays put (arm pitches add up to 90: the staff stays upright and she leans on it)
+                p = add(p, rot("upper_arm_R", pitch=26 - st["arm"] * .25 * swing, side=-10),
+                        rot("forearm_R", pitch=54 + 4 * swing), rot("hand_R", pitch=-26 - 4 * swing))
+            elif walk and model in ("knight", "goblin") and side == "R":
+                p = add(p, rot("upper_arm_R", pitch=20 - st["arm"] * .4 * swing, side=-12),
+                        rot("forearm_R", pitch=52 + 6 * swing), rot("hand_R", pitch=-26))
+            elif walk:
+                p = add(p, rot(f"upper_arm_{side}", pitch=4 - st["arm"] * swing, side=sign * 6),
+                        rot(f"forearm_{side}", pitch=24 - 8 * swing), rot(f"hand_{side}", pitch=-4))
+            elif model in ("knight", "goblin") and side == "R":
+                # weapon arm stays cocked and pumps less so the blade does not whip about
+                p = add(p, rot("upper_arm_R", pitch=34 - st["arm"] * .45 * swing, side=-14),
+                        rot("forearm_R", pitch=78 + 10 * swing), rot("hand_R", pitch=-28 + 8 * spring))
+            else:
+                # running arms: elbows locked near 90 degrees, pumping against the legs
+                p = add(p, rot(f"upper_arm_{side}", pitch=6 - st["arm"] * swing, side=sign * 8),
+                        rot(f"forearm_{side}", pitch=88 - 12 * swing), rot(f"hand_{side}", pitch=-5))
+        return p
+
+    def feet(side, t):
+        sign = 1 if side == "L" else -1
+        u = ((t / cycle) + (0 if side == "L" else .5)) % 1
+        half = st["stride"] / 2
+        if u < duty:                      # stance: the sole slides back under the body
+            y, z, pitch = -half + 2 * half * u / duty, .085, 0
+            pitch = 0
+        else:                             # swing: heel kicks up, knee drives forward
+            k = (u - duty) / (1 - duty)
+            ease = k * k * (3 - 2 * k)
+            y = half - 2 * half * ease
+            z = .085 + st["lift"] * math.sin(math.pi * k) ** 1.4
+            pitch = -35 * math.sin(math.pi * k)
+        return Vector((sign * .13, y, z)), pitch, sign * 4
+    return {"duration": cycle, "fn": fn, "foot": feet, "loop": True,
+            "markers": {}, "props": {"ground_speed_mps": st["stride"] / (duty * cycle)}}
 
 
-# Attack deltas on the ready pose: anticipation, short acceleration, a readable
-# contact at frame 13, follow-through, then recovery. No additive 200-degree elbows.
-ATTACK = {
-    1: {},
-    6: add(pos("hips", fwd=-.055, up=-.015, left=-.018), rot("hips", twist=-12),
-        rot("spine2", twist=-14, pitch=-4), rot("head", twist=20, pitch=3),
-        rot("upper_arm_R", pitch=45, side=-8), rot("forearm_R", pitch=-10),
-        rot("upper_arm_L", pitch=10, side=6), cloth(0, 0, base_f=-2, base_b=2)),
-    10: add(pos("hips", fwd=-.065, up=-.025, left=-.026), rot("hips", twist=-18),
-        rot("spine1", twist=-7), rot("spine2", twist=-20, pitch=-7),
-        rot("head", twist=32, pitch=7), rot("upper_arm_R", pitch=108, side=-16),
-        rot("forearm_R", pitch=-18), rot("hand_R", pitch=-15),
-        rot("upper_arm_L", pitch=18, side=10), rot("forearm_L", pitch=10),
-        cloth(0, 0, base_f=-3, base_b=3)),
-    13: add(pos("hips", fwd=.075, up=-.035, left=.015), rot("hips", twist=18),
-        rot("spine1", twist=6, pitch=4), rot("spine2", twist=18, pitch=9),
-        rot("head", twist=-27, pitch=-8), rot("upper_arm_R", pitch=52, side=24),
-        rot("forearm_R", pitch=-30), rot("hand_R", pitch=-52),
-        rot("upper_arm_L", pitch=-15, side=12),
-        cloth(0, 0, base_f=7, base_b=-9)),
-    17: add(pos("hips", fwd=.09, up=-.025, left=.028), rot("hips", twist=23),
-        rot("spine1", twist=7, pitch=4), rot("spine2", twist=21, pitch=9),
-        rot("head", twist=-32, pitch=-8), rot("upper_arm_R", pitch=16, side=37),
-        rot("forearm_R", pitch=-16), rot("hand_R", pitch=-42),
-        rot("upper_arm_L", pitch=-18, side=14),
-        cloth(0, 0, base_f=4, base_b=-6)),
-    24: add(pos("hips", fwd=.025, up=-.012), rot("hips", twist=5),
-        rot("spine2", twist=7, pitch=2), rot("upper_arm_R", pitch=3, side=12),
-        rot("forearm_R", pitch=-6), cloth(0, 0, base_f=-2, base_b=2)),
-    34: {},
-}
-
-ANIMS = {
-    "TakeHit": (False, {
-        1: {},
-        # impact: head snaps, chest caves, arms fling out
-        4: add(pos("hips", fwd=-0.12, up=-0.02), rot("hips", twist=8), rot("spine1", pitch=-14),
-               rot("spine2", pitch=-18, twist=-10), rot("head", pitch=-24, twist=12),
-               rot("upper_arm_L", pitch=-18, side=52), rot("forearm_L", pitch=-10),
-               rot("upper_arm_R", pitch=-10, side=-46), rot("forearm_R", pitch=-20),
-               rot("thigh_L", pitch=-12), rot("thigh_R", pitch=8), cloth(0, 0, base_f=20, base_b=26)),
-        # rebound past neutral
-        9: add(pos("hips", fwd=0.03), rot("spine1", pitch=5), rot("spine2", pitch=7, twist=3),
-               rot("head", pitch=6), cloth(0, 0, base_f=-8, base_b=-12)),
-        16: {},
-    }),
-    "Death": (False, {
-        1: {},
-        # hit and stagger
-        6: add(pos("hips", fwd=-0.10, up=-0.04), rot("spine1", pitch=-10), rot("spine2", pitch=-14),
-               rot("head", pitch=-20, twist=10), rot("upper_arm_L", pitch=-20, side=50),
-               rot("upper_arm_R", pitch=-8, side=-48), rot("forearm_R", pitch=-30), rot("hand_R", pitch=-40)),
-        # knees give way, head drops
-        16: add(pos("hips", fwd=-0.12, up=-0.30), rot("spine1", pitch=12), rot("spine2", pitch=14),
-                rot("head", pitch=18, twist=-8), rot("thigh_L", pitch=70), rot("shin_L", pitch=-100),
-                rot("thigh_R", pitch=52), rot("shin_R", pitch=-104), rot("foot_L", pitch=-20), rot("foot_R", pitch=-20),
-                rot("upper_arm_L", pitch=-10, side=44), rot("upper_arm_R", pitch=-6, side=-40), rot("forearm_R", pitch=-6),
-                cloth(0, 0, base_f=12, base_b=-22)),
-        # topple backward
-        30: add(rot("root", pitch=-62), pos("root", up=0.04), pos("hips", up=-0.26), rot("spine1", pitch=6),
-                rot("head", pitch=10), rot("thigh_L", pitch=40), rot("shin_L", pitch=-60),
-                rot("thigh_R", pitch=30), rot("shin_R", pitch=-70),
-                rot("upper_arm_L", pitch=-30, side=60), rot("upper_arm_R", pitch=-20, side=-62), rot("forearm_R", pitch=-14),
-                cloth(0, 0, base_f=22, base_b=10)),
-        # lie flat, limbs settle
-        40: add(rot("root", pitch=-88), pos("root", up=0.12), pos("hips", up=-0.06), rot("head", pitch=-6, twist=12),
-                rot("thigh_L", pitch=12), rot("shin_L", pitch=-20), rot("thigh_R", pitch=6, side=-8), rot("shin_R", pitch=-14),
-                rot("upper_arm_L", pitch=-10, side=64), rot("upper_arm_R", pitch=-14, side=-62), rot("forearm_R", pitch=-8),
-                cloth(0, 0, base_f=18, base_b=8)),
-    }),
-}
+def hit_reaction(model, ready):
+    """TakeHit, 3 cels at 6/60: snap away from the blow, rebound past neutral, settle."""
+    k = 1.0 if model != "goblin" else 1.15
+    impact = override(ready, pos("hips", fwd=-.16 * k, up=-.05), rot("hips", twist=10, side=3),
+        rot("spine1", pitch=-16), rot("spine2", pitch=-20, twist=-12),
+        rot("neck", pitch=-8), rot("head", pitch=-30, twist=16),
+        rot("upper_arm_L", pitch=-20, side=56), rot("forearm_L", pitch=-6),
+        rot("upper_arm_R", pitch=-14, side=-52), rot("forearm_R", pitch=-14))
+    rebound = override(ready, pos("hips", fwd=.05, up=-.03), rot("spine1", pitch=9),
+        rot("spine2", pitch=11, twist=4), rot("head", pitch=9, twist=-4))
+    counter = override(ready, pos("hips", fwd=-.03, up=-.01), rot("spine1", pitch=-3),
+        rot("spine2", pitch=-4), rot("head", pitch=-4))
+    keys = {0.0: ready, .05: impact, .1: impact, .17: rebound, .23: counter, .3: ready}
+    return {"duration": .3, "keys": keys,
+            "ease": {.05: "snap", .1: "linear", .17: "back", .23: "back", .3: "back"},
+            "foot": None, "loop": False, "markers": {"Impact": .05}}
 
 
-def interpolate(keys, frame):
-    frames = sorted(keys)
-    if frame >= frames[-1]:
-        return keys[frames[-1]]
-    for a, b in zip(frames, frames[1:]):
-        if a <= frame <= b:
-            t = (frame - a) / (b - a)
-            # Ease anticipation/recovery; the short strike segment retains momentum.
-            if (a, b) != (10, 13):
-                t = t * t * (3 - 2 * t)
-            return {bone: [va * (1 - t) + vb * t for va, vb in
-                    zip(keys[a].get(bone, [0.] * 6), keys[b].get(bone, [0.] * 6))]
-                    for bone in keys[a].keys() | keys[b].keys()}
-    return keys[frames[0]]
+def planted_feet(model):
+    x, fy, by = STYLE[model]["feet"]
+
+    def feet(side, t):
+        sign = 1 if side == "L" else -1
+        return Vector((sign * x, fy if side == "L" else by, .085)), 0, sign * 9
+    return feet
 
 
-def foot_target(side, name, frame):
-    sign = 1 if side == "L" else -1
-    if name == "Move":
-        # 60% planted stance, 40% swing. Ground speed = .42 / (.6 * 1.0) = .7 m/s.
-        # Contact moves back at constant speed relative to the character's root.
-        t = ((frame - 1) / 30 + (0 if side == "L" else .5)) % 1
-        if t < .6:
-            y, z, pitch = -.21 + .42 * t / .6, .085, 0
-        else:
-            u = (t - .6) / .4
-            ease = u * u * (3 - 2 * u)
-            y = .21 - .42 * ease
-            z = .085 + .12 * math.sin(math.pi * u) ** 2
-            pitch = -16 * math.sin(math.pi * u)
-        return Vector((sign * .145, y, z)), pitch, sign * 4
-    # Same foot positions for ready, breathing and the planted sword strike.
-    return Vector((sign * .215, -.08 if side == "L" else .07, .085)), 0, sign * 9
+def make_actions(arm, model, library):
+    """Bake every clip of `library` (name -> clip) with 60 Hz samples and solved feet."""
+    arm.animation_data_create()
+    scene = bpy.context.scene
+    scene.render.fps = FPS
+    bpy.context.view_layer.objects.active = arm
+    for pb in arm.pose.bones:
+        pb.rotation_mode = "QUATERNION"
+    for name in [n for n in CLIP_ORDER if n in library]:
+        clip = library[name]
+        action = bpy.data.actions.new(name)
+        action.use_fake_user = True
+        action["loop"] = bool(clip.get("loop"))
+        for key, value in clip.get("props", {}).items():
+            action[key] = value
+        for marker, when in clip.get("markers", {}).items():
+            action.pose_markers.new(marker).frame = 1 + round(when * FPS)
+        arm.animation_data.action = action
+        foot = clip.get("foot", "planted")
+        if foot == "planted":
+            foot = planted_feet(model)
+        samples = max(2, round(clip["duration"] * FPS))
+        AUTO_DROP[0] = 0.0
+        previous = {}
+        for sample in range(samples + 1):
+            t = sample / FPS if sample < samples else clip["duration"]
+            full = sample_clip(clip, t)
+            for pb in arm.pose.bones:
+                v = full.get(pb.name, [0.] * 6)
+                pb.location = v[3:]
+                pb.rotation_quaternion = Euler([math.radians(a) for a in v[:3]], "XYZ").to_quaternion()
+                pb.scale = (1, 1, 1)
+            bpy.context.view_layer.update()
+            if foot:
+                solve_feet(arm, name, foot, t)
+            if clip.get("grip") is not None:
+                solve_grip(arm, clip["grip"])
+            for pb in arm.pose.bones:
+                q = pb.rotation_quaternion.copy()
+                if pb.name in previous and q.dot(previous[pb.name]) < 0:
+                    q.negate()
+                previous[pb.name] = q.copy()
+                pb.rotation_quaternion = q
+                pb.keyframe_insert("rotation_quaternion", frame=sample + 1, group=pb.name)
+                pb.keyframe_insert("location", frame=sample + 1, group=pb.name)
+        # Dense baked samples use linear interpolation: no Bezier overshoot at contacts.
+        for slot in action.slots:
+            for layer in action.layers:
+                for strip in layer.strips:
+                    bag = strip.channelbag(slot)
+                    if bag:
+                        for curve in bag.fcurves:
+                            for key in curve.keyframe_points:
+                                key.interpolation = "LINEAR"
+        print("CLIP", model, name, "auto-drop %.3f" % AUTO_DROP[0])
+    arm.animation_data.action = bpy.data.actions["Idle"]
+    scene.frame_start, scene.frame_end = 1, 121
+    scene.frame_set(1)
 
 
-def solve_feet(arm, name, frame):
-    """Analytic two-bone IK; knee pole forward, sole level during ground contact."""
+AUTO_DROP = [0.0]  # largest correction (m) the solver had to make; report per clip
+
+
+def solve_feet(arm, name, foot_fn, t):
+    """Analytic two-bone IK; knee pole forward, sole level during ground contact.
+    If a pose would pull a leg past full extension, the body is dropped just enough."""
+    root = arm.pose.bones["root"]
+    for _ in range(6):
+        worst = 0.0
+        for side in ("L", "R"):
+            thigh, shin = arm.pose.bones[f"thigh_{side}"], arm.pose.bones[f"shin_{side}"]
+            target = foot_fn(side, t)[0]
+            reach = thigh.bone.length + shin.bone.length - .004
+            worst = max(worst, (target - thigh.head).length - reach)
+        if worst <= 0:
+            break
+        root.location[1] -= worst + .002
+        AUTO_DROP[0] = max(AUTO_DROP[0], worst + .002)
+        bpy.context.view_layer.update()
+    else:
+        raise ValueError(f"Unreachable foot: {name} t={t:.3f}")
     for side in ("L", "R"):
         thigh, shin, foot = [arm.pose.bones[f"{part}_{side}"] for part in ("thigh", "shin", "foot")]
-        target, pitch, yaw = foot_target(side, name, frame)
+        target, pitch, yaw = foot_fn(side, t)
         hip = thigh.head.copy()
         direction = target - hip
         d = direction.length
         a, b = thigh.bone.length, shin.bone.length
-        if not abs(a - b) + .001 < d < a + b - .001:
-            raise ValueError(f"Unreachable foot: {name} frame {frame} {side}: {d}")
+        d = max(d, abs(a - b) + .001)
         axis = direction.normalized()
         pole = Vector((0, -1, 0))
         pole = (pole - axis * pole.dot(axis)).normalized()
@@ -476,67 +561,86 @@ def solve_feet(arm, name, frame):
         bpy.context.view_layer.update()
 
 
-def make_actions(arm, model):
-    arm.animation_data_create()
-    scene = bpy.context.scene
-    scene.render.fps = FPS
-    stance = STANCES[model]
-    bpy.context.view_layer.objects.active = arm
-    for pb in arm.pose.bones:
-        pb.rotation_mode = "QUATERNION"
-    lengths = {"Idle": 121, "Move": 31, "Attack1": 34, "TakeHit": 16, "Death": 40}
-    for name, last in lengths.items():
-        action = bpy.data.actions.new(name)
-        action.use_fake_user = True
-        action["loop"] = name in ("Idle", "Move")
-        if name == "Attack1":
-            action.pose_markers.new("Anticipation").frame = 19
-            action.pose_markers.new("Contact").frame = 25
-            action.pose_markers.new("Follow through").frame = 33
-        if name == "Move":
-            action["ground_speed_mps"] = .7
-        arm.animation_data.action = action
-        previous = {}
-        for sample in range((last - 1) * 2 + 1):
-            frame = 1 + sample / 2
-            baked_frame = sample + 1
-            if name == "Idle":
-                full = idle_pose(2 * math.pi * (frame - 1) / 120, stance)
-            elif name == "Move":
-                full = move_pose(2 * math.pi * (frame - 1) / 30, model)
-            elif name == "Attack1":
-                # Same intentional sword swing on both bodies, independent of idle arm angles.
-                full = add(STANCE, interpolate(ATTACK, frame))
-            else:
-                full = add(stance, interpolate(ANIMS[name][1], frame))
-            for pb in arm.pose.bones:
-                v = full.get(pb.name, [0.] * 6)
-                pb.location = v[3:]
-                pb.rotation_quaternion = Euler([math.radians(a) for a in v[:3]], "XYZ").to_quaternion()
-                pb.scale = (1, 1, 1)
-            bpy.context.view_layer.update()
-            if name in ("Idle", "Move", "Attack1", "TakeHit"):
-                solve_feet(arm, name, frame)
-            for pb in arm.pose.bones:
-                q = pb.rotation_quaternion.copy()
-                if pb.name in previous and q.dot(previous[pb.name]) < 0:
-                    q.negate()
-                previous[pb.name] = q.copy()
-                pb.rotation_quaternion = q
-                pb.keyframe_insert("rotation_quaternion", frame=baked_frame, group=pb.name)
-                pb.keyframe_insert("location", frame=baked_frame, group=pb.name)
-        # Dense baked samples use linear interpolation: no Bezier overshoot at contacts.
-        for slot in action.slots:
-            for layer in action.layers:
-                for strip in layer.strips:
-                    bag = strip.channelbag(slot)
-                    if bag:
-                        for curve in bag.fcurves:
-                            for key in curve.keyframe_points:
-                                key.interpolation = "LINEAR"
-    arm.animation_data.action = bpy.data.actions["Idle"]
-    scene.frame_start, scene.frame_end = 1, 241
-    scene.frame_set(1)
+def solve_grip(arm, grip):
+    """Two-bone IK for the LEFT arm: put hand_L on `grip`, a point in hand_R's local frame (a two-handed weapon's
+    second grip). The hand takes hand_R's orientation, as both hold the same shaft."""
+    hand_r = arm.pose.bones["hand_R"]
+    target = (hand_r.matrix @ Vector(grip))
+    upper, fore, hand = (arm.pose.bones[n] for n in ("upper_arm_L", "forearm_L", "hand_L"))
+    shoulder = upper.head.copy()
+    a, b = upper.bone.length, fore.bone.length
+    direction = target - shoulder
+    d = min(max(direction.length, abs(a - b) + .001), a + b - .004)
+    axis = direction.normalized()
+    pole = Vector((.55, .25, -1.0))                       # elbow down, a little out and back
+    pole = (pole - axis * pole.dot(axis)).normalized()
+    along = (a * a - b * b + d * d) / (2 * d)
+    elbow = shoulder + axis * along + pole * math.sqrt(max(0, a * a - along * along))
+    wrist = shoulder + axis * d
+    for pb, head, tail in ((upper, shoulder, elbow), (fore, elbow, wrist)):
+        rest = pb.bone.matrix_local.to_quaternion()
+        rest_dir = rest @ Vector((0, 1, 0))
+        swing = rest_dir.rotation_difference((tail - head).normalized())
+        pb.matrix = Matrix.LocRotScale(head, swing @ rest, Vector((1, 1, 1)))
+        bpy.context.view_layer.update()
+    hand.matrix = Matrix.LocRotScale(wrist, hand_r.matrix.to_quaternion(), Vector((1, 1, 1)))
+    bpy.context.view_layer.update()
+
+
+def bouncy_idle(idle, model):
+    """Overlay a springy knee-dip on the idle: sharp dip, quick rise, chest/arms/sword
+    lagging behind with overshoot, like the squash and stretch of the 2D idle."""
+    amount = STYLE[model]["idle_bounce"]
+    duration = idle["duration"]
+    beats = max(1, round(duration / .8))      # roughly a bounce every .8 s, whole number per loop
+    period = duration / beats
+    base = idle
+
+    def dip(t):
+        b = abs(math.sin(math.pi * t / period))
+        return (1 - b) ** 2                   # 1 at the bottom of the bounce, 0 at the top
+
+    def fn(t):
+        d0, d1, d2 = dip(t), dip(t - .06), dip(t - .12)
+        return add(sample_clip(base, t),
+            pos("hips", up=-.045 * amount * d0),
+            rot("spine1", pitch=5 * amount * d1), rot("spine2", pitch=6 * amount * d1),
+            rot("head", pitch=-7 * amount * d2),
+            rot("clavicle_L", pitch=-4 * amount * d1), rot("clavicle_R", pitch=-4 * amount * d1),
+            rot("upper_arm_L", pitch=-9 * amount * d2), rot("upper_arm_R", pitch=-8 * amount * d2),
+            rot("forearm_L", pitch=9 * amount * d2), rot("forearm_R", pitch=-10 * amount * d2),
+            rot("hand_R", pitch=8 * amount * d2))
+    out = dict(idle)
+    out.pop("keys", None)
+    out["fn"] = fn
+    return out
+
+
+def build_library(model):
+    """Clip library for any shared-rig model: Idle/Move/Attack1-3/TakeHit/Death."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    if model in ("knight", "mannequin"):
+        import knight_poses
+        stance = STANCES[model]
+        lib = knight_poses.clips(rot, pos, add, stance)
+    else:
+        import monster_poses
+        lib = monster_poses.clips(model, rot, pos, add, override, amplify)
+    ready = lib["ready"]
+    lib["Idle"] = bouncy_idle(lib["Idle"], model)
+    lib["Move"] = locomotion(model)
+    lib["Walk"] = locomotion(model, walk=True)
+    lib["TakeHit"] = hit_reaction(model, ready)
+    lib["TakeHit"]["foot"] = "planted"
+    if model in ("knight", "mannequin"):
+        import weapon_poses
+        lib.update(weapon_poses.clips(rot, pos, add, ready, lib["Attack1"], override))
+    for name in [n for n in CLIP_ORDER if n in lib]:
+        lib[name].setdefault("loop", name in LOOPING)
+        if lib[name].get("feet") == "free":
+            lib[name]["foot"] = None
+    return lib
+
 
 
 # ---- export ------------------------------------------------------------------
@@ -552,6 +656,24 @@ def export(objs, path, animations):
                       export_anim_slide_to_zero=True, export_optimize_animation_size=False)
     bpy.ops.export_scene.gltf(**kwargs)
     print("WROTE", path, os.path.getsize(path), "bytes")
+
+
+def record_clip_info(out_dir, model, arm):
+    """Write clip timings next to the models (godot/models/clip_info.json) for the game: the Move cycle's
+    ground speed in WORLD metres/s (so playback can be matched to a unit's sim speed) and every clip's length."""
+    path = os.path.join(out_dir, "clip_info.json")
+    data = json.load(open(path)) if os.path.exists(path) else {}
+    scale = arm.scale.x
+    clips = {}
+    for name in CLIP_ORDER:
+        if name not in bpy.data.actions:
+            continue
+        action = bpy.data.actions[name]
+        clips[name] = {"duration": round((action.frame_range[1] - action.frame_range[0]) / FPS, 4)}
+        if "ground_speed_mps" in action.keys():
+            clips[name]["ground_speed_mps"] = round(action["ground_speed_mps"] * scale, 4)
+    data[model] = {"scale": scale, "clips": clips}
+    json.dump(data, open(path, "w"), indent=2, sort_keys=True)
 
 
 def count_tris(obj):
@@ -570,9 +692,10 @@ def main():
     {"knight": build_body, "mannequin": build_mannequin_body}[model](bb)
     bb.broaden_head()
     body = make_object(model, bb, arm)
-    make_actions(arm, model)
+    make_actions(arm, model, build_library(model))
     print("TRIANGLES", model, count_tris(body), "bones", len(arm.data.bones))
     export([arm, body], os.path.join(out_dir, model + ".glb"), True)
+    record_clip_info(out_dir, model, arm)
 
     if model == "knight":
         sb = Builder()

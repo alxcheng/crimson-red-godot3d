@@ -1,0 +1,478 @@
+{
+  "ANIM_SETS": {
+    "bat": {
+      "list": [
+        [
+          "Idle",
+          0.1,
+          true,
+          true
+        ],
+        [
+          "Move",
+          0.1,
+          true
+        ],
+        [
+          "Attack",
+          0.11666666666667
+        ],
+        [
+          "Death",
+          0.1
+        ]
+      ],
+      "sprite": "Bat"
+    },
+    "brigand": {
+      "list": [
+        [
+          "Idle",
+          0.16666666666667,
+          true,
+          true
+        ],
+        [
+          "Move",
+          0.1,
+          true
+        ],
+        [
+          "Attack1",
+          0.11666666666667
+        ],
+        [
+          "Death",
+          0.1
+        ]
+      ],
+      "sprite": "Brigand"
+    },
+    "champion": {
+      "list": [
+        [
+          "Idle",
+          0.16666666666667,
+          true,
+          true
+        ],
+        [
+          "Move",
+          0.1,
+          true
+        ],
+        [
+          "Attack1",
+          0.11666666666667
+        ],
+        [
+          "Death",
+          0.1
+        ]
+      ],
+      "sprite": "Champion"
+    },
+    "duelist": {
+      "list": [
+        [
+          "Idle",
+          0.16666666666667,
+          true,
+          true
+        ],
+        [
+          "Move",
+          0.1,
+          true
+        ],
+        [
+          "Attack1",
+          0.11666666666667
+        ],
+        [
+          "Death",
+          0.1
+        ]
+      ],
+      "sprite": "Duelist"
+    },
+    "goblin": {
+      "list": [
+        [
+          "Idle",
+          0.13333333333333,
+          true,
+          true
+        ],
+        [
+          "Move",
+          0.1,
+          true
+        ],
+        [
+          "Attack",
+          0.11666666666667
+        ],
+        [
+          "Death",
+          0.1
+        ]
+      ],
+      "sprite": "Goblin"
+    },
+    "knight": {
+      "list": [
+        [
+          "Idle",
+          0.16666666666667,
+          true,
+          true
+        ],
+        [
+          "Move",
+          0.1,
+          true
+        ],
+        [
+          "Attack1",
+          0.11666666666667
+        ],
+        [
+          "Attack2",
+          0.21666666666667
+        ],
+        [
+          "TakeHit",
+          0.1
+        ],
+        [
+          "Death",
+          0.1
+        ]
+      ],
+      "sprite": "Knight"
+    },
+    "mushroom": {
+      "list": [
+        [
+          "Idle",
+          0.13333333333333,
+          true,
+          true
+        ],
+        [
+          "Move",
+          0.13333333333333,
+          true
+        ],
+        [
+          "Attack",
+          0.11666666666667
+        ],
+        [
+          "Death",
+          0.1
+        ]
+      ],
+      "sprite": "Mushroom"
+    },
+    "skeleton": {
+      "list": [
+        [
+          "Idle",
+          0.13333333333333,
+          true,
+          true
+        ],
+        [
+          "Move",
+          0.13333333333333,
+          true
+        ],
+        [
+          "Attack",
+          0.11666666666667
+        ],
+        [
+          "Death",
+          0.1
+        ]
+      ],
+      "sprite": "Skeleton"
+    },
+    "witch": {
+      "list": [
+        [
+          "Idle",
+          0.13333333333333,
+          true,
+          true
+        ],
+        [
+          "Move",
+          0.13333333333333,
+          true
+        ],
+        [
+          "Attack1",
+          0.11666666666667
+        ],
+        [
+          "Attack2",
+          0.11666666666667
+        ],
+        [
+          "Death",
+          0.1
+        ]
+      ],
+      "sprite": "Witch"
+    }
+  },
+  "CLASSES": {
+    "brigand": {
+      "actives": {},
+      "anims": "brigand",
+      "auto": "BrigandAutoAttack",
+      "base": {
+        "crit": 0.1,
+        "defense": 8,
+        "hp": 1000,
+        "power": 26
+      },
+      "hireable": false,
+      "name": "Brigand",
+      "scale": {
+        "defense": 1,
+        "hp": 15,
+        "power": 1
+      },
+      "spriteScale": 0.9,
+      "starterGear": [
+        1,
+        5
+      ]
+    },
+    "champion": {
+      "actives": {},
+      "anims": "champion",
+      "auto": "ChampionAutoAttack",
+      "base": {
+        "crit": 0.1,
+        "defense": 7,
+        "hp": 1000,
+        "power": 28
+      },
+      "hireable": false,
+      "name": "Champion",
+      "scale": {
+        "defense": 1,
+        "hp": 15,
+        "power": 1
+      },
+      "spriteScale": 1,
+      "starterGear": [
+        11,
+        5
+      ]
+    },
+    "duelist": {
+      "actives": {},
+      "anims": "duelist",
+      "auto": "DuelistAutoAttack",
+      "base": {
+        "crit": 0.1,
+        "defense": 15,
+        "hp": 1000,
+        "power": 20
+      },
+      "hireable": false,
+      "name": "Duelist",
+      "scale": {
+        "defense": 1.2,
+        "hp": 15,
+        "power": 1
+      },
+      "spriteScale": 0.959,
+      "starterGear": [
+        43,
+        44
+      ]
+    },
+    "knight": {
+      "actives": [
+        "KnightHamstring",
+        "KnightSunderArmor",
+        "KnightChallengingShout"
+      ],
+      "anims": "knight",
+      "auto": "KnightAutoAttack",
+      "base": {
+        "crit": 0.1,
+        "defense": 15,
+        "hp": 1000,
+        "power": 20
+      },
+      "name": "Knight",
+      "scale": {
+        "defense": 1.2,
+        "hp": 15,
+        "power": 1
+      },
+      "spriteScale": 1.1,
+      "starterGear": [
+        0,
+        4
+      ],
+      "traits": {
+        "threatFromDef": 0.5
+      }
+    },
+    "paladin": {
+      "actives": [
+        "PaladinHolyWord",
+        "PaladinDivineIntervention",
+        "PaladinAuraOfLight",
+        "PaladinWrath"
+      ],
+      "anims": "knight",
+      "auto": "PaladinAutoAttack",
+      "base": {
+        "crit": 0,
+        "defense": 18,
+        "hp": 1000,
+        "power": 19
+      },
+      "drawsThreat": true,
+      "name": "Paladin",
+      "scale": {
+        "defense": 1.2,
+        "hp": 15,
+        "power": 1
+      },
+      "spriteScale": 1.1,
+      "starterGear": [
+        0,
+        4
+      ],
+      "variant": "paladin"
+    },
+    "priest": {
+      "actives": [
+        "PriestGroupHeal",
+        "PriestShield",
+        "PriestPowerInfusion",
+        "PriestVengefulAngel"
+      ],
+      "anims": "witch",
+      "auto": "PriestAutoHeal",
+      "base": {
+        "crit": 0,
+        "defense": 4,
+        "hp": 1000,
+        "power": 65
+      },
+      "name": "Priest",
+      "ranged": true,
+      "scale": {
+        "defense": 1,
+        "hp": 15,
+        "power": 3
+      },
+      "spriteScale": 0.72,
+      "starterGear": [
+        2,
+        6
+      ],
+      "targetsAllies": true,
+      "variant": "v2"
+    },
+    "rogue": {
+      "actives": [
+        "RogueSneakAttack",
+        "RogueExposeWeakness",
+        "RogueShadowstep",
+        "RoguePoisonedKnife"
+      ],
+      "anims": "knight",
+      "auto": "RogueAutoAttack",
+      "base": {
+        "crit": 0.2,
+        "defense": 8,
+        "hp": 1000,
+        "power": 26
+      },
+      "name": "Rogue",
+      "scale": {
+        "defense": 1,
+        "hp": 15,
+        "power": 1
+      },
+      "spriteScale": 1.1,
+      "starterGear": [
+        1,
+        5
+      ],
+      "variant": "rogue"
+    },
+    "witch": {
+      "actives": [
+        "WitchGrantPower",
+        "WitchMendWounds",
+        "WitchSparkOfInspiration"
+      ],
+      "anims": "witch",
+      "auto": "WitchAutoHeal",
+      "base": {
+        "crit": 0.05,
+        "defense": 6,
+        "hp": 1000,
+        "power": 12
+      },
+      "hireable": false,
+      "name": "Witch",
+      "ranged": true,
+      "scale": {
+        "defense": 1,
+        "hp": 15,
+        "power": 1
+      },
+      "spriteScale": 0.72,
+      "starterGear": [
+        45,
+        5
+      ],
+      "targetsAllies": true
+    },
+    "wizard": {
+      "actives": [
+        "WizardExplosion",
+        "WizardBlizzard",
+        "WizardTimeStop",
+        "WizardConflagrate"
+      ],
+      "anims": "witch",
+      "auto": "WizardAutoFireball",
+      "base": {
+        "crit": 0,
+        "defense": 0,
+        "hp": 1000,
+        "power": 33
+      },
+      "name": "Wizard",
+      "ranged": true,
+      "scale": {
+        "defense": 1,
+        "hp": 15,
+        "power": 1
+      },
+      "spriteScale": 0.72,
+      "starterGear": [
+        3,
+        6
+      ],
+      "variant": "v3"
+    }
+  },
+  "HERO_MOVE_SPEED": 2.4
+}

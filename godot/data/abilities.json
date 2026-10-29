@@ -1,0 +1,818 @@
+{
+  "BatAutoShot": {
+    "animListIdx": 3,
+    "animLock": 0.93333333333333,
+    "cdMax": 1.8,
+    "delay": 0.64166666666667,
+    "effect": {
+      "kind": "damage",
+      "tags": [
+        "Ranged"
+      ],
+      "vfx": false
+    },
+    "name": "BatAutoShot"
+  },
+  "BrigandAutoAttack": {
+    "animListIdx": 3,
+    "animLock": 0.81666666666667,
+    "cdMax": 0.9,
+    "delay": 0.58333333333333,
+    "effect": {
+      "kind": "damage",
+      "tags": [
+        "Melee"
+      ],
+      "vfx": false
+    },
+    "name": "BrigandAutoAttack"
+  },
+  "ChampionAutoAttack": {
+    "animListIdx": 3,
+    "animLock": 0.46666666666667,
+    "cdMax": 1.15,
+    "delay": 0.35,
+    "effect": {
+      "kind": "damage",
+      "tags": [
+        "Melee"
+      ],
+      "vfx": false
+    },
+    "name": "ChampionAutoAttack"
+  },
+  "DuelistAutoAttack": {
+    "animListIdx": 3,
+    "animLock": 0.7,
+    "cdMax": 0.9,
+    "delay": 0.58333333333333,
+    "effect": {
+      "kind": "damage",
+      "tags": [
+        "Melee"
+      ],
+      "vfx": false
+    },
+    "name": "DuelistAutoAttack"
+  },
+  "GoblinAutoAttack": {
+    "animListIdx": 3,
+    "animLock": 0.93333333333333,
+    "cdMax": 1.16,
+    "delay": 0.40833333333333,
+    "effect": {
+      "kind": "damage",
+      "tags": [
+        "Melee"
+      ],
+      "vfx": false
+    },
+    "name": "GoblinAutoAttack"
+  },
+  "KnightAutoAttack": {
+    "animListIdx": 3,
+    "animLock": 0.46666666666667,
+    "cdMax": 1.1,
+    "delay": 0.23333333333333,
+    "effect": {
+      "kind": "damage",
+      "tags": [
+        "Melee"
+      ],
+      "vfx": false
+    },
+    "name": "KnightAutoAttack"
+  },
+  "KnightBattleShout": {
+    "animLock": 0,
+    "bars": 2,
+    "cdMax": 20,
+    "delay": 0,
+    "effect": {
+      "inner": {
+        "duration": 10,
+        "index": "ATK_BUFF",
+        "isBuff": true,
+        "kind": "status",
+        "magnitude": 0.2,
+        "tint": [
+          1,
+          0.6,
+          0,
+          4
+        ]
+      },
+      "kind": "allAllies"
+    },
+    "iconName": "skill_icons13",
+    "name": "BattleShout",
+    "noTargetRequired": true
+  },
+  "KnightChallengingShout": {
+    "animLock": 0,
+    "bars": 2,
+    "cdMax": 20,
+    "delay": 0,
+    "effect": {
+      "flat": 350,
+      "kind": "threat"
+    },
+    "iconName": "skill_icons6",
+    "name": "ChallengingShout",
+    "noTargetRequired": true
+  },
+  "KnightCharge": {
+    "bars": 2,
+    "cdMax": 5,
+    "charge": {
+      "bonusDamage": 1,
+      "bonusStagger": 0.5,
+      "damage": 2,
+      "fullDistance": 300,
+      "maxTime": 4,
+      "speed": 4,
+      "stagger": 2,
+      "tags": [
+        "Melee"
+      ]
+    },
+    "iconName": "skill_icons30_yellow",
+    "name": "Charge",
+    "select": "unit"
+  },
+  "KnightDefend": {
+    "animLock": 0,
+    "bars": 2,
+    "cdMax": 20,
+    "delay": 0,
+    "effect": {
+      "duration": 10,
+      "index": "DEF_BUFF",
+      "isBuff": true,
+      "kind": "status",
+      "magnitude": 0.3,
+      "tint": [
+        0,
+        0,
+        1,
+        4
+      ]
+    },
+    "iconName": "skill_icons22",
+    "name": "Defend",
+    "noTargetRequired": true
+  },
+  "KnightHamstring": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "bars": 2,
+    "cdMax": 20,
+    "delay": 0.4,
+    "effect": {
+      "buffMods": {
+        "0": 1
+      },
+      "kind": "damage",
+      "onHit": {
+        "effect": {
+          "duration": 10,
+          "index": "WEAKEN",
+          "isBuff": false,
+          "kind": "status",
+          "magnitude": 0.3
+        }
+      },
+      "tags": [
+        "Melee",
+        "Slash"
+      ],
+      "vfx": true
+    },
+    "iconName": "skill_icons5",
+    "name": "Hamstring"
+  },
+  "KnightSunderArmor": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "bars": 1,
+    "cdMax": 10,
+    "delay": 0.4,
+    "effect": {
+      "burst": [
+        "ffffff",
+        "ff0000"
+      ],
+      "centerSelf": true,
+      "inner": {
+        "buffMods": {
+          "0": 0.5
+        },
+        "kind": "damage",
+        "onHit": {
+          "effect": {
+            "duration": 10,
+            "index": "VULNERABILITY",
+            "isBuff": false,
+            "kind": "status",
+            "magnitude": 0.15
+          }
+        },
+        "tags": [
+          "Melee",
+          "Slash"
+        ],
+        "vfx": true
+      },
+      "kind": "aoe",
+      "rx": 80,
+      "ry": 40
+    },
+    "iconName": "skill_icons34",
+    "name": "SunderArmor",
+    "select": "self"
+  },
+  "MushroomAutoAttack": {
+    "animListIdx": 3,
+    "animLock": 0.93333333333333,
+    "cdMax": 1.5,
+    "delay": 0.525,
+    "effect": {
+      "kind": "damage",
+      "tags": [
+        "Melee"
+      ],
+      "vfx": false
+    },
+    "name": "MushroomAutoAttack"
+  },
+  "PaladinAuraOfLight": {
+    "animLock": 0,
+    "bh": true,
+    "cdMax": 40,
+    "delay": 0,
+    "effect": {
+      "duration": 10,
+      "index": "REFLECT",
+      "isBuff": true,
+      "kind": "status",
+      "magnitude": 0.6
+    },
+    "iconName": "skill_icons46",
+    "name": "AuraOfLight",
+    "noTargetRequired": true
+  },
+  "PaladinAutoAttack": {
+    "animListIdx": 3,
+    "animLock": 0.46666666666667,
+    "cdMax": 1.1,
+    "delay": 0.155,
+    "effect": {
+      "kind": "damage",
+      "tags": [
+        "Melee"
+      ],
+      "vfx": false
+    },
+    "name": "PaladinAutoAttack"
+  },
+  "PaladinDivineIntervention": {
+    "animLock": 0,
+    "bh": true,
+    "cdMax": 30,
+    "delay": 0,
+    "effect": {
+      "effects": [
+        {
+          "duration": 10,
+          "index": "WARD",
+          "isBuff": true,
+          "kind": "status",
+          "magnitude": 0.5
+        },
+        {
+          "duration": 10,
+          "index": "REFLECT",
+          "isBuff": true,
+          "kind": "status",
+          "magnitude": 0.5
+        }
+      ],
+      "kind": "effects",
+      "targetSelf": true
+    },
+    "iconName": "skill_icons22",
+    "name": "DivineIntervention",
+    "noTargetRequired": true
+  },
+  "PaladinHolyWord": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "bh": true,
+    "cdMax": 30,
+    "delay": 0.4,
+    "effect": {
+      "kind": "healLowestAlly",
+      "value": 1.5
+    },
+    "iconName": "skill_icons11",
+    "name": "HolyWord",
+    "noTargetRequired": true
+  },
+  "PaladinWrath": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "bh": true,
+    "cdMax": 30,
+    "delay": 0,
+    "effect": {
+      "chainParams": {
+        "count": 3,
+        "decay": 0.5
+      },
+      "duration": 10,
+      "index": "CHAIN",
+      "isBuff": true,
+      "kind": "status",
+      "magnitude": 10,
+      "tint": [
+        1,
+        0.85,
+        0.3,
+        4
+      ]
+    },
+    "iconName": "skill_icons15",
+    "name": "Wrath",
+    "noTargetRequired": true
+  },
+  "PriestAutoHeal": {
+    "animListIdx": 3,
+    "animLock": 0.93333333333333,
+    "cdMax": 1.75,
+    "delay": 0.46666666666667,
+    "effect": {
+      "kind": "heal",
+      "value": 1.15
+    },
+    "name": "PriestAutoHeal"
+  },
+  "PriestGroupHeal": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "bh": true,
+    "cdMax": 20,
+    "delay": 0.4,
+    "effect": {
+      "kind": "healGroup",
+      "value": 1
+    },
+    "iconName": "skill_icons11",
+    "name": "GroupHeal",
+    "noTargetRequired": true
+  },
+  "PriestPowerInfusion": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "bh": true,
+    "cdMax": 30,
+    "delay": 0.2,
+    "effect": {
+      "duration": 10,
+      "index": "ATK_BUFF",
+      "isBuff": true,
+      "kind": "status",
+      "magnitude": 1
+    },
+    "iconName": "skill_icons15",
+    "name": "PowerInfusion",
+    "select": "unit",
+    "selectSide": "allies"
+  },
+  "PriestShield": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "bh": true,
+    "cdMax": 30,
+    "delay": 0.2,
+    "effect": {
+      "duration": 10,
+      "index": "SHIELD",
+      "isBuff": true,
+      "kind": "status",
+      "magnitude": 0.75
+    },
+    "iconName": "skill_icons22",
+    "name": "Shield",
+    "select": "unit",
+    "selectSide": "allies"
+  },
+  "PriestVengefulAngel": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "bh": true,
+    "cdMax": 60,
+    "delay": 0.4,
+    "effect": {
+      "alsoKnockback": {
+        "force": 120
+      },
+      "burst": [
+        "ffffff",
+        "f5d76e"
+      ],
+      "centerSelf": true,
+      "inner": {
+        "kind": "damage",
+        "tags": [
+          "Melee"
+        ],
+        "vfx": true
+      },
+      "kind": "aoe",
+      "rx": 90,
+      "ry": 45
+    },
+    "iconName": "skill_icons46",
+    "name": "VengefulAngel",
+    "noTargetRequired": true
+  },
+  "RogueAutoAttack": {
+    "animListIdx": 3,
+    "animLock": 0.46666666666667,
+    "cdMax": 0.9,
+    "delay": 0.096666666666667,
+    "effect": {
+      "kind": "damage",
+      "tags": [
+        "Melee"
+      ],
+      "vfx": false
+    },
+    "name": "RogueAutoAttack"
+  },
+  "RogueExposeWeakness": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "bh": true,
+    "cdMax": 30,
+    "delay": 0.13333333333333,
+    "effect": {
+      "duration": 10,
+      "index": "VULNERABILITY",
+      "isBuff": false,
+      "kind": "status",
+      "magnitude": 0.5
+    },
+    "iconName": "skill_icons15",
+    "name": "ExposeWeakness"
+  },
+  "RoguePoisonedKnife": {
+    "animListIdx": 4,
+    "animLock": 0.4,
+    "bh": true,
+    "cdMax": 30,
+    "delay": 0.13333333333333,
+    "effect": {
+      "effects": [
+        {
+          "ability": {
+            "aimedShot": true,
+            "canCrit": true,
+            "falloff": 1.5
+          },
+          "buffMods": {
+            "0": -0.5
+          },
+          "kind": "damage",
+          "tags": [
+            "Ranged"
+          ],
+          "vfx": true
+        },
+        {
+          "dotPerSec": 0.3,
+          "duration": 6,
+          "index": "DOT",
+          "isBuff": false,
+          "kind": "status"
+        }
+      ],
+      "kind": "effects"
+    },
+    "iconName": "skill_icons11",
+    "name": "PoisonedKnife"
+  },
+  "RogueShadowstep": {
+    "animListIdx": 4,
+    "animLock": 0.6,
+    "bh": true,
+    "cdMax": 30,
+    "delay": 0.16666666666667,
+    "effect": {
+      "ability": {
+        "canCrit": true
+      },
+      "buffMods": {
+        "0": 2.5
+      },
+      "kind": "damage",
+      "tags": [
+        "Melee"
+      ],
+      "vfx": true
+    },
+    "iconName": "skill_icons17",
+    "name": "Shadowstep"
+  },
+  "RogueSneakAttack": {
+    "animListIdx": 4,
+    "animLock": 0.4,
+    "bh": true,
+    "cdMax": 20,
+    "delay": 0.13333333333333,
+    "effect": {
+      "ability": {
+        "canCrit": true
+      },
+      "buffMods": {
+        "0": 1.5
+      },
+      "kind": "damage",
+      "tags": [
+        "Melee"
+      ],
+      "vfx": true
+    },
+    "iconName": "skill_icons17",
+    "name": "SneakAttack"
+  },
+  "SkeletonAutoAttack": {
+    "animListIdx": 3,
+    "animLock": 0.93333333333333,
+    "cdMax": 1.3,
+    "delay": 0.40833333333333,
+    "effect": {
+      "kind": "damage",
+      "tags": [
+        "Melee"
+      ],
+      "vfx": false
+    },
+    "name": "SkeletonAutoAttack"
+  },
+  "WitchAutoHeal": {
+    "animListIdx": 3,
+    "animLock": 0.93333333333333,
+    "cdMax": 2.8,
+    "delay": 0.46666666666667,
+    "effect": {
+      "kind": "heal",
+      "value": 1
+    },
+    "name": "WitchAutoHeal"
+  },
+  "WitchGrantPower": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "delay": 0.4,
+    "effect": {
+      "duration": 10,
+      "index": "ATK_BUFF",
+      "isBuff": true,
+      "kind": "status",
+      "magnitude": 0.5,
+      "tint": [
+        1,
+        0,
+        0,
+        4
+      ]
+    },
+    "iconName": "skill_icons15",
+    "name": "GrantPower"
+  },
+  "WitchMendWounds": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "delay": 0.4,
+    "effect": {
+      "dotPerSec": 0.5,
+      "duration": 10,
+      "index": "HOT",
+      "isBuff": true,
+      "kind": "status",
+      "tint": [
+        0,
+        1,
+        0,
+        4
+      ]
+    },
+    "iconName": "skill_icons11",
+    "name": "MendWounds"
+  },
+  "WitchSparkOfInspiration": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "bars": 0,
+    "delay": 0.4,
+    "effect": {
+      "effects": [
+        {
+          "fraction": 0.2,
+          "kind": "drainHp"
+        },
+        {
+          "amount": 20,
+          "kind": "resourceGain"
+        }
+      ],
+      "kind": "effects"
+    },
+    "iconName": "skill_icons46",
+    "name": "SparkOfInspiration"
+  },
+  "WizardAutoFireball": {
+    "animListIdx": 3,
+    "animLock": 0,
+    "cdMax": 1.5,
+    "delay": 0.4,
+    "effect": {
+      "ability": {
+        "aimedShot": true,
+        "canCrit": true,
+        "falloff": 1.5
+      },
+      "kind": "damage",
+      "tags": [
+        "Ranged",
+        "Fire"
+      ],
+      "vfx": false
+    },
+    "name": "WizardAutoFireball",
+    "projectile": {
+      "colours": [
+        "f5b21a",
+        "d42a0c"
+      ],
+      "launchDelay": 0.25,
+      "life": 5,
+      "look": "fireball",
+      "origin": {
+        "x": 42,
+        "y": -38
+      },
+      "speed": 15
+    }
+  },
+  "WizardBlizzard": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "bh": true,
+    "cdMax": 30,
+    "delay": 0.4,
+    "effect": {
+      "alsoStatus": {
+        "duration": 10,
+        "index": "SLOW",
+        "isBuff": false,
+        "kind": "status",
+        "magnitude": 0.4
+      },
+      "burst": [
+        "ffffff",
+        "7cc4f0"
+      ],
+      "inner": {
+        "ability": {
+          "aimedShot": true,
+          "canCrit": true,
+          "falloff": 1.5
+        },
+        "kind": "damage",
+        "tags": [
+          "Ranged",
+          "Fire"
+        ],
+        "vfx": true
+      },
+      "kind": "aoe",
+      "rx": 90,
+      "ry": 45
+    },
+    "iconName": "skill_icons46",
+    "name": "Blizzard",
+    "select": "area"
+  },
+  "WizardConflagrate": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "bh": true,
+    "cdMax": 40,
+    "delay": 0.4,
+    "effect": {
+      "effects": [
+        {
+          "dotPerSec": 0.5,
+          "duration": 6,
+          "index": "DOT",
+          "isBuff": false,
+          "kind": "status"
+        },
+        {
+          "duration": 1.5,
+          "index": "STUN",
+          "isBuff": false,
+          "kind": "status"
+        }
+      ],
+      "kind": "effects"
+    },
+    "iconName": "skill_icons46",
+    "name": "Conflagrate",
+    "select": "unit"
+  },
+  "WizardExplosion": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "bh": true,
+    "cdMax": 30,
+    "delay": 0.4,
+    "effect": {
+      "burst": [
+        "f5b21a",
+        "d42a0c"
+      ],
+      "inner": {
+        "ability": {
+          "aimedShot": true,
+          "canCrit": true,
+          "falloff": 1.5
+        },
+        "buffMods": {
+          "0": 2
+        },
+        "kind": "damage",
+        "tags": [
+          "Ranged",
+          "Fire"
+        ],
+        "vfx": true
+      },
+      "kind": "aoe",
+      "rx": 90,
+      "ry": 45
+    },
+    "iconName": "skill_icons46",
+    "name": "Explosion",
+    "select": "area"
+  },
+  "WizardThunderbolt": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "bh": true,
+    "cdMax": 30,
+    "delay": 0.4,
+    "effect": {
+      "alsoKnockback": {
+        "force": 100
+      },
+      "burst": [
+        "ffffff",
+        "f5d76e"
+      ],
+      "centerSelf": true,
+      "inner": {
+        "ability": {
+          "canCrit": true
+        },
+        "kind": "damage",
+        "tags": [
+          "Ranged"
+        ],
+        "vfx": true
+      },
+      "kind": "aoe",
+      "rx": 90,
+      "ry": 45
+    },
+    "iconName": "skill_icons46",
+    "name": "Thunderbolt",
+    "noTargetRequired": true
+  },
+  "WizardTimeStop": {
+    "animListIdx": 4,
+    "animLock": 0,
+    "bh": true,
+    "cdMax": 45,
+    "delay": 0.4,
+    "effect": {
+      "kind": "stunAll",
+      "seconds": 5
+    },
+    "iconName": "skill_icons46",
+    "name": "TimeStop",
+    "noTargetRequired": true
+  }
+}

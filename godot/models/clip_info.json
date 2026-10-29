@@ -1,0 +1,181 @@
+{
+  "goblin": {
+    "clips": {
+      "Attack1": {
+        "duration": 1.1542
+      },
+      "Attack2": {
+        "duration": 1.075
+      },
+      "Attack3": {
+        "duration": 0.8625
+      },
+      "Death": {
+        "duration": 0.5
+      },
+      "Idle": {
+        "duration": 0.5333
+      },
+      "Move": {
+        "duration": 0.5,
+        "ground_speed_mps": 2.1
+      },
+      "TakeHit": {
+        "duration": 0.3
+      },
+      "Walk": {
+        "duration": 0.9,
+        "ground_speed_mps": 0.6272
+      }
+    },
+    "scale": 0.699999988079071
+  },
+  "knight": {
+    "clips": {
+      "Attack1": {
+        "duration": 0.625
+      },
+      "Attack2": {
+        "duration": 1.0667
+      },
+      "Attack3": {
+        "duration": 0.7833
+      },
+      "Death": {
+        "duration": 0.9
+      },
+      "Idle": {
+        "duration": 1.6667
+      },
+      "Move": {
+        "duration": 0.6,
+        "ground_speed_mps": 2.4561
+      },
+      "OffhandAttack": {
+        "duration": 0.6875
+      },
+      "StaffCast": {
+        "duration": 0.8
+      },
+      "StaffRaise": {
+        "duration": 1.3
+      },
+      "TakeHit": {
+        "duration": 0.3
+      },
+      "TwoHandAttack": {
+        "duration": 0.8208
+      },
+      "TwoHandIdle": {
+        "duration": 0.9
+      },
+      "Walk": {
+        "duration": 1.0,
+        "ground_speed_mps": 1.0323
+      }
+    },
+    "scale": 1.0
+  },
+  "mannequin": {
+    "clips": {
+      "Attack1": {
+        "duration": 0.625
+      },
+      "Attack2": {
+        "duration": 1.0667
+      },
+      "Attack3": {
+        "duration": 0.7833
+      },
+      "Death": {
+        "duration": 0.9
+      },
+      "Idle": {
+        "duration": 1.6667
+      },
+      "Move": {
+        "duration": 0.6208,
+        "ground_speed_mps": 2.5467
+      },
+      "OffhandAttack": {
+        "duration": 0.6875
+      },
+      "StaffCast": {
+        "duration": 0.8
+      },
+      "StaffRaise": {
+        "duration": 1.3
+      },
+      "TakeHit": {
+        "duration": 0.3
+      },
+      "TwoHandAttack": {
+        "duration": 0.8208
+      },
+      "TwoHandIdle": {
+        "duration": 0.9
+      },
+      "Walk": {
+        "duration": 1.0,
+        "ground_speed_mps": 1.0323
+      }
+    },
+    "scale": 1.0
+  },
+  "skeleton": {
+    "clips": {
+      "Attack1": {
+        "duration": 1.175
+      },
+      "Attack2": {
+        "duration": 0.9208
+      },
+      "Attack3": {
+        "duration": 0.9208
+      },
+      "Death": {
+        "duration": 0.5
+      },
+      "Idle": {
+        "duration": 0.5333
+      },
+      "Move": {
+        "duration": 0.5417,
+        "ground_speed_mps": 2.5926
+      },
+      "TakeHit": {
+        "duration": 0.3
+      },
+      "Walk": {
+        "duration": 1.0,
+        "ground_speed_mps": 0.8065
+      }
+    },
+    "scale": 1.0
+  },
+  "witch": {
+    "clips": {
+      "Cast": {
+        "duration": 1.95
+      },
+      "Death": {
+        "duration": 0.6
+      },
+      "Idle": {
+        "duration": 1.8
+      },
+      "Move": {
+        "duration": 0.6583,
+        "ground_speed_mps": 0.9051
+      },
+      "TakeHit": {
+        "duration": 0.3
+      },
+      "Walk": {
+        "duration": 1.1,
+        "ground_speed_mps": 0.4699
+      }
+    },
+    "scale": 0.8399999737739563
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "obstacles": [],
+  "lights": [
+    {
+      "x": -14.75,
+      "y": 2.6,
+      "z": 5.0,
+      "color": [
+        1.0,
+        0.58,
+        0.25
+      ],
+      "energy": 2.4,
+      "range": 10.0,
+      "flicker": 0.3
+    },
+    {
+      "x": -14.75,
+      "y": 2.6,
+      "z": -0.0,
+      "color": [
+        1.0,
+        0.58,
+        0.25
+      ],
+      "energy": 2.4,
+      "range": 10.0,
+      "flicker": 0.3
+    },
+    {
+      "x": -14.75,
+      "y": 2.6,
+      "z": -5.0,
+      "color": [
+        1.0,
+        0.58,
+        0.25
+      ],
+      "energy": 2.4,
+      "range": 10.0,
+      "flicker": 0.3
+    },
+    {
+      "x": -10.0,
+      "y": 2.6,
+      "z": -15.75,
+      "color": [
+        1.0,
+        0.58,
+        0.25
+      ],
+      "energy": 2.4,
+      "range": 10.0,
+      "flicker": 0.3
+    },
+    {
+      "x": -2.0,
+      "y": 2.6,
+      "z": -15.75,
+      "color": [
+        1.0,
+        0.58,
+        0.25
+      ],
+      "energy": 2.4,
+      "range": 10.0,
+      "flicker": 0.3
+    },
+    {
+      "x": 6.0,
+      "y": 2.6,
+      "z": -15.75,
+      "color": [
+        1.0,
+        0.58,
+        0.25
+      ],
+      "energy": 2.4,
+      "range": 10.0,
+      "flicker": 0.3
+    },
+    {
+      "x": 12.0,
+      "y": 2.6,
+      "z": -15.75,
+      "color": [
+        1.0,
+        0.58,
+        0.25
+      ],
+      "energy": 2.4,
+      "range": 10.0,
+      "flicker": 0.3
+    }
+  ],
+  "units": "metres; x, z are Godot ground coordinates (z = -Blender y)",
+  "px_per_m": 23.3,
+  "bounds": {
+    "min_x": -15.0,
+    "max_x": 15.0,
+    "min_z": -16.0,
+    "max_z": 16.0
+  },
+  "spawns": {
+    "party": [
+      {
+        "x": -8.6,
+        "z": -3.0
+      },
+      {
+        "x": -8.6,
+        "z": -1.0
+      },
+      {
+        "x": -8.6,
+        "z": 1.0
+      },
+      {
+        "x": -8.6,
+        "z": 3.0
+      }
+    ],
+    "enemy_entry": [
+      {
+        "x": 15.8,
+        "z": -1.2
+      },
+      {
+        "x": 15.8,
+        "z": 0.0
+      },
+      {
+        "x": 15.8,
+        "z": 1.2
+      }
+    ],
+    "enemy_inside": [
+      {
+        "x": 8.0,
+        "z": -2.0
+      },
+      {
+        "x": 8.0,
+        "z": 2.0
+      }
+    ]
+  },
+  "camera": {
+    "yaw_deg": 0,
+    "pitch_deg": 22,
+    "projection": "orthogonal"
+  },
+  "emissive_materials": [
+    "flame",
+    "flame_core"
+  ],
+  "far_walls": [
+    "-X end",
+    "-Z side"
+  ],
+  "stats": {
+    "floor_stones": 2313
+  }
+}

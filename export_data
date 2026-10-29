@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Crimson Red 3D - export the 2D game's data tables to JSON for the Godot port.
+# Reads main-game/ (never changes it), writes godot/data/*.json. Usage: ./export_data  [CR_NO_OVERRIDES=1 ./export_data]
+set -euo pipefail
+HERE="$(cd "$(dirname "$0")" && pwd)"
+export CR_MAIN_DIR="$HERE/../main-game"
+export CR_OUT_DIR="$HERE/godot/data"
+mkdir -p "$CR_OUT_DIR"
+exec love "$HERE/tools/export_data"

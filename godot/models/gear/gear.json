@@ -1,0 +1,1806 @@
+{
+  "pieces": [
+    {
+      "id": "helm_iron",
+      "name": "Nasal Helm",
+      "slot": "head",
+      "file": "helm_iron.glb"
+    },
+    {
+      "id": "helm_great",
+      "name": "Great Helm",
+      "slot": "head",
+      "file": "helm_great.glb"
+    },
+    {
+      "id": "cap_leather",
+      "name": "Leather Cap",
+      "slot": "head",
+      "file": "cap_leather.glb"
+    },
+    {
+      "id": "hood_cloth",
+      "name": "Cloth Hood",
+      "slot": "head",
+      "file": "hood_cloth.glb"
+    },
+    {
+      "id": "helm_spangenhelm",
+      "name": "Spangenhelm",
+      "slot": "head",
+      "file": "helm_spangenhelm.glb"
+    },
+    {
+      "id": "helm_sugarloaf",
+      "name": "Sugarloaf Helm",
+      "slot": "head",
+      "file": "helm_sugarloaf.glb"
+    },
+    {
+      "id": "helm_bascinet",
+      "name": "Bascinet",
+      "slot": "head",
+      "file": "helm_bascinet.glb"
+    },
+    {
+      "id": "helm_hounskull",
+      "name": "Hounskull",
+      "slot": "head",
+      "file": "helm_hounskull.glb"
+    },
+    {
+      "id": "helm_sallet",
+      "name": "Sallet",
+      "slot": "head",
+      "file": "helm_sallet.glb"
+    },
+    {
+      "id": "helm_barbute",
+      "name": "Barbute",
+      "slot": "head",
+      "file": "helm_barbute.glb"
+    },
+    {
+      "id": "helm_armet",
+      "name": "Armet",
+      "slot": "head",
+      "file": "helm_armet.glb"
+    },
+    {
+      "id": "helm_frog_mouth",
+      "name": "Frog-Mouth Helm",
+      "slot": "head",
+      "file": "helm_frog_mouth.glb"
+    },
+    {
+      "id": "helm_burgonet",
+      "name": "Burgonet",
+      "slot": "head",
+      "file": "helm_burgonet.glb"
+    },
+    {
+      "id": "helm_morion",
+      "name": "Morion",
+      "slot": "head",
+      "file": "helm_morion.glb"
+    },
+    {
+      "id": "helm_kettle_hat",
+      "name": "Kettle Hat",
+      "slot": "head",
+      "file": "helm_kettle_hat.glb"
+    },
+    {
+      "id": "helm_cabasset",
+      "name": "Cabasset",
+      "slot": "head",
+      "file": "helm_cabasset.glb"
+    },
+    {
+      "id": "helm_zischagge",
+      "name": "Zischaegge",
+      "slot": "head",
+      "file": "helm_zischagge.glb"
+    },
+    {
+      "id": "helm_shishak",
+      "name": "Shishak",
+      "slot": "head",
+      "file": "helm_shishak.glb"
+    },
+    {
+      "id": "armor_scale_mail",
+      "name": "Scale Mail",
+      "slot": "armor",
+      "file": "armor_scale_mail.glb",
+      "bh_item": 4
+    },
+    {
+      "id": "armor_leather",
+      "name": "Soft Leather Garb",
+      "slot": "armor",
+      "file": "armor_leather.glb",
+      "bh_item": 5
+    },
+    {
+      "id": "armor_cloak",
+      "name": "Cotton Cloak",
+      "slot": "armor",
+      "file": "armor_cloak.glb",
+      "bh_item": 6
+    },
+    {
+      "id": "armor_leather_armor",
+      "name": "Leather Armor",
+      "slot": "armor",
+      "file": "armor_leather_armor.glb"
+    },
+    {
+      "id": "armor_hard_leather",
+      "name": "Hard Leather Armor",
+      "slot": "armor",
+      "file": "armor_hard_leather.glb"
+    },
+    {
+      "id": "armor_ring_mail",
+      "name": "Ring Mail",
+      "slot": "armor",
+      "file": "armor_ring_mail.glb"
+    },
+    {
+      "id": "armor_scale_hauberk",
+      "name": "Scale Hauberk",
+      "slot": "armor",
+      "file": "armor_scale_hauberk.glb"
+    },
+    {
+      "id": "armor_chain_mail",
+      "name": "Chain Mail",
+      "slot": "armor",
+      "file": "armor_chain_mail.glb"
+    },
+    {
+      "id": "armor_splint_mail",
+      "name": "Splint Mail",
+      "slot": "armor",
+      "file": "armor_splint_mail.glb"
+    },
+    {
+      "id": "armor_breast_plate",
+      "name": "Breast Plate",
+      "slot": "armor",
+      "file": "armor_breast_plate.glb"
+    },
+    {
+      "id": "sword_iron",
+      "name": "Iron Sword",
+      "slot": "weapon",
+      "file": "sword_iron.glb",
+      "bh_item": 0,
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "sword_long",
+      "name": "Longsword",
+      "slot": "weapon",
+      "file": "sword_long.glb",
+      "bh_item": 10,
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "sword_carver",
+      "name": "Rusty Carver",
+      "slot": "weapon",
+      "file": "sword_carver.glb",
+      "bh_item": 9,
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "dagger_iron",
+      "name": "Iron Dagger",
+      "slot": "weapon",
+      "file": "dagger_iron.glb",
+      "bh_item": 1,
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "staff_oak",
+      "name": "Oakwood Staff",
+      "slot": "weapon",
+      "file": "staff_oak.glb",
+      "bh_item": 3,
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "rod_cleric",
+      "name": "Cleric's Rod",
+      "slot": "weapon",
+      "file": "rod_cleric.glb",
+      "bh_item": 2,
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "hatchet",
+      "name": "Dual Hatchets (one)",
+      "slot": "weapon",
+      "file": "hatchet.glb",
+      "bh_item": 11,
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "hat_wizard_black",
+      "name": "Wizard Hat (Black)",
+      "slot": "head",
+      "file": "hat_wizard_black.glb"
+    },
+    {
+      "id": "armor_wizard_black",
+      "name": "Wizard Robe (Black)",
+      "slot": "armor",
+      "file": "armor_wizard_black.glb"
+    },
+    {
+      "id": "hat_wizard_brown",
+      "name": "Wizard Hat (Brown)",
+      "slot": "head",
+      "file": "hat_wizard_brown.glb"
+    },
+    {
+      "id": "armor_wizard_brown",
+      "name": "Wizard Robe (Brown)",
+      "slot": "armor",
+      "file": "armor_wizard_brown.glb"
+    },
+    {
+      "id": "hat_wizard_blue",
+      "name": "Wizard Hat (Blue)",
+      "slot": "head",
+      "file": "hat_wizard_blue.glb"
+    },
+    {
+      "id": "armor_wizard_blue",
+      "name": "Wizard Robe (Blue)",
+      "slot": "armor",
+      "file": "armor_wizard_blue.glb"
+    },
+    {
+      "id": "hat_wizard_green",
+      "name": "Wizard Hat (Green)",
+      "slot": "head",
+      "file": "hat_wizard_green.glb"
+    },
+    {
+      "id": "armor_wizard_green",
+      "name": "Wizard Robe (Green)",
+      "slot": "armor",
+      "file": "armor_wizard_green.glb"
+    },
+    {
+      "id": "hat_wizard_purple",
+      "name": "Wizard Hat (Purple)",
+      "slot": "head",
+      "file": "hat_wizard_purple.glb"
+    },
+    {
+      "id": "armor_wizard_purple",
+      "name": "Wizard Robe (Purple)",
+      "slot": "armor",
+      "file": "armor_wizard_purple.glb"
+    },
+    {
+      "id": "hat_wizard_gray",
+      "name": "Wizard Hat (Gray)",
+      "slot": "head",
+      "file": "hat_wizard_gray.glb"
+    },
+    {
+      "id": "armor_wizard_gray",
+      "name": "Wizard Robe (Gray)",
+      "slot": "armor",
+      "file": "armor_wizard_gray.glb"
+    },
+    {
+      "id": "hat_wizard_white",
+      "name": "Wizard Hat (White)",
+      "slot": "head",
+      "file": "hat_wizard_white.glb"
+    },
+    {
+      "id": "armor_wizard_white",
+      "name": "Wizard Robe (White)",
+      "slot": "armor",
+      "file": "armor_wizard_white.glb"
+    },
+    {
+      "id": "armor_heavy_2",
+      "name": "Bronze Splint Mail (body)",
+      "slot": "armor",
+      "file": "armor_heavy_2.glb"
+    },
+    {
+      "id": "head_heavy_2",
+      "name": "Bronze Splint Mail (helm)",
+      "slot": "head",
+      "file": "head_heavy_2.glb"
+    },
+    {
+      "id": "armor_heavy_3",
+      "name": "Iron Plate (body)",
+      "slot": "armor",
+      "file": "armor_heavy_3.glb"
+    },
+    {
+      "id": "head_heavy_3",
+      "name": "Iron Plate (helm)",
+      "slot": "head",
+      "file": "head_heavy_3.glb"
+    },
+    {
+      "id": "armor_heavy_4",
+      "name": "Steel Scale Mail (body)",
+      "slot": "armor",
+      "file": "armor_heavy_4.glb"
+    },
+    {
+      "id": "head_heavy_4",
+      "name": "Steel Scale Mail (helm)",
+      "slot": "head",
+      "file": "head_heavy_4.glb"
+    },
+    {
+      "id": "armor_heavy_5",
+      "name": "Brass Splint Mail (body)",
+      "slot": "armor",
+      "file": "armor_heavy_5.glb"
+    },
+    {
+      "id": "head_heavy_5",
+      "name": "Brass Splint Mail (helm)",
+      "slot": "head",
+      "file": "head_heavy_5.glb"
+    },
+    {
+      "id": "armor_heavy_6",
+      "name": "Sunforged Plate (body)",
+      "slot": "armor",
+      "file": "armor_heavy_6.glb"
+    },
+    {
+      "id": "head_heavy_6",
+      "name": "Sunforged Plate (helm)",
+      "slot": "head",
+      "file": "head_heavy_6.glb"
+    },
+    {
+      "id": "armor_heavy_7",
+      "name": "Mithril Scale Mail (body)",
+      "slot": "armor",
+      "file": "armor_heavy_7.glb"
+    },
+    {
+      "id": "head_heavy_7",
+      "name": "Mithril Scale Mail (helm)",
+      "slot": "head",
+      "file": "head_heavy_7.glb"
+    },
+    {
+      "id": "armor_heavy_8",
+      "name": "Adamant Splint Mail (body)",
+      "slot": "armor",
+      "file": "armor_heavy_8.glb"
+    },
+    {
+      "id": "head_heavy_8",
+      "name": "Adamant Splint Mail (helm)",
+      "slot": "head",
+      "file": "head_heavy_8.glb"
+    },
+    {
+      "id": "armor_heavy_9",
+      "name": "Draconite Plate (body)",
+      "slot": "armor",
+      "file": "armor_heavy_9.glb"
+    },
+    {
+      "id": "head_heavy_9",
+      "name": "Draconite Plate (helm)",
+      "slot": "head",
+      "file": "head_heavy_9.glb"
+    },
+    {
+      "id": "armor_heavy_10",
+      "name": "Dragonlord Scale Mail (body)",
+      "slot": "armor",
+      "file": "armor_heavy_10.glb"
+    },
+    {
+      "id": "head_heavy_10",
+      "name": "Dragonlord Scale Mail (helm)",
+      "slot": "head",
+      "file": "head_heavy_10.glb"
+    },
+    {
+      "id": "armor_medium_2",
+      "name": "Leather Armor (body)",
+      "slot": "armor",
+      "file": "armor_medium_2.glb"
+    },
+    {
+      "id": "head_medium_2",
+      "name": "Leather Armor (helm)",
+      "slot": "head",
+      "file": "head_medium_2.glb"
+    },
+    {
+      "id": "armor_medium_3",
+      "name": "Hard Leather Armor (body)",
+      "slot": "armor",
+      "file": "armor_medium_3.glb"
+    },
+    {
+      "id": "head_medium_3",
+      "name": "Hard Leather Armor (helm)",
+      "slot": "head",
+      "file": "head_medium_3.glb"
+    },
+    {
+      "id": "armor_medium_4",
+      "name": "Ring Mail (body)",
+      "slot": "armor",
+      "file": "armor_medium_4.glb"
+    },
+    {
+      "id": "head_medium_4",
+      "name": "Ring Mail (helm)",
+      "slot": "head",
+      "file": "head_medium_4.glb"
+    },
+    {
+      "id": "armor_medium_5",
+      "name": "Brass Chain Mail (body)",
+      "slot": "armor",
+      "file": "armor_medium_5.glb"
+    },
+    {
+      "id": "head_medium_5",
+      "name": "Brass Chain Mail (helm)",
+      "slot": "head",
+      "file": "head_medium_5.glb"
+    },
+    {
+      "id": "armor_medium_6",
+      "name": "Gilded Scale Hauberk (body)",
+      "slot": "armor",
+      "file": "armor_medium_6.glb"
+    },
+    {
+      "id": "head_medium_6",
+      "name": "Gilded Scale Hauberk (helm)",
+      "slot": "head",
+      "file": "head_medium_6.glb"
+    },
+    {
+      "id": "armor_medium_7",
+      "name": "Mithril Ring Mail (body)",
+      "slot": "armor",
+      "file": "armor_medium_7.glb"
+    },
+    {
+      "id": "head_medium_7",
+      "name": "Mithril Ring Mail (helm)",
+      "slot": "head",
+      "file": "head_medium_7.glb"
+    },
+    {
+      "id": "armor_medium_8",
+      "name": "Adamant Scale Hauberk (body)",
+      "slot": "armor",
+      "file": "armor_medium_8.glb"
+    },
+    {
+      "id": "head_medium_8",
+      "name": "Adamant Scale Hauberk (helm)",
+      "slot": "head",
+      "file": "head_medium_8.glb"
+    },
+    {
+      "id": "armor_medium_9",
+      "name": "Draconite Chain Mail (body)",
+      "slot": "armor",
+      "file": "armor_medium_9.glb"
+    },
+    {
+      "id": "head_medium_9",
+      "name": "Draconite Chain Mail (helm)",
+      "slot": "head",
+      "file": "head_medium_9.glb"
+    },
+    {
+      "id": "armor_medium_10",
+      "name": "Dragonscale Hauberk (body)",
+      "slot": "armor",
+      "file": "armor_medium_10.glb"
+    },
+    {
+      "id": "head_medium_10",
+      "name": "Dragonscale Hauberk (helm)",
+      "slot": "head",
+      "file": "head_medium_10.glb"
+    },
+    {
+      "id": "armor_light_2",
+      "name": "Linen Robe (body)",
+      "slot": "armor",
+      "file": "armor_light_2.glb"
+    },
+    {
+      "id": "head_light_2",
+      "name": "Linen Robe (helm)",
+      "slot": "head",
+      "file": "head_light_2.glb"
+    },
+    {
+      "id": "armor_light_3",
+      "name": "Greyweave Cloak (body)",
+      "slot": "armor",
+      "file": "armor_light_3.glb"
+    },
+    {
+      "id": "head_light_3",
+      "name": "Greyweave Cloak (helm)",
+      "slot": "head",
+      "file": "head_light_3.glb"
+    },
+    {
+      "id": "armor_light_4",
+      "name": "Silk Robe (body)",
+      "slot": "armor",
+      "file": "armor_light_4.glb"
+    },
+    {
+      "id": "head_light_4",
+      "name": "Silk Robe (helm)",
+      "slot": "head",
+      "file": "head_light_4.glb"
+    },
+    {
+      "id": "armor_light_5",
+      "name": "Verdant Cloak (body)",
+      "slot": "armor",
+      "file": "armor_light_5.glb"
+    },
+    {
+      "id": "head_light_5",
+      "name": "Verdant Cloak (helm)",
+      "slot": "head",
+      "file": "head_light_5.glb"
+    },
+    {
+      "id": "armor_light_6",
+      "name": "Gilded White Robe (body)",
+      "slot": "armor",
+      "file": "armor_light_6.glb"
+    },
+    {
+      "id": "head_light_6",
+      "name": "Gilded White Robe (helm)",
+      "slot": "head",
+      "file": "head_light_6.glb"
+    },
+    {
+      "id": "armor_light_7",
+      "name": "Mithril Cloak (body)",
+      "slot": "armor",
+      "file": "armor_light_7.glb"
+    },
+    {
+      "id": "head_light_7",
+      "name": "Mithril Cloak (helm)",
+      "slot": "head",
+      "file": "head_light_7.glb"
+    },
+    {
+      "id": "armor_light_8",
+      "name": "Crimson Battlemage Robe (body)",
+      "slot": "armor",
+      "file": "armor_light_8.glb"
+    },
+    {
+      "id": "head_light_8",
+      "name": "Crimson Battlemage Robe (helm)",
+      "slot": "head",
+      "file": "head_light_8.glb"
+    },
+    {
+      "id": "armor_light_9",
+      "name": "Draconite Cloak (body)",
+      "slot": "armor",
+      "file": "armor_light_9.glb"
+    },
+    {
+      "id": "head_light_9",
+      "name": "Draconite Cloak (helm)",
+      "slot": "head",
+      "file": "head_light_9.glb"
+    },
+    {
+      "id": "armor_light_10",
+      "name": "Archmage's Robe (body)",
+      "slot": "armor",
+      "file": "armor_light_10.glb"
+    },
+    {
+      "id": "head_light_10",
+      "name": "Archmage's Robe (helm)",
+      "slot": "head",
+      "file": "head_light_10.glb"
+    },
+    {
+      "id": "wpn_melee_1h_2",
+      "name": "Hand Axe",
+      "slot": "weapon",
+      "file": "wpn_melee_1h_2.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_1h_3",
+      "name": "Mace",
+      "slot": "weapon",
+      "file": "wpn_melee_1h_3.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_1h_4",
+      "name": "Scimitar",
+      "slot": "weapon",
+      "file": "wpn_melee_1h_4.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_1h_5",
+      "name": "Cleaver",
+      "slot": "weapon",
+      "file": "wpn_melee_1h_5.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_1h_6",
+      "name": "Flanged Mace",
+      "slot": "weapon",
+      "file": "wpn_melee_1h_6.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_1h_7",
+      "name": "Sabre",
+      "slot": "weapon",
+      "file": "wpn_melee_1h_7.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_1h_8",
+      "name": "Tomahawk",
+      "slot": "weapon",
+      "file": "wpn_melee_1h_8.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_1h_9",
+      "name": "Morning Star",
+      "slot": "weapon",
+      "file": "wpn_melee_1h_9.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_1h_10",
+      "name": "Phase Blade",
+      "slot": "weapon",
+      "file": "wpn_melee_1h_10.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_2h_2",
+      "name": "Bardiche",
+      "slot": "weapon",
+      "file": "wpn_melee_2h_2.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_2h_3",
+      "name": "Maul",
+      "slot": "weapon",
+      "file": "wpn_melee_2h_3.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_2h_4",
+      "name": "Claymore",
+      "slot": "weapon",
+      "file": "wpn_melee_2h_4.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_2h_5",
+      "name": "Great Axe",
+      "slot": "weapon",
+      "file": "wpn_melee_2h_5.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_2h_6",
+      "name": "Halberd",
+      "slot": "weapon",
+      "file": "wpn_melee_2h_6.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_2h_7",
+      "name": "Flamberge",
+      "slot": "weapon",
+      "file": "wpn_melee_2h_7.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_2h_8",
+      "name": "Great Maul",
+      "slot": "weapon",
+      "file": "wpn_melee_2h_8.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_2h_9",
+      "name": "Giant Thresher",
+      "slot": "weapon",
+      "file": "wpn_melee_2h_9.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_melee_2h_10",
+      "name": "Colossus Blade",
+      "slot": "weapon",
+      "file": "wpn_melee_2h_10.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_bow_1",
+      "name": "Short Bow",
+      "slot": "weapon",
+      "file": "wpn_bow_1.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_bow_2",
+      "name": "Long Bow",
+      "slot": "weapon",
+      "file": "wpn_bow_2.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_bow_3",
+      "name": "Composite Bow",
+      "slot": "weapon",
+      "file": "wpn_bow_3.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_bow_4",
+      "name": "Short Battle Bow",
+      "slot": "weapon",
+      "file": "wpn_bow_4.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_bow_5",
+      "name": "Long Battle Bow",
+      "slot": "weapon",
+      "file": "wpn_bow_5.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_bow_6",
+      "name": "Short War Bow",
+      "slot": "weapon",
+      "file": "wpn_bow_6.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_bow_7",
+      "name": "Long War Bow",
+      "slot": "weapon",
+      "file": "wpn_bow_7.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_bow_8",
+      "name": "Razor Bow",
+      "slot": "weapon",
+      "file": "wpn_bow_8.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_bow_9",
+      "name": "Hydra Bow",
+      "slot": "weapon",
+      "file": "wpn_bow_9.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_bow_10",
+      "name": "Rune Bow",
+      "slot": "weapon",
+      "file": "wpn_bow_10.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_crossbow_1",
+      "name": "Light Crossbow",
+      "slot": "weapon",
+      "file": "wpn_crossbow_1.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_crossbow_2",
+      "name": "Crossbow",
+      "slot": "weapon",
+      "file": "wpn_crossbow_2.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_crossbow_3",
+      "name": "Heavy Crossbow",
+      "slot": "weapon",
+      "file": "wpn_crossbow_3.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_crossbow_4",
+      "name": "Arbalest",
+      "slot": "weapon",
+      "file": "wpn_crossbow_4.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_crossbow_5",
+      "name": "Repeating Crossbow",
+      "slot": "weapon",
+      "file": "wpn_crossbow_5.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_crossbow_6",
+      "name": "Siege Crossbow",
+      "slot": "weapon",
+      "file": "wpn_crossbow_6.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_crossbow_7",
+      "name": "Ballista",
+      "slot": "weapon",
+      "file": "wpn_crossbow_7.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_crossbow_8",
+      "name": "Chu-Ko-Nu",
+      "slot": "weapon",
+      "file": "wpn_crossbow_8.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_crossbow_9",
+      "name": "Colossus Crossbow",
+      "slot": "weapon",
+      "file": "wpn_crossbow_9.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_crossbow_10",
+      "name": "Demon Crossbow",
+      "slot": "weapon",
+      "file": "wpn_crossbow_10.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_staff_2",
+      "name": "Short Staff",
+      "slot": "weapon",
+      "file": "wpn_staff_2.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_staff_3",
+      "name": "Long Staff",
+      "slot": "weapon",
+      "file": "wpn_staff_3.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_staff_4",
+      "name": "Gnarled Staff",
+      "slot": "weapon",
+      "file": "wpn_staff_4.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_staff_5",
+      "name": "Battle Staff",
+      "slot": "weapon",
+      "file": "wpn_staff_5.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_staff_6",
+      "name": "War Staff",
+      "slot": "weapon",
+      "file": "wpn_staff_6.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_staff_7",
+      "name": "Jo Staff",
+      "slot": "weapon",
+      "file": "wpn_staff_7.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_staff_8",
+      "name": "Cedar Staff",
+      "slot": "weapon",
+      "file": "wpn_staff_8.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_staff_9",
+      "name": "Gothic Staff",
+      "slot": "weapon",
+      "file": "wpn_staff_9.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_staff_10",
+      "name": "Archon Staff",
+      "slot": "weapon",
+      "file": "wpn_staff_10.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_wand_1",
+      "name": "Wand",
+      "slot": "weapon",
+      "file": "wpn_wand_1.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_wand_2",
+      "name": "Yew Wand",
+      "slot": "weapon",
+      "file": "wpn_wand_2.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_wand_3",
+      "name": "Bone Wand",
+      "slot": "weapon",
+      "file": "wpn_wand_3.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_wand_4",
+      "name": "Grim Wand",
+      "slot": "weapon",
+      "file": "wpn_wand_4.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_wand_5",
+      "name": "Burnt Wand",
+      "slot": "weapon",
+      "file": "wpn_wand_5.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_wand_6",
+      "name": "Petrified Wand",
+      "slot": "weapon",
+      "file": "wpn_wand_6.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_wand_7",
+      "name": "Tomb Wand",
+      "slot": "weapon",
+      "file": "wpn_wand_7.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_wand_8",
+      "name": "Grave Wand",
+      "slot": "weapon",
+      "file": "wpn_wand_8.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_wand_9",
+      "name": "Unearthed Wand",
+      "slot": "weapon",
+      "file": "wpn_wand_9.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    },
+    {
+      "id": "wpn_wand_10",
+      "name": "Lich Wand",
+      "slot": "weapon",
+      "file": "wpn_wand_10.glb",
+      "attach": {
+        "bone": "hand_R",
+        "position": [
+          0,
+          0.07,
+          0
+        ],
+        "rotation_degrees": [
+          -40,
+          90,
+          0
+        ]
+      }
+    }
+  ]
+}
