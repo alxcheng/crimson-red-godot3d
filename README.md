@@ -7,9 +7,13 @@
 - **Dates:** 2026-10-28 (the files' real modification dates; the repo history has two earlier commits from the same day)
 - **Status:** Prototype. A sandbox battle and menu screens run; the combat rules are mostly placeholders (see below).
 
-![Sandbox battle, Knight and Wizard in the Black Forest](docs/campaign-battle.png)
+| Title menu | Party screen | Sandbox battle: melee |
+|---|---|---|
+| ![Title menu](docs/screenshots/001-menu-title.png) | ![Party screen](docs/screenshots/004-menu-party.png) | ![Sandbox battle: melee](docs/screenshots/027-sandbox-dungeon-melee.png) |
 
-![Character viewer: Knight, Attack1 animation](docs/model-viewer.png)
+| Sandbox battle: close-up | Castle Crimson stage | Character viewer: Knight, Attack1 |
+|---|---|---|
+| ![Sandbox battle: close-up](docs/screenshots/046-sandbox-closeup-fight.png) | ![Castle Crimson stage](docs/screenshots/058-sandbox-stage-castle_crimson-fight.png) | ![Character viewer: Knight, Attack1](docs/screenshots/073-model-knight-Attack1-00.png) |
 
 ## What this is
 
