@@ -1,0 +1,122 @@
+{
+ "_note": "Original reward tables (hand-authored): XP to next level and the gold / XP of a won battle by tier.",
+ "FIRST_LEVEL_XP": 40,
+ "XP_TABLE": [
+  1.3,
+  1.3,
+  1.3,
+  1.28,
+  1.26,
+  1.24,
+  1.22,
+  1.2,
+  1.18,
+  1.16,
+  1.15,
+  1.14,
+  1.13,
+  1.12,
+  1.11,
+  1.1,
+  1.09,
+  1.08,
+  1.08,
+  1.07,
+  1.07,
+  1.06,
+  1.06,
+  1.05,
+  1.05,
+  1.05,
+  1.04,
+  1.04,
+  1.04,
+  1.04
+ ],
+ "LEVELS": [
+  {
+   "name": "Mossy Hollow",
+   "gold": 24,
+   "xp": 32,
+   "lootTable": 0,
+   "rareChance": 10
+  },
+  {
+   "name": "Reedmarch",
+   "gold": 28,
+   "xp": 40,
+   "lootTable": 0,
+   "rareChance": 13
+  },
+  {
+   "name": "Ashen Quarry",
+   "gold": 32,
+   "xp": 48,
+   "lootTable": 0,
+   "rareChance": 16
+  },
+  {
+   "name": "Hollowbell Road",
+   "gold": 37,
+   "xp": 57,
+   "lootTable": 1,
+   "rareChance": 19
+  },
+  {
+   "name": "Drift Pass",
+   "gold": 42,
+   "xp": 66,
+   "lootTable": 1,
+   "rareChance": 22
+  },
+  {
+   "name": "Lantern Vault",
+   "gold": 47,
+   "xp": 76,
+   "lootTable": 1,
+   "rareChance": 25
+  },
+  {
+   "name": "Saltglass Flats",
+   "gold": 52,
+   "xp": 86,
+   "lootTable": 2,
+   "rareChance": 28
+  },
+  {
+   "name": "Briar Keep",
+   "gold": 58,
+   "xp": 97,
+   "lootTable": 2,
+   "rareChance": 31
+  },
+  {
+   "name": "Cinder Gate",
+   "gold": 64,
+   "xp": 108,
+   "lootTable": 2,
+   "rareChance": 34
+  },
+  {
+   "name": "Mournfield",
+   "gold": 70,
+   "xp": 120,
+   "lootTable": 3,
+   "rareChance": 37
+  },
+  {
+   "name": "Gallows Steps",
+   "gold": 76,
+   "xp": 132,
+   "lootTable": 3,
+   "rareChance": 40
+  },
+  {
+   "name": "Crimson Reach",
+   "gold": 82,
+   "xp": 145,
+   "lootTable": 3,
+   "rareChance": 43
+  }
+ ]
+}

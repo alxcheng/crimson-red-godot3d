@@ -64,7 +64,7 @@ func _run() -> void:
 	_check(GameState.party() == ["knight", "wizard"], "a new game's party is the Knight and the Wizard (the heroes with full trees)")
 	_check(GameState.PLAYABLE == ["knight", "wizard"], "only the full-tree heroes are playable")
 	var st := GameState.hero_stats("knight")
-	_check(st["ATK"] == 20 + int(GameState.catalog()["0"]["power"]) and st["DEF"] == 35 and st["maxHP"] == 1000, "Knight stats = class base + starter gear (Iron Sword ATK, Scale Mail +20 DEF): %s" % st)
+	_check(st["ATK"] == 20 + int(GameState.catalog()["0"]["power"]) and st["DEF"] == 35 and st["maxHP"] == 1000, "Knight stats = class base + starter gear (Training Sword ATK, Riveted Mail +20 DEF): %s" % st)
 	_check(GameState.model_for(GameState.item_of(GameState.record("knight")["equipped"]["weapon"])) == "sword_iron", "equipped items map to their 3D models")
 	# ---- the talent tree: switchable picks
 	GameState.record("wizard")["level"] = 25
@@ -123,25 +123,25 @@ func _run() -> void:
 	_check(GameState.data["inventory"].is_empty(), "no buying without the gold")
 	# ---- equip
 	GameState.data["inventory"] = []
-	var longsword := GameState.mint(10)                       # Longsword: knight / paladin
+	var longsword := GameState.mint(10)                       # Broadsword: knight / paladin
 	GameState.data["inventory"].append(longsword)
 	var eq = _open(EquipScreen, app)
 	_check(eq._sel_char == "knight", "the first party hero is selected")
 	_click(eq, IC.cell_rect(0).get_center())
 	_check(eq._held == longsword, "clicking an item holds it")
 	_click(eq, eq._slot_rect(0).get_center())
-	_check(GameState.record("knight")["equipped"]["weapon"] == longsword and GameState.data["inventory"].size() == 1, "clicking the weapon slot equips it; the Iron Sword goes back to the inventory")
+	_check(GameState.record("knight")["equipped"]["weapon"] == longsword and GameState.data["inventory"].size() == 1, "clicking the weapon slot equips it; the Training Sword goes back to the inventory")
 	_check(GameState.hero_stats("knight")["ATK"] == 20 + int(GameState.catalog()["10"]["power"]), "equipping changes the stats")
-	# an item the class cannot use is refused (the Oakwood Staff is the Wizard's)
+	# an item the class cannot use is refused (the Hazel Staff is the Wizard's)
 	var staff := GameState.mint(3)
 	GameState.data["inventory"].append(staff)
 	_click(eq, IC.cell_rect(1).get_center())
 	_click(eq, eq._slot_rect(0).get_center())
 	_check(GameState.record("knight")["equipped"]["weapon"] == longsword, "a class cannot equip an item it cannot use")
 	# ---- armor weights: the Knight wears heavy, the Wizard light
-	var cloak := GameState.make_instance("t1", 6)                        # Cotton Cloak (light)
-	var scale := GameState.make_instance("t2", 4)                        # Scale Mail (heavy)
-	var leather := GameState.make_instance("t3", 5)                      # Soft Leather Garb (medium)
+	var cloak := GameState.make_instance("t1", 6)                        # Linen Wrap (light)
+	var scale := GameState.make_instance("t2", 4)                        # Riveted Mail (heavy)
+	var leather := GameState.make_instance("t3", 5)                      # Hide Jerkin (medium)
 	_check(GameState.armor_weight(cloak) == "light" and GameState.armor_weight(scale) == "heavy" and GameState.armor_weight(leather) == "medium", "armor items have a weight")
 	_check(GameState.can_use(scale, "knight") and not GameState.can_use(cloak, "knight") and not GameState.can_use(leather, "knight"), "the Knight wears heavy armor only")
 	_check(GameState.can_use(cloak, "wizard") and not GameState.can_use(scale, "wizard") and not GameState.can_use(leather, "wizard"), "the Wizard wears light armor only")
@@ -149,10 +149,10 @@ func _run() -> void:
 	var last := {"heavy": 0, "medium": 0, "light": 0}                    # the 10-tier armor sets: 3 weights x tiers 1-10
 	for w in ["heavy", "medium", "light"]:
 		for t in range(1, 11):
-			var bh: int = {"heavy": 4, "medium": 5, "light": 6}[w] if t == 1 else {"heavy": 300, "medium": 310, "light": 320}[w] + t
-			var inst := GameState.make_instance("s%d" % bh, bh)
+			var aid: int = {"heavy": 4, "medium": 5, "light": 6}[w] if t == 1 else {"heavy": 300, "medium": 310, "light": 320}[w] + t
+			var inst := GameState.make_instance("s%d" % aid, aid)
 			var cls: String = {"heavy": "knight", "medium": "rogue", "light": "wizard"}[w]
-			var p: int = int(GameState.catalog()[str(bh)]["power"])
+			var p: int = int(GameState.catalog()[str(aid)]["power"])
 			_check(GameState.armor_weight(inst) == w and GameState.can_use(inst, cls), "%s tier %d: weight and class" % [w, t])
 			_check(p > last[w], "%s tier %d: power %d rises with the tier" % [w, t, p])
 			last[w] = p
@@ -179,7 +179,7 @@ func _run() -> void:
 	var sp1 := GameState.weapon_speed(GameState.make_instance("a", 402))   # hatchet-class one-hand
 	var sp2 := GameState.weapon_speed(GameState.make_instance("b", 415))   # great axe
 	_check(sp1 < 1.0 and sp2 > 1.0 and GameState.can_use(GameState.make_instance("r", 412), "rogue"), "one-hand weapons are faster than two-hand ones; rogues wield melee weapons")
-	_check(GameState.is_supported(4) and not GameState.is_supported(103), "unmodelled Battleheart armors are not offered")
+	_check(GameState.is_supported(4) and not GameState.is_supported(103), "armors without a model are not offered")
 	_check(GameState.roll_offers(30).size() > 0, "shop rolls at level 30")
 	# ---- party
 	var pa = _open(PartyScreen, app)

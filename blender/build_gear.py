@@ -11,9 +11,9 @@ Conventions (so any character can wear any piece):
     mannequin proportions (head x-widening included).
   * Weapons are props: origin at the grip, blade/shaft along +Z, no armature. They attach to
     hand_R exactly like sword.glb.
-  * gear.json lists every piece: id, display name, slot, file, and the Battleheart item it
-    represents in main-game/data/bh_items.lua (so the Godot port can map item id -> model).
-All shapes/colours are CR-original art direction [tuned]; item names/ids come from bh_items.lua.
+  * gear.json lists every piece: id, display name, slot, file, and the catalog item it
+    represents in godot/data/items_catalog.json (so the Godot port can map item id -> model).
+All shapes/colours are CR-original art direction [tuned].
 """
 import json
 import math
@@ -607,7 +607,7 @@ def rod_cleric(b):
 
 
 def hatchet(b):
-    """Dual Hatchets (item 11): one hatchet (the prop is used in each hand)."""
+    """Woodsman's Hatchet (item 11): one hatchet (the prop is used in each hand)."""
     b.loft("w", "wood", [(0, 0, -.14, .02, .02), (0, 0, .42, .018, .018)], 6)
     b.loft("w", "leather_dark", [(0, 0, -.12, .024, .024), (0, 0, .03, .024, .024)], 6)
     m.panel(b, "w", "iron", [(.015, 0, .30), (.045, 0, .34), (.16, 0, .42), (.17, 0, .22), (.045, 0, .26)])
@@ -615,7 +615,7 @@ def hatchet(b):
     b.loft("w", "iron_dark", [(0, 0, .25, .03, .03), (0, 0, .35, .03, .03)], box=True)
 
 
-# id: (name, slot, builder, battleheart item id or None)
+# id: (name, slot, builder, items_catalog.json item id or None)
 CATALOG = {
     "helm_iron":         ("Nasal Helm", "head", helm_iron, None),
     "helm_great":        ("Great Helm", "head", helm_great, None),
@@ -635,9 +635,9 @@ CATALOG = {
     "helm_cabasset":     ("Cabasset", "head", helm_cabasset, None),
     "helm_zischagge":    ("Zischaegge", "head", helm_zischagge, None),
     "helm_shishak":      ("Shishak", "head", helm_shishak, None),
-    "armor_scale_mail":  ("Scale Mail", "armor", armor_scale_mail, 4),
-    "armor_leather":     ("Soft Leather Garb", "armor", armor_leather_garb, 5),
-    "armor_cloak":       ("Cotton Cloak", "armor", armor_cotton_cloak, 6),
+    "armor_scale_mail":  ("Riveted Mail", "armor", armor_scale_mail, 4),
+    "armor_leather":     ("Hide Jerkin", "armor", armor_leather_garb, 5),
+    "armor_cloak":       ("Linen Wrap", "armor", armor_cotton_cloak, 6),
     "armor_leather_armor": ("Leather Armor", "armor", armor_leather_armor, None),
     "armor_hard_leather":  ("Hard Leather Armor", "armor", armor_hard_leather, None),
     "armor_ring_mail":     ("Ring Mail", "armor", armor_ring_mail, None),
@@ -645,13 +645,13 @@ CATALOG = {
     "armor_chain_mail":    ("Chain Mail", "armor", armor_chain_mail, None),
     "armor_splint_mail":   ("Splint Mail", "armor", armor_splint_mail, None),
     "armor_breast_plate":  ("Breast Plate", "armor", armor_breast_plate, None),
-    "sword_iron":        ("Iron Sword", "weapon", sword_iron, 0),
-    "sword_long":        ("Longsword", "weapon", sword_long, 10),
-    "sword_carver":      ("Rusty Carver", "weapon", sword_carver, 9),
-    "dagger_iron":       ("Iron Dagger", "weapon", dagger_iron, 1),
-    "staff_oak":         ("Oakwood Staff", "weapon", staff_oak, 3),
-    "rod_cleric":        ("Cleric's Rod", "weapon", rod_cleric, 2),
-    "hatchet":           ("Dual Hatchets (one)", "weapon", hatchet, 11),
+    "sword_iron":        ("Training Sword", "weapon", sword_iron, 0),
+    "sword_long":        ("Broadsword", "weapon", sword_long, 10),
+    "sword_carver":      ("Notched Cleaver", "weapon", sword_carver, 9),
+    "dagger_iron":       ("Stiletto", "weapon", dagger_iron, 1),
+    "staff_oak":         ("Hazel Staff", "weapon", staff_oak, 3),
+    "rod_cleric":        ("Pilgrim's Rod", "weapon", rod_cleric, 2),
+    "hatchet":           ("Woodsman's Hatchet", "weapon", hatchet, 11),
 }
 for _colour in WIZARD_COLOURS:
     CATALOG["hat_wizard_" + _colour] = ("Wizard Hat (%s)" % _colour.title(), "head",
@@ -686,7 +686,7 @@ for _line, (_base, _label, _users, _p1, _p10, _rows) in wtiers.LINES.items():
 
 
 def build_piece(piece_id, out_dir):
-    name, slot, fn, bh = CATALOG[piece_id]
+    name, slot, fn, item = CATALOG[piece_id]
     bpy.ops.wm.read_factory_settings(use_empty=True)
     saved = {k: h.COLOURS[k] for k in RECOLOURS.get(piece_id, {}) if k in h.COLOURS}
     for k, v in RECOLOURS.get(piece_id, {}).items():
@@ -711,8 +711,8 @@ def build_piece(piece_id, out_dir):
     size = [round(max(v[i] for v in bbox) - min(v[i] for v in bbox), 3) for i in range(3)]
     print("PIECE", piece_id, slot, "triangles", h.count_tris(obj), "size", size)
     entry = {"id": piece_id, "name": name, "slot": slot, "file": piece_id + ".glb"}
-    if bh is not None:
-        entry["bh_item"] = bh
+    if item is not None:
+        entry["item"] = item
     if slot == "weapon":
         entry["attach"] = {"bone": "hand_R", "position": [0, .07, 0], "rotation_degrees": [-40, 90, 0]}
     return entry

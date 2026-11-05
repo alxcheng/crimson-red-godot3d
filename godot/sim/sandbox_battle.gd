@@ -232,7 +232,7 @@ func _class_skills(class_id: String) -> Array:
 	for id in GameData.classes()[class_id]["actives"]:
 		var row: Dictionary = abilities[id]
 		var kind: String = SKILL_KINDS[id]
-		var bars: int = int(row.get("bars", 0))               # the Battleheart abilities (bh = true) cost no bars, only a cooldown
+		var bars: int = int(row.get("bars", 0))               # the abilities marked bh = true cost no bars, only a cooldown
 		out.append({"id": id, "name": row["name"], "kind": kind, "bars": bars, "cost": bars * RESOURCE_PER_BAR,
 				"cd_max": row["cdMax"], "cd": 0.0, "delay": row["delay"], "anim": SKILL_ANIM[kind], "row": row,
 				"icon": ICON_OVERRIDE.get(id, row.get("iconName", "")), "select": row.get("select", ""), "side": row.get("selectSide", ""), "lock": SKILL_LOCK.get(kind, -1.0)})

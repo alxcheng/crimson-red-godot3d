@@ -1,5 +1,7 @@
 -- export_data: dumps the 2D game's data tables (main-game/data/*.lua and a few engine tables) to JSON
 -- for the Godot port. READ-ONLY on main-game: it requires the modules and writes only to CR_OUT_DIR.
+-- Running it needs the 2D game (main-game/). The item and reward tables are not exported: godot/data/items_catalog.json
+-- and rewards.json are hand-authored.
 --
 --   CR_MAIN_DIR  absolute path of main-game/ (the LÖVE game)
 --   CR_OUT_DIR   absolute path of the output folder (crimson-red-3d/godot/data)
@@ -119,8 +121,6 @@ function love.load()
     export("talents",      "data/talents")
     export("tutorial",     "data/tutorial")
     export("sprite_bounds", "data/sprite_bounds")
-    export("bh_items",     "data/bh_items")
-    export("bh_rewards",   "data/bh_rewards")
     export("wave_tuning",  "encounter/wave_gen", function(m) return m.TUNING end)
     write("_meta", {
         source = "main-game",

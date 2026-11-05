@@ -28,7 +28,7 @@ Not done: the full encounter rules of the 2D game (damage and HP in the sandbox 
 - `godot/view/`: stage and dimetric camera (`stage_scene.gd`), unit rigs (`unit_view.gd`), picking, HUD (`battle_hud.gd`), effects, and the playable sandbox (`sandbox_battle_view.gd`) with an `F` debug overlay (unit radii, paths, goals, melee slots).
 - `godot/ui/`: `SmoothValue`, `SmoothVec2`, `SmoothRect`, `SmoothColor`. Every gradual UI change is a spring-damper retargeted at any time.
 - `godot/menus/`: the 2D game's menu screens rebuilt as Godot controls on an 800x450 virtual canvas, with a JSON save (`game_state.gd`).
-- `godot/data/`: JSON exported from the 2D game by `./export_data` (needs the 2D game's `main-game/` folder next to this project, which is not part of this repo and needs LOVE). `unit_sizes.json` and `wizard_talents.json` are hand-authored.
+- `godot/data/`: JSON exported from the 2D game by `./export_data` (needs the 2D game's `main-game/` folder next to this project, which is not part of this repo and needs LOVE). `unit_sizes.json`, `wizard_talents.json`, `items_catalog.json`, `rewards.json`, `armor_tiers.json` and `weapon_tiers.json` are hand-authored (the item and reward tables are original to this project).
 - `blender/`: scripts that build the shared 24-bone rig, the Knight, mannequin, Goblin, Skeleton and Witch bodies and their animation clips, gear pieces, and the zone stages. `./build_model` rebuilds the character models; the `.blend` sources and `.glb` outputs are included.
 
 ## Running
@@ -55,6 +55,5 @@ This project was built with AI coding agents working from my direction. Evidence
 
 - Flowerwall CRT shader addon, MIT licence, Copyright (c) 2024 Art (`godot/addons/flowerwall_crt/LICENSE`).
 - Cursor sprites: Kenney, Cursor Pixel Pack, CC0 (`godot/assets/cursor/KENNEY_LICENSE.txt`).
-- Item and reward tables in `godot/data/bh_items.json` and `bh_rewards.json` follow those of the mobile game Battleheart, which the 2D game is modelled on; they come from the 2D project's decoded reference data.
 - Zone and class icons in `godot/assets/ui/` come from the 2D game.
 - ORCA follows van den Berg et al.'s RVO2 approach, re-implemented here.

@@ -110,24 +110,24 @@
     },
     {
       "id": "armor_scale_mail",
-      "name": "Scale Mail",
+      "name": "Riveted Mail",
       "slot": "armor",
       "file": "armor_scale_mail.glb",
-      "bh_item": 4
+      "item": 4
     },
     {
       "id": "armor_leather",
-      "name": "Soft Leather Garb",
+      "name": "Hide Jerkin",
       "slot": "armor",
       "file": "armor_leather.glb",
-      "bh_item": 5
+      "item": 5
     },
     {
       "id": "armor_cloak",
-      "name": "Cotton Cloak",
+      "name": "Linen Wrap",
       "slot": "armor",
       "file": "armor_cloak.glb",
-      "bh_item": 6
+      "item": 6
     },
     {
       "id": "armor_leather_armor",
@@ -173,10 +173,10 @@
     },
     {
       "id": "sword_iron",
-      "name": "Iron Sword",
+      "name": "Training Sword",
       "slot": "weapon",
       "file": "sword_iron.glb",
-      "bh_item": 0,
+      "item": 0,
       "attach": {
         "bone": "hand_R",
         "position": [
@@ -193,10 +193,10 @@
     },
     {
       "id": "sword_long",
-      "name": "Longsword",
+      "name": "Broadsword",
       "slot": "weapon",
       "file": "sword_long.glb",
-      "bh_item": 10,
+      "item": 10,
       "attach": {
         "bone": "hand_R",
         "position": [
@@ -213,10 +213,10 @@
     },
     {
       "id": "sword_carver",
-      "name": "Rusty Carver",
+      "name": "Notched Cleaver",
       "slot": "weapon",
       "file": "sword_carver.glb",
-      "bh_item": 9,
+      "item": 9,
       "attach": {
         "bone": "hand_R",
         "position": [
@@ -233,10 +233,10 @@
     },
     {
       "id": "dagger_iron",
-      "name": "Iron Dagger",
+      "name": "Stiletto",
       "slot": "weapon",
       "file": "dagger_iron.glb",
-      "bh_item": 1,
+      "item": 1,
       "attach": {
         "bone": "hand_R",
         "position": [
@@ -253,10 +253,10 @@
     },
     {
       "id": "staff_oak",
-      "name": "Oakwood Staff",
+      "name": "Hazel Staff",
       "slot": "weapon",
       "file": "staff_oak.glb",
-      "bh_item": 3,
+      "item": 3,
       "attach": {
         "bone": "hand_R",
         "position": [
@@ -273,10 +273,10 @@
     },
     {
       "id": "rod_cleric",
-      "name": "Cleric's Rod",
+      "name": "Pilgrim's Rod",
       "slot": "weapon",
       "file": "rod_cleric.glb",
-      "bh_item": 2,
+      "item": 2,
       "attach": {
         "bone": "hand_R",
         "position": [
@@ -293,10 +293,10 @@
     },
     {
       "id": "hatchet",
-      "name": "Dual Hatchets (one)",
+      "name": "Woodsman's Hatchet",
       "slot": "weapon",
       "file": "hatchet.glb",
-      "bh_item": 11,
+      "item": 11,
       "attach": {
         "bone": "hand_R",
         "position": [

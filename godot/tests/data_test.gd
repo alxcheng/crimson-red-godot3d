@@ -16,7 +16,7 @@ func _near(a: float, b: float, tol: float = 0.01) -> bool:
 
 
 func _initialize() -> void:
-	for name in ["classes", "enemies", "abilities", "talents", "tutorial", "sprite_bounds", "bh_items", "bh_rewards",
+	for name in ["classes", "enemies", "abilities", "talents", "tutorial", "sprite_bounds", "items_catalog", "rewards",
 			"wave_tuning", "unit_sizes", "_meta"]:
 		_check(GameData.table(name) != null, "data/%s.json missing or invalid" % name)
 	# every hero and enemy has a collision radius

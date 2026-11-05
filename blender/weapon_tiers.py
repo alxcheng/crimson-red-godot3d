@@ -1,7 +1,7 @@
 """weapon_tiers.py - 6 weapon lines x 10 tiers (pure data, no bpy). Models are the shapes in weapon_shapes.py (plus the original
 sword / hatchet / staff props) recoloured per tier with armor_tiers' metals; names are Diablo 2 base types (no uniques).
 Lines: melee one hand, melee two hands, bow (two hands), crossbow (one hand), staff (two hands), wand (one hand).
-`python3 blender/weapon_tiers.py` writes godot/data/weapon_tiers.json. Tier 1 of melee-1h / melee-2h / staff are Battleheart items 0 / 10 / 3.
+`python3 blender/weapon_tiers.py` writes godot/data/weapon_tiers.json. Tier 1 of melee-1h / melee-2h / staff are the starter items 0 / 10 / 3 in godot/data/items_catalog.json.
 All numbers [tuned]."""
 import json
 import os
@@ -15,14 +15,14 @@ GEMS = {1: (110, 200, 255), 2: (80, 130, 230), 3: (80, 200, 120), 4: (230, 70, 7
         7: (80, 230, 230), 8: (240, 240, 250), 9: (255, 90, 40), 10: (255, 60, 220)}
 BONE = {t: c for t, c in zip(range(1, 11), [(200, 190, 160)] * 5 + [(214, 206, 176), (180, 172, 150), (150, 140, 120), (120, 90, 80), (60, 50, 60)])}
 
-# line -> (id base, label, class list, hand, power tier 1, power tier 10, rows[tier] = (name, shape, tier-1 bh item or None))
+# line -> (id base, label, class list, hand, power tier 1, power tier 10, rows[tier] = (name, shape, names and shapes))
 LINES = {
     "melee_1h": (400, "One-hand melee", ["knight", "paladin", "rogue", "barbarian", "champion", "duelist", "brigand"], {
-        1: ("Iron Sword", "sword_iron"), 2: ("Hand Axe", "hatchet"), 3: ("Mace", "mace"), 4: ("Scimitar", "scimitar"),
+        1: ("Training Sword", "sword_iron"), 2: ("Hand Axe", "hatchet"), 3: ("Mace", "mace"), 4: ("Scimitar", "scimitar"),
         5: ("Cleaver", "hatchet"), 6: ("Flanged Mace", "mace"), 7: ("Sabre", "scimitar"), 8: ("Tomahawk", "hatchet"),
         9: ("Morning Star", "mace"), 10: ("Phase Blade", "scimitar")}),
     "melee_2h": (410, "Two-hand melee", ["knight", "paladin", "rogue", "barbarian", "champion"], {
-        1: ("Longsword", "sword_long"), 2: ("Bardiche", "halberd"), 3: ("Maul", "maul"), 4: ("Claymore", "greatsword"),
+        1: ("Broadsword", "sword_long"), 2: ("Bardiche", "halberd"), 3: ("Maul", "maul"), 4: ("Claymore", "greatsword"),
         5: ("Great Axe", "great_axe"), 6: ("Halberd", "halberd"), 7: ("Flamberge", "greatsword"), 8: ("Great Maul", "maul"),
         9: ("Giant Thresher", "halberd"), 10: ("Colossus Blade", "greatsword")}),
     "bow": (420, "Bow", ["hunter", "piper"], {
@@ -34,7 +34,7 @@ LINES = {
         5: ("Repeating Crossbow", "xbow_repeating"), 6: ("Siege Crossbow", "xbow_heavy"), 7: ("Ballista", "xbow_heavy"),
         8: ("Chu-Ko-Nu", "xbow_repeating"), 9: ("Colossus Crossbow", "xbow_heavy"), 10: ("Demon Crossbow", "xbow_repeating")}),
     "staff": (440, "Staff", ["wizard", "priest", "witch"], {
-        1: ("Oakwood Staff", "staff_oak"), 2: ("Short Staff", "staff_oak"), 3: ("Long Staff", "staff_oak"), 4: ("Gnarled Staff", "staff_gnarled"),
+        1: ("Hazel Staff", "staff_oak"), 2: ("Short Staff", "staff_oak"), 3: ("Long Staff", "staff_oak"), 4: ("Gnarled Staff", "staff_gnarled"),
         5: ("Battle Staff", "staff_battle"), 6: ("War Staff", "staff_war"), 7: ("Jo Staff", "staff_gnarled"), 8: ("Cedar Staff", "staff_battle"),
         9: ("Gothic Staff", "staff_war"), 10: ("Archon Staff", "staff_war")}),
     "wand": (450, "Wand", ["wizard", "priest", "witch"], {
@@ -50,7 +50,7 @@ SPEED = {"sword_iron": .9, "hatchet": .9, "scimitar": .8, "mace": 1.0,
          "xbow_light": .9, "xbow_repeating": .7, "xbow_heavy": 1.2,
          "staff_oak": 1.2, "staff_gnarled": 1.3, "staff_battle": 1.4, "staff_war": 1.5,
          "wand_straight": .75, "wand_skull": .8, "wand_knob": .85}
-STARTERS = {("melee_1h", 1): 0, ("melee_2h", 1): 10, ("staff", 1): 3}      # tier 1 kept as the existing Battleheart items
+STARTERS = {("melee_1h", 1): 0, ("melee_2h", 1): 10, ("staff", 1): 3}      # tier 1 is kept as the starter items of items_catalog.json
 
 
 REF_T1, REF_T10 = 19.0, 65.0         # power per unit of weapon speed: the same DPS for every weapon type of a tier [tuned]
@@ -95,10 +95,7 @@ def items():
             rows[str(iid)] = {"name": names[tier][0], "desc": "Tier %d %s." % (tier, label.lower()), "type": "weapon", "wline": line, "tier": tier,
                               "power": p, "price": int(round(ref_power(tier) ** 2 / 7 / 5.0) * 5), "usableBy": users, "model": piece_id(line, tier), "speed": SPEED[names[tier][1]]}
             shop.append({"id": iid, "minLevel": at.min_level(tier), "maxLevel": 999 if tier == 10 else at.min_level(tier) + 9})
-    overrides = {}                                                       # the Battleheart starters with a model get the same rule (tier 1 index; the Rusty Carver tier 2)
-    for bh, speed, tier in ((0, .9, 1), (1, .7, 1), (2, .85, 1), (3, 1.2, 1), (9, 1.1, 2), (10, 1.2, 1), (11, .9, 1)):
-        overrides[str(bh)] = {"power": round(ref_power(tier) * speed), "speed": speed}
-    return {"OVERRIDES": overrides, "_note": "The 3D side's weapon tiers (Diablo 2 base types). Generated by blender/weapon_tiers.py. power = ATK = speed x the tier's DPS index [tuned]; minLevel/maxLevel = shop levels [tuned].",
+    return {"_note": "The 3D side's weapon tiers (Diablo 2 base types). Generated by blender/weapon_tiers.py. power = ATK = speed x the tier's DPS index [tuned]; minLevel/maxLevel = shop levels [tuned].",
             "ITEMS": rows, "SHOP": shop}
 
 

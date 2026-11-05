@@ -1,0 +1,433 @@
+{
+ "_note": "Original item catalog (hand-authored). Weapons and armor carry their model / weight / speed; trinkets use effects power, defense, crit. Tiers 2-10 of armor and weapons are in armor_tiers.json and weapon_tiers.json.",
+ "ITEMS": {
+  "0": {
+   "name": "Training Sword",
+   "desc": "A plain one-hand blade for new recruits.",
+   "type": "weapon",
+   "tier": 1,
+   "power": 17,
+   "price": 20,
+   "usableBy": [
+    "knight",
+    "paladin"
+   ],
+   "model": "sword_iron",
+   "speed": 0.9
+  },
+  "1": {
+   "name": "Stiletto",
+   "desc": "A thin, quick blade for close work.",
+   "type": "weapon",
+   "tier": 1,
+   "power": 13,
+   "price": 24,
+   "usableBy": [
+    "rogue",
+    "brigand"
+   ],
+   "model": "dagger_iron",
+   "speed": 0.7
+  },
+  "2": {
+   "name": "Pilgrim's Rod",
+   "desc": "A blessed rod carried on long roads.",
+   "type": "weapon",
+   "tier": 1,
+   "power": 16,
+   "price": 18,
+   "usableBy": [
+    "priest"
+   ],
+   "model": "rod_cleric",
+   "speed": 0.85
+  },
+  "3": {
+   "name": "Hazel Staff",
+   "desc": "A rough hazel branch that hums faintly.",
+   "type": "weapon",
+   "tier": 1,
+   "power": 23,
+   "price": 26,
+   "usableBy": [
+    "wizard"
+   ],
+   "model": "staff_oak",
+   "speed": 1.2
+  },
+  "9": {
+   "name": "Notched Cleaver",
+   "desc": "Heavy, ugly and effective.",
+   "type": "weapon",
+   "tier": 2,
+   "power": 24,
+   "price": 36,
+   "usableBy": [
+    "knight",
+    "paladin"
+   ],
+   "model": "sword_carver",
+   "speed": 1.1
+  },
+  "10": {
+   "name": "Broadsword",
+   "desc": "A wide, well-balanced blade.",
+   "type": "weapon",
+   "tier": 2,
+   "power": 23,
+   "price": 48,
+   "usableBy": [
+    "knight",
+    "paladin"
+   ],
+   "model": "sword_long",
+   "speed": 1.2
+  },
+  "11": {
+   "name": "Woodsman's Hatchet",
+   "desc": "Made for firewood, used for worse.",
+   "type": "weapon",
+   "tier": 1,
+   "power": 17,
+   "price": 25,
+   "usableBy": [
+    "champion"
+   ],
+   "model": "hatchet",
+   "speed": 0.9
+  },
+  "4": {
+   "name": "Riveted Mail",
+   "desc": "Overlapping plates riveted to a canvas coat.",
+   "type": "armor",
+   "weight": "heavy",
+   "tier": 1,
+   "power": 20,
+   "price": 30,
+   "model": "armor_scale_mail",
+   "head": "helm_iron"
+  },
+  "5": {
+   "name": "Hide Jerkin",
+   "desc": "Stiff tanned hide, cut for movement.",
+   "type": "armor",
+   "weight": "medium",
+   "tier": 1,
+   "power": 12,
+   "price": 25,
+   "model": "armor_leather",
+   "head": "cap_leather"
+  },
+  "6": {
+   "name": "Linen Wrap",
+   "desc": "Layered linen; light, cool and thin.",
+   "type": "armor",
+   "weight": "light",
+   "tier": 1,
+   "power": 8,
+   "price": 15,
+   "model": "armor_cloak",
+   "head": "hood_cloth"
+  },
+  "20": {
+   "name": "Bone Knuckle",
+   "desc": "Adds +2 attack.",
+   "type": "trinket",
+   "effect": "power",
+   "tier": 1,
+   "power": 2,
+   "price": 30
+  },
+  "21": {
+   "name": "Brass Gauntlet",
+   "desc": "Adds +4 attack.",
+   "type": "trinket",
+   "effect": "power",
+   "tier": 2,
+   "power": 4,
+   "price": 70
+  },
+  "22": {
+   "name": "Wolfhide Bracer",
+   "desc": "Adds +6 attack.",
+   "type": "trinket",
+   "effect": "power",
+   "tier": 3,
+   "power": 6,
+   "price": 120
+  },
+  "23": {
+   "name": "Ogre Mitten",
+   "desc": "Adds +9 attack.",
+   "type": "trinket",
+   "effect": "power",
+   "tier": 4,
+   "power": 9,
+   "price": 180
+  },
+  "24": {
+   "name": "Ember Signet",
+   "desc": "Adds +12 attack.",
+   "type": "trinket",
+   "effect": "power",
+   "tier": 5,
+   "power": 12,
+   "price": 250
+  },
+  "25": {
+   "name": "Warlord's Band",
+   "desc": "Adds +16 attack.",
+   "type": "trinket",
+   "effect": "power",
+   "tier": 6,
+   "power": 16,
+   "price": 330
+  },
+  "26": {
+   "name": "Stormcaller Seal",
+   "desc": "Adds +20 attack.",
+   "type": "trinket",
+   "effect": "power",
+   "tier": 7,
+   "power": 20,
+   "price": 420
+  },
+  "27": {
+   "name": "Titan Vambrace",
+   "desc": "Adds +25 attack.",
+   "type": "trinket",
+   "effect": "power",
+   "tier": 8,
+   "power": 25,
+   "price": 520
+  },
+  "28": {
+   "name": "Pewter Armlet",
+   "desc": "Adds +2 defense.",
+   "type": "trinket",
+   "effect": "defense",
+   "tier": 1,
+   "power": 2,
+   "price": 30
+  },
+  "29": {
+   "name": "Barkskin Charm",
+   "desc": "Adds +4 defense.",
+   "type": "trinket",
+   "effect": "defense",
+   "tier": 2,
+   "power": 4,
+   "price": 70
+  },
+  "30": {
+   "name": "Bulwark Pin",
+   "desc": "Adds +6 defense.",
+   "type": "trinket",
+   "effect": "defense",
+   "tier": 3,
+   "power": 6,
+   "price": 120
+  },
+  "31": {
+   "name": "Granite Medallion",
+   "desc": "Adds +8 defense.",
+   "type": "trinket",
+   "effect": "defense",
+   "tier": 4,
+   "power": 8,
+   "price": 180
+  },
+  "32": {
+   "name": "Warded Torc",
+   "desc": "Adds +11 defense.",
+   "type": "trinket",
+   "effect": "defense",
+   "tier": 5,
+   "power": 11,
+   "price": 250
+  },
+  "33": {
+   "name": "Aegis Brooch",
+   "desc": "Adds +14 defense.",
+   "type": "trinket",
+   "effect": "defense",
+   "tier": 6,
+   "power": 14,
+   "price": 330
+  },
+  "34": {
+   "name": "Shieldbearer's Seal",
+   "desc": "Adds +18 defense.",
+   "type": "trinket",
+   "effect": "defense",
+   "tier": 7,
+   "power": 18,
+   "price": 420
+  },
+  "35": {
+   "name": "Obsidian Ward",
+   "desc": "Adds +22 defense.",
+   "type": "trinket",
+   "effect": "defense",
+   "tier": 8,
+   "power": 22,
+   "price": 520
+  },
+  "36": {
+   "name": "Lucky Coin",
+   "desc": "Grants 3% critical chance.",
+   "type": "trinket",
+   "effect": "crit",
+   "tier": 1,
+   "power": 3,
+   "price": 30
+  },
+  "37": {
+   "name": "Falcon Feather",
+   "desc": "Grants 5% critical chance.",
+   "type": "trinket",
+   "effect": "crit",
+   "tier": 2,
+   "power": 5,
+   "price": 70
+  },
+  "38": {
+   "name": "Hawkeye Lens",
+   "desc": "Grants 7% critical chance.",
+   "type": "trinket",
+   "effect": "crit",
+   "tier": 3,
+   "power": 7,
+   "price": 120
+  },
+  "39": {
+   "name": "Serpent Fang",
+   "desc": "Grants 9% critical chance.",
+   "type": "trinket",
+   "effect": "crit",
+   "tier": 4,
+   "power": 9,
+   "price": 180
+  },
+  "40": {
+   "name": "Duelist's Cufflink",
+   "desc": "Grants 12% critical chance.",
+   "type": "trinket",
+   "effect": "crit",
+   "tier": 5,
+   "power": 12,
+   "price": 250
+  },
+  "41": {
+   "name": "Bloodied Talon",
+   "desc": "Grants 15% critical chance.",
+   "type": "trinket",
+   "effect": "crit",
+   "tier": 6,
+   "power": 15,
+   "price": 330
+  },
+  "42": {
+   "name": "Comet Shard",
+   "desc": "Grants 18% critical chance.",
+   "type": "trinket",
+   "effect": "crit",
+   "tier": 7,
+   "power": 18,
+   "price": 420
+  },
+  "43": {
+   "name": "Eclipse Pendant",
+   "desc": "Grants 22% critical chance.",
+   "type": "trinket",
+   "effect": "crit",
+   "tier": 8,
+   "power": 22,
+   "price": 520
+  }
+ },
+ "LOOT_TABLES": [
+  {
+   "name": "Starter gear and tier 1 trinkets",
+   "minLevel": 0,
+   "maxLevel": 4,
+   "items": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    11,
+    20,
+    28,
+    36
+   ]
+  },
+  {
+   "name": "Tier 1-2 trinkets and early blades",
+   "minLevel": 2,
+   "maxLevel": 11,
+   "items": [
+    9,
+    10,
+    20,
+    28,
+    36,
+    21,
+    29,
+    37
+   ]
+  },
+  {
+   "name": "Tier 2-4 trinkets",
+   "minLevel": 8,
+   "maxLevel": 18,
+   "items": [
+    10,
+    21,
+    29,
+    37,
+    22,
+    30,
+    38,
+    23,
+    31,
+    39
+   ]
+  },
+  {
+   "name": "Tier 4-6 trinkets",
+   "minLevel": 14,
+   "maxLevel": 27,
+   "items": [
+    23,
+    31,
+    39,
+    24,
+    32,
+    40,
+    25,
+    33,
+    41
+   ]
+  },
+  {
+   "name": "Tier 6-8 trinkets",
+   "minLevel": 24,
+   "maxLevel": 999,
+   "items": [
+    25,
+    33,
+    41,
+    26,
+    34,
+    42,
+    27,
+    35,
+    43
+   ]
+  }
+ ]
+}

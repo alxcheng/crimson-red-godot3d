@@ -16,12 +16,8 @@ const PARTY_SLOTS := 4
 const SAVE_PATH := "user://save_1.json"
 static var save_path := SAVE_PATH                  # tests point this somewhere else so they never touch the real save
 ## Armor comes in three weights (Director): HEAVY plate and mail, MEDIUM leather and gi, LIGHT cloaks and robes. A class wears one weight:
-## the Knight heavy, the Wizard light. (Keys are Battleheart item ids.)
-const ARMOR_WEIGHT := {4: "heavy", 103: "heavy", 104: "heavy", 105: "heavy", 106: "heavy", 107: "heavy",
-		5: "medium", 113: "medium", 114: "medium", 115: "medium", 116: "medium", 117: "medium", 44: "medium", 118: "medium", 119: "medium", 120: "medium", 121: "medium", 122: "medium",
-		6: "light", 108: "light", 109: "light", 110: "light", 111: "light", 112: "light"}
+## the Knight heavy, the Wizard light. (Each armor row in the item tables carries its `weight`.)
 const CLASS_ARMOR := {"knight": ["heavy"], "paladin": ["heavy"], "wizard": ["light"], "priest": ["light"], "witch": ["light"], "rogue": ["medium"], "barbarian": ["medium"]}
-const MODELLED_BH := [0, 1, 2, 3, 4, 5, 6, 9, 10, 11]      # the Battleheart weapons / armors that have a 3D model
 const TRINKET_STATS := {"power": ["ATK", 1.0], "defense": ["DEF", 1.0], "crit": ["CRIT", 0.01]}
 
 ## The stages (the 2D map zones, blender/build_zones.py): id, display name, fights, the stage folder in models/stage/.
@@ -75,6 +71,10 @@ static func load_save() -> bool:
 	if typeof(parsed) != TYPE_DICTIONARY or not parsed.has("unlockedCharacters"):
 		return false
 	data = parsed
+	for inst in data.get("items", {}).values():                      # saves from before the rename kept the item id under another key
+		if typeof(inst) == TYPE_DICTIONARY and inst.has("bhId") and not inst.has("itemId"):
+			inst["itemId"] = inst["bhId"]
+			inst.erase("bhId")
 	if not data.get("_knightTiersSwapped", false):                  # the Knight's Lv 1 and Lv 10 tiers were swapped: carry the saved picks over
 		var st: Array = data["unlockedCharacters"].get("knight", {}).get("skillTree", [])
 		if st.size() > 2:
@@ -173,8 +173,8 @@ static func catalog() -> Dictionary:
 	return GameData.items()
 
 
-static func make_instance(id: String, bh_id: int) -> Dictionary:
-	var row: Dictionary = catalog().get(str(bh_id), {})
+static func make_instance(id: String, item_id: int) -> Dictionary:
+	var row: Dictionary = catalog().get(str(item_id), {})
 	if row.is_empty():
 		return {}
 	var mods := {}
@@ -186,14 +186,14 @@ static func make_instance(id: String, bh_id: int) -> Dictionary:
 		var t: Array = TRINKET_STATS[row["effect"]]
 		mods[t[0]] = row["power"] * t[1]
 	var tier: int = int(row.get("tier", 9))
-	return {"id": id, "bhId": bh_id, "itemType": row["type"], "name": row["name"], "desc": row.get("desc", ""), "grade": 1 if tier <= 3 else (2 if tier <= 6 else 3),
+	return {"id": id, "itemId": item_id, "itemType": row["type"], "name": row["name"], "desc": row.get("desc", ""), "grade": 1 if tier <= 3 else (2 if tier <= 6 else 3),
 			"value": row["price"], "sellPrice": int(floor(float(row["price"]) / 2.0)), "usableBy": row.get("usableBy", []), "mods": mods}
 
 
-static func mint(bh_id: int) -> String:
+static func mint(item_id: int) -> String:
 	data["_itemIdSeq"] = int(data.get("_itemIdSeq", 0)) + 1
 	var id := "it_%04d" % int(data["_itemIdSeq"])
-	var inst := make_instance(id, bh_id)
+	var inst := make_instance(id, item_id)
 	if inst.is_empty():
 		return ""
 	data["items"][id] = inst
@@ -209,8 +209,8 @@ static func item_of(id: Variant) -> Dictionary:
 static func armor_weight(inst: Dictionary) -> String:
 	if inst.get("itemType", "") != "armor":
 		return ""
-	var row: Dictionary = catalog().get(str(int(inst.get("bhId", -1))), {})
-	return String(row.get("weight", ARMOR_WEIGHT.get(int(inst.get("bhId", -1)), "medium")))
+	var row: Dictionary = catalog().get(str(int(inst.get("itemId", -1))), {})
+	return String(row.get("weight", "medium"))
 
 
 ## Why `name` cannot wear this armor ("" when it can): its weight is not one the class wears.
@@ -259,47 +259,42 @@ static func inventory_full() -> bool:
 	return data["inventory"].size() >= INVENTORY_SIZE
 
 
-static func is_supported(bh_id: int) -> bool:
-	var row: Dictionary = catalog().get(str(bh_id), {})
+static func is_supported(item_id: int) -> bool:
+	var row: Dictionary = catalog().get(str(item_id), {})
 	if row.is_empty():
 		return false
-	if (row["type"] == "armor" or row["type"] == "weapon") and not row.has("model") and not MODELLED_BH.has(bh_id):
-		return false                                                          # the other Battleheart armors / weapons have no 3D model; the tiers replace them
+	if (row["type"] == "armor" or row["type"] == "weapon") and not row.has("model"):
+		return false                                                          # a weapon or armor without a 3D model is not offered
 	return row["type"] != "trinket" or TRINKET_STATS.has(row.get("effect", ""))
 
 
-## The 3D model for an item (blender/build_gear.py gear.json `bh_item`), or "" when the item has no model yet.
+## The 3D model for an item (its row's `model`, a piece of models/gear/gear.json), or "" when the item has no model yet.
 static func model_for(inst: Dictionary) -> String:
 	if inst.is_empty():
 		return ""
-	var row: Dictionary = catalog().get(str(int(inst["bhId"])), {})
-	if row.has("model"):                                                  # the armor tiers 2-10 name their own body model
-		return String(row["model"])
-	return {0: "sword_iron", 10: "sword_long", 9: "sword_carver", 1: "dagger_iron", 3: "staff_oak", 2: "rod_cleric", 11: "hatchet",
-			4: "armor_scale_mail", 5: "armor_leather", 6: "armor_cloak"}.get(int(inst["bhId"]), "")
+	var row: Dictionary = catalog().get(str(int(inst["itemId"])), {})
+	return String(row.get("model", ""))
 
 
 ## Weapon speed: a multiplier on the class's auto-attack cooldown (not the animation speed). One-hand weapons are below 1, two-hand above.
 static func weapon_speed(inst: Dictionary) -> float:
 	if inst.is_empty() or inst.get("itemType", "") != "weapon":
 		return 1.0
-	var row: Dictionary = catalog().get(str(int(inst["bhId"])), {})
+	var row: Dictionary = catalog().get(str(int(inst["itemId"])), {})
 	return float(row.get("speed", 1.0))
 
 
-## The helm of an armor set (the armor tiers carry one; the starters wear their class's usual headpiece).
+## The helm of an armor set (its row's `head`).
 static func head_for(inst: Dictionary) -> String:
 	if inst.is_empty():
 		return ""
-	var row: Dictionary = catalog().get(str(int(inst["bhId"])), {})
-	if row.has("head"):
-		return String(row["head"])
-	return {4: "helm_iron", 5: "cap_leather", 6: "hood_cloth"}.get(int(inst["bhId"]), "")
+	var row: Dictionary = catalog().get(str(int(inst["itemId"])), {})
+	return String(row.get("head", ""))
 
 
 # ------------------------------------------------------------------------------------------------- stats (progression.lua)
 static func xp_to_next(level: int) -> int:
-	var rewards: Dictionary = GameData.table("bh_rewards")
+	var rewards: Dictionary = GameData.table("rewards")
 	var xp: float = float(rewards["FIRST_LEVEL_XP"])
 	var tbl: Array = rewards["XP_TABLE"]
 	for i in range(2, level + 1):
@@ -484,7 +479,7 @@ static func highest_level() -> int:
 
 static func roll_offers(level: int) -> Array:
 	var tables: Array = []
-	for t in GameData.table("bh_items")["LOOT_TABLES"]:
+	for t in GameData.table("items_catalog")["LOOT_TABLES"]:
 		if level >= int(t["minLevel"]) and level <= int(t["maxLevel"]):
 			tables.append(t)
 	var extra: Array = []                                                          # the 3D side's own items appear as one more table
@@ -499,9 +494,9 @@ static func roll_offers(level: int) -> Array:
 	for _i in randi_range(3, SHOP_SLOTS):
 		for _try in 20:
 			var t: Dictionary = tables[randi() % tables.size()]
-			var bh_id: int = int(t["items"][randi() % t["items"].size()])
-			if is_supported(bh_id):
-				offers.append(bh_id)
+			var item_id: int = int(t["items"][randi() % t["items"].size()])
+			if is_supported(item_id):
+				offers.append(item_id)
 				break
 	return offers
 
@@ -520,8 +515,8 @@ static func restock_if_needed() -> void:
 		if typeof(old) == TYPE_STRING:
 			data["items"].erase(old)
 	ss["offers"] = []
-	for bh_id in roll_offers(highest_level()):
-		ss["offers"].append(mint(bh_id))
+	for item_id in roll_offers(highest_level()):
+		ss["offers"].append(mint(item_id))
 	ss["hireOffer"] = null                                           # nobody else is playable yet: no one is hiring
 	ss["seeded"] = true
 	ss["pendingRestock"] = false
@@ -556,7 +551,7 @@ static func fight_number(i: int) -> int:
 # ------------------------------------------------------------------------------------------------- rewards (progression.onEncounterWon)
 ## The gold and XP of a won battle (one battle of the tier of the current floor). Returns what the stage-select screen shows.
 static func on_encounter_won(survivors: Array) -> Dictionary:
-	var rows: Array = GameData.table("bh_rewards")["LEVELS"]
+	var rows: Array = GameData.table("rewards")["LEVELS"]
 	var tier: int = clampi(int(data.get("floor", 1)) + int(data["mapProgression"]["clearedEncounters"].size()), 1, rows.size())
 	var row: Dictionary = rows[tier - 1]
 	var result := {"gold": int(floor(float(row["gold"]) * randf_range(0.85, 1.15) + 0.5)), "xp": []}

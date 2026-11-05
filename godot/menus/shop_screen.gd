@@ -1,5 +1,5 @@
 extends "res://menus/menu_screen.gd"
-## SHOP (screens/shop.lua, BH's Merchant + Tavern): GEAR tab = up to six items for sale (click one, then BUY), HIRE tab = the hero for hire (nobody is
+## SHOP (screens/shop.lua, Merchant + Tavern): GEAR tab = up to six items for sale (click one, then BUY), HIRE tab = the hero for hire (nobody is
 ## looking for work while only the Knight and the Wizard are playable); the right panel is the shared inventory (click an item, then SELL). Buy at the
 ## item's value, sell for half, no buying with a full inventory. The stock re-rolls after a won battle. The "NOT ENOUGH GOLD" flash is a SmoothValue.
 

@@ -1,5 +1,6 @@
 extends RefCounted
-## Read access to the game's data, exported from the 2D game by `./export_data` into res://data/*.json,
+## Read access to the game's data: the 2D game's tables exported by `./export_data` into res://data/*.json (exporting needs the 2D game),
+## the hand-authored items_catalog / rewards / tier tables,
 ## plus the unit conversions between the 2D game's pixels and the 3D game's metres.
 ## Static: no autoload needed. Tables are loaded once and cached.
 
@@ -36,17 +37,13 @@ static func abilities() -> Dictionary:
 
 
 static func items() -> Dictionary:
-	var all: Dictionary = table("bh_items")["ITEMS"].duplicate()
-	all.merge(table("armor_tiers")["ITEMS"])
-	all.merge(table("weapon_tiers")["ITEMS"])                  # and the weapon tiers
-	for id in table("weapon_tiers")["OVERRIDES"]:              # equal-DPS powers for the Battleheart starter weapons
-		var row: Dictionary = all[id].duplicate()
-		row.merge(table("weapon_tiers")["OVERRIDES"][id], true)
-		all[id] = row                  # the 3D side's armor tiers 2-10
+	var all: Dictionary = table("items_catalog")["ITEMS"].duplicate()     # the starter gear and the trinkets
+	all.merge(table("armor_tiers")["ITEMS"])                              # armor tiers 2-10
+	all.merge(table("weapon_tiers")["ITEMS"])                             # and the weapon tiers
 	return all
 
 
-## Shop entries of the 3D-side items: {id, minLevel, maxLevel}.
+## Shop entries of the tiered items: {id, minLevel, maxLevel}.
 static func extra_shop() -> Array:
 	return table("armor_tiers")["SHOP"] + table("weapon_tiers")["SHOP"]
 

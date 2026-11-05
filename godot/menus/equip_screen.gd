@@ -1,5 +1,5 @@
 extends "res://menus/menu_screen.gd"
-## EQUIP (screens/equip.lua, BH's "Armory"): pick a hero from the party strip, then move items between the shared inventory and the hero's three gear
+## EQUIP (screens/equip.lua, "Armory"): pick a hero from the party strip, then move items between the shared inventory and the hero's three gear
 ## slots (weapon / armor / trinket). Click an item to hold it, then its slot to equip (type and class checked; the old item returns to the inventory);
 ## click an occupied slot with nothing held to unequip. Hover for details. The save is written on exit.
 

@@ -1,8 +1,6 @@
 {
   "files": {
     "abilities": 39,
-    "bh_items": 2,
-    "bh_rewards": 3,
     "classes": 3,
     "enemies": 2,
     "sprite_bounds": 9,

@@ -1,5 +1,5 @@
 extends "res://menus/menu_screen.gd"
-## TALENTS (screens/talents.lua, BH's Academy): one hero's talent ladder, a vertical list of level rows where the fork levels offer two options (A / B).
+## TALENTS (screens/talents.lua, Academy): one hero's talent ladder, a vertical list of level rows where the fork levels offer two options (A / B).
 ## Director: picks are SWITCHABLE, not permanent: any reached fork can be re-picked at any time (click the other option; click the chosen one to clear it),
 ## free of charge. The ladder is the 2D game's (Knight) or the Director's skill tree (Wizard, data/wizard_talents.json); a tier with no options yet is shown
 ## as "to be defined". Left: the hero's abilities (Q W E, three at most) with icons and tooltips. Wheel scrolls the ladder (a SmoothValue). Dev: L adds a level.
